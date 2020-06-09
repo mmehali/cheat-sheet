@@ -16,14 +16,19 @@ $ curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaf
 $ sudo install skaffold /usr/local/bin/
 ## Build a Microservice Architecture with Spring Boot and Kubernetes 
 -- https://developer.okta.com/blog/2019/04/01/spring-boot-microservices-with-kubernetes
+
 ## How To Install and Use Docker on Ubuntu 18.04
 -- https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04
+
 ## apt-key - Utilitaire de gestion des clés d'APT
 -- http://manpages.ubuntu.com/manpages/trusty/fr/man8/apt-key.8.html
+
 # Private Docker Registry
 -- https://ubuntu.com/kubernetes/docs/docker-registry
+
 ## Kubernetes Support in IntelliJ IDEA Ultimate
 -- https://www.youtube.com/watch?v=8p5GWvjKX9Q
+
 # Kubernetes support in IntelliJ
 -- https://www.youtube.com/watch?v=iWTXj53Y-_E
 -- https://www.youtube.com/watch?v=eq3KiAH4IBI
