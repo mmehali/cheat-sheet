@@ -24,19 +24,19 @@
  
 ## REST
 
-  [REST API with Spring Boot](https://www.youtube.com/watch?v=bK9PXo7IQSo&list=PLdW9lrB9HDw101ImXtR_xkvTe1HWx7Gc6)
-  [Securing REST API using Keycloak and Spring Oauth2 ](https://medium.com/@bcarunmail/securing-rest-api-using-keycloak-and-spring-oauth2-6ddf3a1efcc2)
-  [Accessing Secure REST API using Spring OAuth2RestTemplate | by Arun B Chandrasekaran | Medium](https://medium.com/@bcarunmail/accessing-secure-rest-api-using-spring-oauth2resttemplate-ef18377e2e05)
-  [Spring Cloud Gateway with OpenID Connect and Token Relay]https://blog.jdriven.com/2019/11/spring-cloud-gateway-with-openid-connect-and-token-relay/)
-  [Sécurisez l’accès à vos APIs avec OAuth2](https://nexworld.fr/securiser-api-oauth2/)
+ - [REST API with Spring Boot](https://www.youtube.com/watch?v=bK9PXo7IQSo&list=PLdW9lrB9HDw101ImXtR_xkvTe1HWx7Gc6)
+ - [Securing REST API using Keycloak and Spring Oauth2 ](https://medium.com/@bcarunmail/securing-rest-api-using-keycloak-and-spring-oauth2-6ddf3a1efcc2)
+ - [Accessing Secure REST API using Spring OAuth2RestTemplate | by Arun B Chandrasekaran | Medium](https://medium.com/@bcarunmail/accessing-secure-rest-api-using-spring-oauth2resttemplate-ef18377e2e05)
+ - [Spring Cloud Gateway with OpenID Connect and Token Relay]https://blog.jdriven.com/2019/11/spring-cloud-gateway-with-openid-connect-and-token-relay/)
+ - [Sécurisez l’accès à vos APIs avec OAuth2](https://nexworld.fr/securiser-api-oauth2/)
 
 
 ## HTTPS certificate for the server
-  (https://medium.com/@sairamkrish/keycloak-integration-part-1-overview-812010d6c7cf)[HTTPS sercificate]
+ - [HTTPS sercificate](https://medium.com/@sairamkrish/keycloak-integration-part-1-overview-812010d6c7cf)
 
 ## Keyclock containers:mysql, mssql, mariadb, etc
 
- [docker-compose mysql, mssql, etc](https://github.com/keycloak/keycloak-containers/tree/master/docker-compose-examples)
+ - [docker-compose mysql, mssql, etc](https://github.com/keycloak/keycloak-containers/tree/master/docker-compose-examples)
 
 ## Keycloak javaFX
 
@@ -49,117 +49,69 @@
 ## Keyclock Angular
    
 - [Angular, OpenID Connect and Keycloak](http://robferguson.org/blog/2019/12/29/angular-openid-connect-keycloak/)
-(https://dev.to/anjnkmr/keycloak-integration-in-angular-application-5a43)Keycloak Integration in Angular Application]
-(https://blog.bitsrc.io/integrating-keycloak-with-angular-for-sso-authentication-9d1c6c2d2742)Integrating KeyCloak With Angular For SSO Authentication]
-(https://medium.com/@sairamkrish/keycloak-integration-part-1-overview-812010d6c7cf)Keycloak Integration : Overview]
-(https://medium.com/@sairamkrish/keycloak-integration-part-2-integration-with-angular-frontend-f2716c696a28)Keycloak Integration : Part 2: Integration with Angular Frontend]
-(https://github.com/Robinyo/serendipity)]un projet complet
-(https://geeks18.com/?p=1397)Keycloak Integration with AngularAPP]
-(https://symbiotics.co.za/integrating-keycloak-with-an-angular-4-web-application-part-5/)Integrating Keycloak with an Angular 4 Web Application]
-(https://morioh.com/p/0e61e524f5ca)How to Add KeyCloak in Angular for SSO Authentication]
+- [Keycloak Integration in Angular Application](https://dev.to/anjnkmr/keycloak-integration-in-angular-application-5a43)
+- [Integrating KeyCloak With Angular For SSO Authentication](https://blog.bitsrc.io/integrating-keycloak-with-angular-for-sso-authentication-9d1c6c2d2742)
+- [Keycloak Integration : Overview](https://medium.com/@sairamkrish/keycloak-integration-part-1-overview-812010d6c7cf)
+- [Keycloak Integration : Part 2: Integration with Angular Frontend](https://medium.com/@sairamkrish/keycloak-integration-part-2-integration-with-angular-frontend-f2716c696a28)
+- [un projet complet](https://github.com/Robinyo/serendipity)
+- [Keycloak Integration with AngularAPP](https://geeks18.com/?p=1397)
+- [Integrating Keycloak with an Angular 4 Web Application](https://symbiotics.co.za/integrating-keycloak-with-an-angular-4-web-application-part-5/)
+- [How to Add KeyCloak in Angular for SSO Authentication](https://morioh.com/p/0e61e524f5ca)
 
 
 ## manual with java 
 
-  (https://developer.okta.com/blog/2018/10/31/jwts-with-java)Tutorial: Create and Verify JWTs in Java]
-  (https://developer.okta.com/blog/2018/10/16/token-auth-for-java)Simple Token Authentication for Java Apps]
+- [Tutorial: Create and Verify JWTs in Java](https://developer.okta.com/blog/2018/10/31/jwts-with-java)
+- [Simple Token Authentication for Java Apps](https://developer.okta.com/blog/2018/10/16/token-auth-for-java)
 
 
 ## Keycloack - java app
-[How to secure a Java App with RedHat SSO using OpenID](https://www.janua.fr/how-to-secure-a-java-app-with-rh-sso-using-openid/)
+- [How to secure a Java App with RedHat SSO using OpenID](https://www.janua.fr/how-to-secure-a-java-app-with-rh-sso-using-openid/)
 
 ## Secure REST API 
 
-[Secure REST API using Spring Boot | Toptal](https://www.toptal.com/spring/spring-boot-oauth2-jwt-rest-protection)
-(link)[https://developer.okta.com/blog/2018/05/17/microservices-spring-boot-2-oauth]
-(https://www.pixeltrice.com/spring-boot-security-using-oauth2-with-jwt/)[Spring Boot Security using OAuth2 with JWT - PixelTrice]
-(https://www.tutorialspoint.com/spring_boot/spring_boot_oauth2_with_jwt.htm)[Spring Boot - OAuth2 with JWT - Tutorialspoint]
-(https://spring.io/blog/2015/06/08/cors-support-in-spring-framework[CORS support in Spring Framework]
-(https://dzone.com/articles/how-to-achieve-oauth2-security-in-microservices-di)[How to Implement Oauth2 Security in Microservices - DZone Microservices]
-(https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2)[An Introduction to OAuth 2 | DigitalOcean]
-(http://blog.ippon.fr/2017/10/31/gerer-lauthentification-dans-une-architecture-moderne-partie-1/)[Gérer l’authentification dans une Architecture Moderne - Partie 1]
-(https://www.baeldung.com/spring-security-oauth-jwt)[Using JWT with Spring Security OAuth | Baeldung]
-(https://www.baeldung.com/spring-security-oauth-resource-server)[OAuth 2.0 Resource Server With Spring Security 5 | Baeldung]
-(https://spring.io/blog/2015/06/08/cors-support-in-spring-framework)[CORS support in Spring Framework]
-(https://github.com/summerwind/opa-nginx-rbac)[GitHub - summerwind/opa-nginx-rbac: A proof of concept for RBAC on nginx with Open Policy Agent]
-(ttps://www.nginx.com/blog/building-microservices-inter-process-communication/)[Building Microservices: Inter-Process Communication in a Microservices Architecture]
-
+- [Secure REST API using Spring Boot | Toptal](https://www.toptal.com/spring/spring-boot-oauth2-jwt-rest-protection)
+- [link](https://developer.okta.com/blog/2018/05/17/microservices-spring-boot-2-oauth)
+- [Spring Boot Security using OAuth2 with JWT - PixelTrice](https://www.pixeltrice.com/spring-boot-security-using-oauth2-with-jwt/)
+- [Spring Boot - OAuth2 with JWT - Tutorialspoint](https://www.tutorialspoint.com/spring_boot/spring_boot_oauth2_with_jwt.htm)
+- [CORS support in Spring Framework](https://spring.io/blog/2015/06/08/cors-support-in-spring-framework)
+- [How to Implement Oauth2 Security in Microservices - DZone Microservices](https://dzone.com/articles/how-to-achieve-oauth2-security-in-microservices-di)
+- [An Introduction to OAuth 2 | DigitalOcean](https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2)
+- [Gérer l’authentification dans une Architecture Moderne - Partie 1](http://blog.ippon.fr/2017/10/31/gerer-lauthentification-dans-une-architecture-moderne-partie-1/)
+- [Using JWT with Spring Security OAuth | Baeldung](https://www.baeldung.com/spring-security-oauth-jwt)
+- [OAuth 2.0 Resource Server With Spring Security 5 | Baeldung](https://www.baeldung.com/spring-security-oauth-resource-server)
+- [CORS support in Spring Framework](https://spring.io/blog/2015/06/08/cors-support-in-spring-framework)
+- [GitHub - summerwind/opa-nginx-rbac: A proof of concept for RBAC on nginx with Open Policy Agent](https://github.com/summerwind/opa-nginx-rbac)
+- [Building Microservices: Inter-Process Communication in a Microservices Architecture](ttps://www.nginx.com/blog/building-microservices-inter-process-communication/)
 
 
 ## Keycloak - Themes
 
-  <li>
-
-    (https://robferguson.org/blog/2020/04/12/keycloak-themes-part-1/)
-      Keycloak Themes - Part 1
-      ]
-   (http://robferguson.org/blog/2020/04/17/keycloak-themes-part-2/)
-    Keycloak Themes - Part 2
-    ]
-  
+- [Keycloak Themes - Part 1](https://robferguson.org/blog/2020/04/12/keycloak-themes-part-1/)
+- [Keycloak Themes - Part 2](http://robferguson.org/blog/2020/04/17/keycloak-themes-part-2/)
 
 
 ## Keycloak
 <ul>
-(http://progressivecoder.com/spring-boot-keycloak-integration-part-1
-/)Securing Applications using Spring Boot Keycloak Integration – Part 1]</li
->
-(http://progressivecoder.com/securing-applications-using-spring-boot
--keycloak-integration-part-2/)Securing Applications using Spring Boot Keycloak
-Integration – Part 2]
-(https://farinmedia.ir/udemy-oauth-2-0-in-spring-boot-applications/"
->dfdf] 
-(https://www.appsdeveloperblog.com/category/keycloak/) Keycloak Arc
-hives - Apps Developer Blog]
-(https://www.appsdeveloperblog.com/get-userid-from-keycloak-jwt-acce
-ss-token/)Get UserId from Keycloak JWT Access Token - Apps Developer Blog]</
-li>
-</ul>
-
-(https://www.appsdeveloperblog.com/keycloak-client-credentials-grant-exa
-mple/)Keycloak: Client Credentials Grant Example - Apps Developer Blog]
-
-(https://github.com/thomasdarimont/awesome-keycloak)
-        GitHub - thomasdarimont/awesome-keycloak: A curated list of resources fo
-r learning about keycloak
-        ]</br>
-       
-        (http://robferguson.org/blog/2019/12/24/getting-started-with-key
-cloak/)
-        Getting started with Keycloak
-        ]</br>
-       
-
-       
-     
-   (https://ordina-jworks.github.io/security/2019/08/22/Securing-Web-App
-lications-With-Keycloak.html)
-  Securing Web Applications With Keycloak Using OAuth 2.0 Authorization Code Flo
-w and PKCE - Jeroen Meys — Ordina JWorks Tech Blog
-  ]</br>
-       
-(https://ordina-jworks.github.io/security/2019/08/22/Securing-Web-Applic
+- [Securing Applications using Spring Boot Keycloak Integration – Part 1](http://progressivecoder.com/spring-boot-keycloak-integration-part-1/)
+- Securing Applications using Spring Boot Keycloak
+- [Integration – Part 2](http://progressivecoder.com/securing-applications-using-spring-boot-keycloak-integration-part-2/)
+- [fdf](https://farinmedia.ir/udemy-oauth-2-0-in-spring-boot-applications/
+- [Keycloak Archives - Apps Developer Blog](https://www.appsdeveloperblog.com/category/keycloak/) 
+- [[Get UserId from Keycloak JWT Access Token - Apps Developer Blog](https://www.appsdeveloperblog.com/get-userid-from-keycloak-jwt-access-token/
+- [Keycloak: Client Credentials Grant Example - Apps Developer Blog](https://www.appsdeveloperblog.com/keycloak-client-credentials-grant-example/
+- [GitHub - thomasdarimont/awesome-keycloak: A curated list of resources for learning about keycloak](https://github.com/thomasdarimont/awesome-keycloak)
+- [[Getting started with Keycloak](http://robferguson.org/blog/2019/12/24/getting-started-with-keycloak/)
+- [Securing Web Applications With Keycloak Using OAuth 2.0 Authorization Code Flow and PKCE - Jeroen Meys — Ordina JWorks Tech Blog](https://ordina-jworks.github.io/security/2019/08/22/Securing-Web-Applications-With-Keycloak.html)
+-[Securing Web Applications With Keycloak Using OAuth 2.0 Authorization Code Flow and PKCE - Jeroen Meys — Ordina JWorks Tech Blog](https://ordina-jworks.github.io/security/2019/08/22/Securing-Web-Applic
 ations-With-Keycloak.html)
-    Securing Web Applications With Keycloak Using OAuth 2.0 Authorization Code F
-low and PKCE - Jeroen Meys — Ordina JWorks Tech Blog
- ]</br>
-
- (https://frameworks.readthedocs.io/en/latest/spring-boot/spring-boot2/k
+- [Keycloak OAuth2 PKCE — Framework Repositories 1.0 documentation](https://frameworks.readthedocs.io/en/latest/spring-boot/spring-boot2/k
 eycloakOAuth2PKCE.html)
-    Keycloak OAuth2 PKCE — Framework Repositories 1.0 documentation
-    ]</br>
-
-    (https://geeks18.com/?p=1347)
-        Securing a Microservice with Keycloak - Geeks18
-        ]</br>
-       
-        (https://prog.world/sso-on-microservice-architecture-we-use-keyc
+- [Securing a Microservice with Keycloak - Geeks18](https://geeks18.com/?p=1347)
+- [SSO on microservice architecture. We use Keycloak. Part number 1 - Prog.world](https://prog.world/sso-on-microservice-architecture-we-use-keyc
 loak-part-number-1/)
-        SSO on microservice architecture. We use Keycloak. Part number 1 - Prog.
-world
-        ]</br>
-       
-
+     
+   
         (https://piotrminkowski.com/2020/10/09/spring-cloud-gateway-oaut
 h2-with-keycloak/)
             Spring Cloud Gateway OAuth2 with Keycloak - Piotr's TechBlog
