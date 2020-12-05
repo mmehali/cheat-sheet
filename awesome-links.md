@@ -27,7 +27,7 @@
  - [REST API with Spring Boot](https://www.youtube.com/watch?v=bK9PXo7IQSo&list=PLdW9lrB9HDw101ImXtR_xkvTe1HWx7Gc6)
  - [Securing REST API using Keycloak and Spring Oauth2 ](https://medium.com/@bcarunmail/securing-rest-api-using-keycloak-and-spring-oauth2-6ddf3a1efcc2)
  - [Accessing Secure REST API using Spring OAuth2RestTemplate | by Arun B Chandrasekaran | Medium](https://medium.com/@bcarunmail/accessing-secure-rest-api-using-spring-oauth2resttemplate-ef18377e2e05)
- - [Spring Cloud Gateway with OpenID Connect and Token Relay]https://blog.jdriven.com/2019/11/spring-cloud-gateway-with-openid-connect-and-token-relay/)
+ - [Spring Cloud Gateway with OpenID Connect and Token Relay](https://blog.jdriven.com/2019/11/spring-cloud-gateway-with-openid-connect-and-token-relay/)
  - [Sécurisez l’accès à vos APIs avec OAuth2](https://nexworld.fr/securiser-api-oauth2/)
 
 
@@ -59,7 +59,7 @@
 - [How to Add KeyCloak in Angular for SSO Authentication](https://morioh.com/p/0e61e524f5ca)
 
 
-## manual with java 
+## Manual with java 
 
 - [Tutorial: Create and Verify JWTs in Java](https://developer.okta.com/blog/2018/10/31/jwts-with-java)
 - [Simple Token Authentication for Java Apps](https://developer.okta.com/blog/2018/10/16/token-auth-for-java)
@@ -92,144 +92,44 @@
 
 
 ## Keycloak
-<ul>
 - [Securing Applications using Spring Boot Keycloak Integration – Part 1](http://progressivecoder.com/spring-boot-keycloak-integration-part-1/)
-- Securing Applications using Spring Boot Keycloak
-- [Integration – Part 2](http://progressivecoder.com/securing-applications-using-spring-boot-keycloak-integration-part-2/)
-- [fdf](https://farinmedia.ir/udemy-oauth-2-0-in-spring-boot-applications/
+- [Securing Applications using Spring Boot Keycloak Integration – Part 1](http://progressivecoder.com/securing-applications-using-spring-boot-keycloak-integration-part-2/)
+- [fdf](https://farinmedia.ir/udemy-oauth-2-0-in-spring-boot-applications/)
 - [Keycloak Archives - Apps Developer Blog](https://www.appsdeveloperblog.com/category/keycloak/) 
-- [[Get UserId from Keycloak JWT Access Token - Apps Developer Blog](https://www.appsdeveloperblog.com/get-userid-from-keycloak-jwt-access-token/
-- [Keycloak: Client Credentials Grant Example - Apps Developer Blog](https://www.appsdeveloperblog.com/keycloak-client-credentials-grant-example/
+- [[Get UserId from Keycloak JWT Access Token - Apps Developer Blog](https://www.appsdeveloperblog.com/get-userid-from-keycloak-jwt-access-token/)
+- [Keycloak: Client Credentials Grant Example - Apps Developer Blog](https://www.appsdeveloperblog.com/keycloak-client-credentials-grant-example/)
 - [GitHub - thomasdarimont/awesome-keycloak: A curated list of resources for learning about keycloak](https://github.com/thomasdarimont/awesome-keycloak)
 - [[Getting started with Keycloak](http://robferguson.org/blog/2019/12/24/getting-started-with-keycloak/)
 - [Securing Web Applications With Keycloak Using OAuth 2.0 Authorization Code Flow and PKCE - Jeroen Meys — Ordina JWorks Tech Blog](https://ordina-jworks.github.io/security/2019/08/22/Securing-Web-Applications-With-Keycloak.html)
--[Securing Web Applications With Keycloak Using OAuth 2.0 Authorization Code Flow and PKCE - Jeroen Meys — Ordina JWorks Tech Blog](https://ordina-jworks.github.io/security/2019/08/22/Securing-Web-Applic
-ations-With-Keycloak.html)
-- [Keycloak OAuth2 PKCE — Framework Repositories 1.0 documentation](https://frameworks.readthedocs.io/en/latest/spring-boot/spring-boot2/k
-eycloakOAuth2PKCE.html)
+-[Securing Web Applications With Keycloak Using OAuth 2.0 Authorization Code Flow and PKCE - Jeroen Meys — Ordina JWorks Tech Blog](https://ordina-jworks.github.io/security/2019/08/22/Securing-Web-Applications-With-Keycloak.html)
+- [Keycloak OAuth2 PKCE — Framework Repositories 1.0 documentation](https://frameworks.readthedocs.io/en/latest/spring-boot/spring-boot2/keycloakOAuth2PKCE.html)
 - [Securing a Microservice with Keycloak - Geeks18](https://geeks18.com/?p=1347)
-- [SSO on microservice architecture. We use Keycloak. Part number 1 - Prog.world](https://prog.world/sso-on-microservice-architecture-we-use-keyc
-loak-part-number-1/)
-     
-   
-        (https://piotrminkowski.com/2020/10/09/spring-cloud-gateway-oaut
-h2-with-keycloak/)
-            Spring Cloud Gateway OAuth2 with Keycloak - Piotr's TechBlog
-            ]</br>
-           
-            (https://piotrminkowski.com/2020/10/09/spring-cloud-gateway-
-oauth2-with-keycloak/)
-            Spring Cloud Gateway OAuth2 with Keycloak - Piotr's TechBlog
-            ]</br>
-       
-        (https://keycloak.discourse.group/t/keycloak-spring-cloud-gatewa
-y/1745)
-        Keycloak & Spring Cloud Gateway - Securing applications - Keycloak
-        ]</br>
-        (https://stackoverflow.com/questions/56606652/how-to-use-keycloa
-k-logout-using-the-keycloak-installed-adapter-in-netbeans)
-            java - How to use keycloak.logout() using the keycloak-installed-ada
-pter in Netbeans - Stack Overflow
-            ]</br>
-       
-            (https://medium.com/devops-dudes/securing-spring-boot-rest-a
-pis-with-keycloak-1d760b2004e)
-                Securing Spring Boot REST APIs with Keycloak | by Dinuth De Zoys
-a | DevOps Dudes | Medium
-            ]</br>
-           
-            (https://medium.com/@bcarunmail/securing-rest-api-using-keyc
-loak-and-spring-oauth2-6ddf3a1efcc2)
-             Securing REST API using Keycloak and Spring Oauth2 | by Arun B Chan
-drasekaran | Medium
-            ]</br>
-           
-            (https://www.thomasvitale.com/keycloak-configuration-authent
-ication-authorisation/)
-            Keycloak Basic Configuration for Authentication and Authorization
-            ]</br>
-           
-            (https://www.thomasvitale.com/spring-security-keycloak/)
-            Spring Security and Keycloak to Secure Spring Boot - A First Look
-            ]</br>
+- [SSO on microservice architecture. We use Keycloak. Part number 1 - Prog.world](https://prog.world/sso-on-microservice-architecture-we-use-keycloak-part-number-1/)
+- [Spring Cloud Gateway OAuth2 with Keycloak - Piotr's TechBlog](https://piotrminkowski.com/2020/10/09/spring-cloud-gateway-oauth2-with-keycloak/)
+- [Spring Cloud Gateway OAuth2 with Keycloak - Piotr's TechBlog](https://piotrminkowski.com/2020/10/09/spring-cloud-gateway-oauth2-with-keycloak/)
+- [Keycloak & Spring Cloud Gateway - Securing applications - Keycloak](https://keycloak.discourse.group/t/keycloak-spring-cloud-gateway/1745)
+- [Java - How to use keycloak.logout() using the keycloak-installed-adapter in Netbeans - Stack Overflow](https://stackoverflow.com/questions/56606652/how-to-use-keycloak-logout-using-the-keycloak-installed-adapter-in-netbeans)
+- [Securing Spring Boot REST APIs with Keycloak | by Dinuth De Zoysa | DevOps Dudes | Medium](https://medium.com/devops-dudes/securing-spring-boot-rest-apis-with-keycloak-1d760b2004e)
+- [Securing REST API using Keycloak and Spring Oauth2 | by Arun B Chandrasekaran | Medium](https://medium.com/@bcarunmail/securing-rest-api-using-keycloak-and-spring-oauth2-6ddf3a1efcc2)
+- [Keycloak Basic Configuration for Authentication and Authorization](https://www.thomasvitale.com/keycloak-configuration-authentication-authorisation/)
+- [Spring Security and Keycloak to Secure Spring Boot - A First Look](https://www.thomasvitale.com/spring-security-keycloak/)
+- [How to Use Keycloak With a Spring Boot Application - DEV](https://dev.to/betterjavacode/how-to-use-keycloak-with-a-spring-boot-application-3385)
+- [keycloak-auth/AuthController.java at master · AriHealth/keycloak-auth · GitHub](https://github.com/AriHealth/keycloak-auth/blob/master/src/main/java/net/atos/ari/auth/controller/AuthController.java)
+- [java - OAuth2 client credentials flow via Spring Boot Keycloak integration - Stack Overflow](https://stackoverflow.com/questions/57974630/oauth2-client-credentials-flow-via-spring-boot-keycloak-integration)
+- [Keycloak for Identity and Access Management & High AvailabilityDeployment with Kubernetes | by Dinuth De Zoysa | DevOps Dudes | Medium](https://medium.com/devops-dudes/keycloak-for-identity-and-access-management-9860a994bf0)
+- [Spring Security Expressions - Exemple avec hasRole](https://www.codeflow.site/fr/article/spring-security-expressions-basic)
+- [Creating OAuth 2 Scope in Keycloak - Apps Developer Blog a - Spring security client PKCE with Keycloak - Stack Overflow](https://www.appsdeveloperblog.com/creating-oauth-2-scope-in-keycloak/)
+- [a - Spring security client PKCE with Keycloak - Stack Overflow](https://stackoverflow.com/questions/61211598/spring-security-client-pkce-with-keycloak)
            
            
-            (https://dev.to/betterjavacode/how-to-use-keycloak-with-a-sp
-ring-boot-application-3385)
-            How to Use Keycloak With a Spring Boot Application - DEV
-            ]</br>
-
-            (https://github.com/AriHealth/keycloak-auth/blob/master/src/
-main/java/net/atos/ari/auth/controller/AuthController.java)
-                keycloak-auth/AuthController.java at master · AriHealth/keycloak
--auth · GitHub
-                ]</br>
-               
-                (https://stackoverflow.com/questions/57974630/oauth2-cli
-ent-credentials-flow-via-spring-boot-keycloak-integration)
-                java - OAuth2 client credentials flow via Spring Boot Keycloak i
-ntegration - Stack Overflow
-                ]</br>
-                 
-                (https://medium.com/devops-dudes/keycloak-for-identity-a
-nd-access-management-9860a994bf0)
-                Keycloak for Identity and Access Management & High Availability
-Deployment with Kubernetes | by Dinuth De Zoysa | DevOps Dudes | Medium
-                ]</br>
-                (https://www.codeflow.site/fr/article/spring-security-ex
-pressions-basic)
-                Spring Security Expressions - Exemple avec hasRole
-                ]</br>
-               
-            (https://www.appsdeveloperblog.com/creating-oauth-2-scope-in
--keycloak/)
-            Creating OAuth 2 Scope in Keycloak - Apps Developer Blog
-            ]</br>
-             
-           
-            (https://stackoverflow.com/questions/61211598/spring-securit
-y-client-pkce-with-keycloak)
-            a - Spring security client PKCE with Keycloak - Stack Overflow
-            ]</br>
-           
-
-           
-    ## OAUTH2
-    (https://www.appsdeveloperblog.com/tag/oauth-2/)plusieurs articles
-OAUTH2]
-
-       
-(https://www.codeflow.site/fr/article/spring-security-5-oauth2-login) S
-pring Security 5 - Connexion OAuth2 ]</br>
-
-
-(https://spring.io/blog/2018/03/06/using-spring-security-5-to-integrate-
-with-oauth-2-secured-services-such-as-facebook-and-github)
-Using Spring Security 5 to integrate with OAuth 2-secured services such as Faceb
-ook and GitHub
-]</br>
-
-
-(https://www.appsdeveloperblog.com/spring-security-oauth-2-social-logout
-/)
-Spring Security OAuth 2 Social Logout - Apps Developer Blog
-]</br>
-
-
-(https://www.appsdeveloperblog.com/pkce-verification-in-authorization-co
-de-grant/)
-PKCE Verification in Authorization Code Grant - Apps Developer Blog
-]</br>
-
-(https://sultanov.dev/blog/authorization-code-flow-with-pkce-in-spring-s
-ecurity-oauth/)
-Authorization Code Flow with PKCE in Spring Security OAuth
-]</br>
-
-(https://sultanov.dev/blog/authorization-code-flow-with-pkce-in-spring-s
-ecurity-oauth/)
-Authorization Code Flow with PKCE in Spring Security OAuth
-]</br>
+## OAUTH2
+- [plusieurs articlesOAUTH2](https://www.appsdeveloperblog.com/tag/oauth-2/)
+- [Spring Security 5 - Connexion OAuth2 ](https://www.codeflow.site/fr/article/spring-security-5-oauth2-login)
+- [Using Spring Security 5 to integrate with OAuth 2-secured services such as Facebook and GitHub](https://spring.io/blog/2018/03/06/using-spring-security-5-to-integrate-with-oauth-2-secured-services-such-as-facebook-and-github)
+- [Spring Security OAuth 2 Social Logout - Apps Developer Blog](https://www.appsdeveloperblog.com/spring-security-oauth-2-social-logout/)
+- [PKCE Verification in Authorization Code Grant - Apps Developer Blog](https://www.appsdeveloperblog.com/pkce-verification-in-authorization-code-grant/)
+- [Authorization Code Flow with PKCE in Spring Security OAuth](https://sultanov.dev/blog/authorization-code-flow-with-pkce-in-spring-security-oauth/)
+- [Authorization Code Flow with PKCE in Spring Security OAuth](https://sultanov.dev/blog/authorization-code-flow-with-pkce-in-spring-security-oauth/)
 
 (https://dev.to/shyamala_u/spring-boot--spring-security-5--oauth2oidc-cl
 ient---basics-4ibo)
