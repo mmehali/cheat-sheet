@@ -1,4 +1,4 @@
-#LDAP
+# LDAP
 
 - [keycloak-ldap-playground/infrastructure at master](https://github.com/tbsfrdrch/keycloak-ldap-playground/tree/master/infrastructure)
 - [openldap - Mapping Client roles of keycloak on LDAP user - Super User](https://superuser.com/questions/1399232/mapping-client-roles-of-keycloak-on-ldap-user)
