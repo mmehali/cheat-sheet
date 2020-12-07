@@ -1187,7 +1187,7 @@ sso/SsoApplication.java at master · spring-cloud-samples/sso · GitHub
 
 
 ## LDAP
-
+- [Apache DS (LDAP) as User Federation in Keycloak](https://medium.com/keycloak/apache-ds-ldap-as-user-federation-in-keycloak-5978838d53c0)
 - [keycloak-ldap-playground/infrastructure at master](https://github.com/tbsfrdrch/keycloak-ldap-playground/tree/master/infrastructure)
 - [openldap - Mapping Client roles of keycloak on LDAP user - Super User](https://superuser.com/questions/1399232/mapping-client-roles-of-keycloak-on-ldap-user)
 - [Role LDAP Mapper : add primary group to role - Getting advice - Keycloak](https://keycloak.discourse.group/t/role-ldap-mapper-add-primary-group-to-role/1625)
