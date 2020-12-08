@@ -13,9 +13,9 @@
 - [https://dzone.com/articles/how-do-you-ensure-security](https://dzone.com/articles/how-do-you-ensure-security)
 
 
-## saml 
+## brokering saml & openid 
 - [AWS SAML based User Federation using Keycloak](https://neuw.medium.com/aws-connect-saml-based-identity-provider-using-keycloak-9b3e6d0111e6)
-
+- [AWS user account OpenID federation using Keycloak](https://neuw.medium.com/aws-account-openid-federation-using-keycloak-40d22b952a43)
 ## Spring security documentation
  - [String security 5 documentation](https://docs.spring.io/spring-security/site/docs/current/reference/html5/#oauth2")
  - [Spring Boot and OAuth2](https://spring.io/guides/tutorials/spring-boot-oauth2/)
