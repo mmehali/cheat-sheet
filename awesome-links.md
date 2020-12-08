@@ -11,6 +11,7 @@
 - [10 Excellent Ways to Secure Your Spring Boot Application](https://developer.okta.com/blog/2018/07/30/10-ways-to-secure-spring-boot)
 - [Supercharge Java Authentication with JSON Web Tokens (JWTs)](https://www.baeldung.com/java-json-web-tokens-jjwt)
 - [https://dzone.com/articles/how-do-you-ensure-security](https://dzone.com/articles/how-do-you-ensure-security)
+- [Integrating RH-SSO (Keycloak) to ADFS](https://sysadm.life/posts/rh_sso_keycloak_to_adfs_using_saml_integration/)
 
 
 ## brokering saml & openid 
