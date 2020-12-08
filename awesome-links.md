@@ -13,7 +13,8 @@
 - [https://dzone.com/articles/how-do-you-ensure-security](https://dzone.com/articles/how-do-you-ensure-security)
 
 
- 
+## saml 
+- [AWS SAML based User Federation using Keycloak](https://neuw.medium.com/aws-connect-saml-based-identity-provider-using-keycloak-9b3e6d0111e6)
 
 ## Spring security documentation
  - [String security 5 documentation](https://docs.spring.io/spring-security/site/docs/current/reference/html5/#oauth2")
