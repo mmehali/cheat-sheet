@@ -13,10 +13,15 @@
 - [https://dzone.com/articles/how-do-you-ensure-security](https://dzone.com/articles/how-do-you-ensure-security)
 - [Integrating RH-SSO (Keycloak) to ADFS](https://sysadm.life/posts/rh_sso_keycloak_to_adfs_using_saml_integration/)
 
+## drupal
+ - [Keycloak Single Sign On (SSO) for your Application](https://idp.miniorange.com/login-using-keycloak/)
+ - [Keycloak with drupal](https://github.com/wadmiraal/docker-drupal)
+ - [keycloak openId connect drupal module](https://www.drupal.org/project/keycloak)
 
 ## brokering saml & openid 
 - [AWS SAML based User Federation using Keycloak](https://neuw.medium.com/aws-connect-saml-based-identity-provider-using-keycloak-9b3e6d0111e6)
 - [AWS user account OpenID federation using Keycloak](https://neuw.medium.com/aws-account-openid-federation-using-keycloak-40d22b952a43)
+- [How to secure a Spring Boot app with SAML and Keycloak](https://blog.codecentric.de/en/2019/03/secure-spring-boot-app-saml-keycloak/)
 ## Spring security documentation
  - [String security 5 documentation](https://docs.spring.io/spring-security/site/docs/current/reference/html5/#oauth2")
  - [Spring Boot and OAuth2](https://spring.io/guides/tutorials/spring-boot-oauth2/)
