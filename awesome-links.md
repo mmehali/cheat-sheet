@@ -357,7 +357,7 @@ userpassword: {MD5}ICy5YqxZB1uWSwcVLSNLcA==
 --------------------------------------------------------------------------------
 Keycloak- gravitee
 --------------------------------------------------------------------------------
-- [GitHub - gravitee-io/gravitee-resource-oauth2-provider-keycloak: Gravitee.io - API Management - Resource - Keycloak Adapter](https://github.com/gravitee-io/gravitee-resource-oauth2-provider-keycloak
+- [GitHub - gravitee-io/gravitee-resource-oauth2-provider-keycloak: Gravitee.io - API Management - Resource - Keycloak Adapter](https://github.com/gravitee-io/gravitee-resource-oauth2-provider-keycloak)
 - [Understanding Keycloak RedHat SSO Authentication - JANUA](https://www.janua.fr/understanding-keycloak-redhat-sso-authentication/)
 - [Keycloak Identity Provider Extension Released - Camunda](https://camunda.com/blog/2019/08/keycloak-identity-provider-extension/)
 - [GitHub - thomasdarimont/keycloak-extension-playground: Simple project environment for creating custom Keycloak extensions](https://github.com/thomasdarimont/keycloak-extension-playground)
