@@ -381,7 +381,7 @@ Keycloak- gravitee
 - [How to Better Captain of the Enterprise with Apache Maven – Billy Korando](https://billykorando.com/2020/01/14/how-to-better-captain-of-the-enterprise-with-apache-maven/)
 - [GitHub - entando/keycloak-connector: Generates client jar for interacting with keycloak architecture](https://github.com/entando/keycloak-connector)
 - [Habilitations autorisations authentification - Recherche Google](https://www.google.com/search?client=tablet-android-huawei-rev1&ei=9suiX-i6KIv6UrDspJgF&q=Habilitations+autorisations++authentification&oq=Habilitations+autorisations++authentification&gs_lcp=ChNtb2JpbGUtZ3dzLXdpei1zZXJwEAMyBQgAEM0CMgUIABDNAjIFCAAQzQI6BggAEAgQHjoFCCEQoAE6BwghEAoQoAFQlpcBWKqGAmCQoQJoAnAAeACAAXCIAYQPkgEEMTMuN5gBAKABAcABAQ&sclient=mobile-gws-wiz-serp)
-[????](https://www.google.com/url?sa=t&source=web&rct=j&url=](https://www.forum-des-competences.org/assets/files/v1/Livrables/les-six-pilliers-de-la-gestion-des-identites-et-des-acces.pdf&ved=2ahUKEwjbnqO4nensAhV5AWMBHe4SBmYQFjABegQIARAB&usg=AOvVaw1WA5Fqbp7SLjaw4WtZvPmM)
+
 - [Authorization Code Grant - OAuth 2.0 Simplified](https://www.oauth.com/oauth2-servers/server-side-apps/authorization-code/)
 - [Présentation d'OAuth 2.0  |  Apigee  |  Google Cloud](https://cloud.google.com/apigee/docs/api-platform/security/oauth/access-tokens?hl=fr)
 - [java - Keycloak public client and authorization - Stack Overflow](https://stackoverflow.com/questions/53118828/keycloak-public-client-and-authorization)
