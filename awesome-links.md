@@ -165,6 +165,38 @@
 - [Supercharge Java Authentication with JSON Web Tokens (JWTs)](https://www.baeldung.com/java-json-web-tokens-jjwt)
 - [https://dzone.com/articles/how-do-you-ensure-security](https://dzone.com/articles/how-do-you-ensure-security)
 
+           
+    ## OAUTH2
+- [plusieurs articles OAUTH2](https://www.appsdeveloperblog.com/tag/oauth-2/)  
+- [Spring Security 5 - Connexion OAuth2 ](https://www.codeflow.site/fr/article/spring-security-5-oauth2-login)
+- [Using Spring Security 5 to integrate with OAuth 2-secured services such as Facebook and GitHub](https://spring.io/blog/2018/03/06/using-spring-security-5-to-- - [integrate-with-oauth-2-secured-services-such-as-facebook-and-github)
+- [Spring Security OAuth 2 Social Logout - Apps Developer Blog](https://www.appsdeveloperblog.com/spring-security-oauth-2-social-logout/)
+- [PKCE Verification in Authorization Code Grant - Apps Developer Blog](https://www.appsdeveloperblog.com/pkce-verification-in-authorization-code-grant/)
+- [Authorization Code Flow with PKCE in Spring Security OAuth](https://sultanov.dev/blog/authorization-code-flow-with-pkce-in-spring-security-oauth/)
+- [Authorization Code Flow with PKCE in Spring Security OAuth](https://sultanov.dev/blog/authorization-code-flow-with-pkce-in-spring-security-oauth/)
+- [Spring boot + Spring Security 5 + OAuth2/OIDC Client - Basics - DEV](https://dev.to/shyamala_u/spring-boot--spring-security-5--oauth2oidc-client---basics-4ibo)
+- [Spring Security - How to configure an OAuth2 client | TwiNNatioN](https://twinnation.org/articles/18/spring-security-how-to-configure-an-oauth2-client)
+- [Secure Reactive Microservices with Spring Cloud Gateway | Okta Developer](https://developer.okta.com/blog/2019/08/28/reactive-microservices-spring-cloud-gateway)
+- [Implement OAuth 2.0 Easily with Spring Boot and Spring Security - DZone Security](https://dzone.com/articles/implement-oauth-20-easily-with-spring-boot-and-spr)
+- [OAuth 2.0 Migration Guide · spring-projects/spring-security Wiki · GitHub](https://github.com/spring-projects/spring-security/wiki/OAuth-2.0-Migration-Guide)
+- [spring-security-oauth-5-2-migrate/pom.xml at master · jgrandja/spring-security-oauth-5-2-migrate · GitHub](https://github.com/jgrandja/spring-security-oauth-5-2-migrate/blob/master/client-app/pom.xml)
+- [microservices-security/front/src at master · ImFlog/microservices-security · GitHub](https://github.com/ImFlog/microservices-security/tree/master/front/src)
+- [Microservices and Security — Part 2 | by Yogendra Mishra | Medium](https://medium.com/@imyom25/microservices-and-security-part-2-f2b44eb98a21)
+- [Which OAuth 2.0 Flow Should I Use?](https://auth0.com/docs/authorization/which-oauth-2-0-flow-should-i-use)
+- [The Phantom Token Approach | OAuth and OpenID Connect Done Better](https://curity.io/resources/architect/api-security/phantom-token-pattern/)
+- [The separation of concerns between API Gateway and microservice | by Johan Sydseter | Norway Community Site | Medium](https://medium.com/capgemini-norway/the-separation-of-concerns-between-api-gateway-and-microservice-d9dbce6f1cc8)
+- [OAuth2 authorization patterns and microservices | by Johan Sydseter | Norway Community Site | Medium](https://medium.com/capgemini-norway/oauth2-authorization-patterns-and-microservices-45ffc67a8541)
+- [How to Implement Oauth2 Security in Microservices - DZone Microservices](https://dzone.com/articles/how-to-achieve-oauth2-security-in-microservices-di)
+- [How to Implement Oauth2 Security in Microservices - DZone Microservices](https://dzone.com/articles/how-to-achieve-oauth2-security-in-microservices-di)
+- [spring-security-samples/README.adoc at master · timtebeek/spring-security-samples · GitHub](https://github.com/timtebeek/spring-security-samples/blob/master/spring-cloud-gateway-oidc-tokenrelay/README.adoc)
+- [Spring Cloud Gateway with OpenID Connect and Token Relay - JDriven Blog](https://blog.jdriven.com/2019/11/Spring-Cloud-Gateway-with-OpenID-Connect-and-Token-Relay)
+- [Access management | wstutorial.com](https://wstutorial.com/am.html)
+- [sso/SsoApplication.java at master · spring-cloud-samples/sso · GitHub](https://github.com/spring-cloud-samples/sso/blob/master/src/main/java/demo/SsoApplication.java)
+- [Supercharge Java Authentication with JSON Web Tokens (JWTs)](https://www.baeldung.com/java-json-web-tokens-jjwt)
+- [https://dzone.com/articles/how-do-you-ensure-security](https://dzone.com/articles/how-do-you-ensure-security)
+
+
+
 ## Spring security documentation 
 - [String security 5 documentation](https://docs.spring.io/spring-security/site/docs/current/reference/html5/#oauth2)
 - [Spring Boot and OAuth2](https://spring.io/guides/tutorials/spring-boot-oauth2/)
@@ -202,161 +234,6 @@
 - [Keycloak Themes - Part 2](http://robferguson.org/blog/2020/04/17/keycloak-themes-part-2/)
 
   
-
-## Keycloak
-
-- [Securing Applications using Spring Boot Keycloak Integration – Part 1](http://progressivecoder.com/spring-boot-keycloak-integration-part-1/)
-- [Securing Applications using Spring Boot Keycloak](http://progressivecoder.com/securing-applications-using-spring-boot-keycloak-integration-part-2/)
-- [Integration – Part 2](https://farinmedia.ir/udemy-oauth-2-0-in-spring-boot-applications/) 
-- [Keycloak Archives - Apps Developer Blog](https://www.appsdeveloperblog.com/category/keycloak/) 
-- [Get UserId from Keycloak JWT Access Token - Apps Developer Blog](https://www.appsdeveloperblog.com/get-userid-from-keycloak-jwt-access-token/)
-- [Keycloak: Client Credentials Grant Example - Apps Developer Blog](https://www.appsdeveloperblog.com/keycloak-client-credentials-grant-example/)
-- [GitHub - thomasdarimont/awesome-keycloak: A curated list of resources for learning about keycloak](https://github.com/thomasdarimont/awesome-keycloak)
-- [Getting started with Keycloak](http://robferguson.org/blog/2019/12/24/getting-started-with-keycloak/)
-   
-       
-
-       
-     
-   (https://ordina-jworks.github.io/security/2019/08/22/Securing-Web-App
-lications-With-Keycloak.html)
-  Securing Web Applications With Keycloak Using OAuth 2.0 Authorization Code Flo
-w and PKCE - Jeroen Meys — Ordina JWorks Tech Blog
-  ]</br>
-       
-(https://ordina-jworks.github.io/security/2019/08/22/Securing-Web-Applic
-ations-With-Keycloak.html)
-    Securing Web Applications With Keycloak Using OAuth 2.0 Authorization Code F
-low and PKCE - Jeroen Meys — Ordina JWorks Tech Blog
- ]</br>
-
- (https://frameworks.readthedocs.io/en/latest/spring-boot/spring-boot2/k
-eycloakOAuth2PKCE.html)
-    Keycloak OAuth2 PKCE — Framework Repositories 1.0 documentation
-    ]</br>
-
-    (https://geeks18.com/?p=1347)
-        Securing a Microservice with Keycloak - Geeks18
-        ]</br>
-       
-        (https://prog.world/sso-on-microservice-architecture-we-use-keyc
-loak-part-number-1/)
-        SSO on microservice architecture. We use Keycloak. Part number 1 - Prog.
-world
-        ]</br>
-       
-
-        (https://piotrminkowski.com/2020/10/09/spring-cloud-gateway-oaut
-h2-with-keycloak/)
-            Spring Cloud Gateway OAuth2 with Keycloak - Piotr's TechBlog
-            ]</br>
-           
-            (https://piotrminkowski.com/2020/10/09/spring-cloud-gateway-
-oauth2-with-keycloak/)
-            Spring Cloud Gateway OAuth2 with Keycloak - Piotr's TechBlog
-            ]</br>
-       
-        (https://keycloak.discourse.group/t/keycloak-spring-cloud-gatewa
-y/1745)
-        Keycloak & Spring Cloud Gateway - Securing applications - Keycloak
-        ]</br>
-        (https://stackoverflow.com/questions/56606652/how-to-use-keycloa
-k-logout-using-the-keycloak-installed-adapter-in-netbeans)
-            java - How to use keycloak.logout() using the keycloak-installed-ada
-pter in Netbeans - Stack Overflow
-            ]</br>
-       
-            (https://medium.com/devops-dudes/securing-spring-boot-rest-a
-pis-with-keycloak-1d760b2004e)
-                Securing Spring Boot REST APIs with Keycloak | by Dinuth De Zoys
-a | DevOps Dudes | Medium
-            ]</br>
-           
-            (https://medium.com/@bcarunmail/securing-rest-api-using-keyc
-loak-and-spring-oauth2-6ddf3a1efcc2)
-             Securing REST API using Keycloak and Spring Oauth2 | by Arun B Chan
-drasekaran | Medium
-            ]</br>
-           
-            (https://www.thomasvitale.com/keycloak-configuration-authent
-ication-authorisation/)
-            Keycloak Basic Configuration for Authentication and Authorization
-            ]</br>
-           
-            (https://www.thomasvitale.com/spring-security-keycloak/)
-            Spring Security and Keycloak to Secure Spring Boot - A First Look
-            ]</br>
-           
-           
-            (https://dev.to/betterjavacode/how-to-use-keycloak-with-a-sp
-ring-boot-application-3385)
-            How to Use Keycloak With a Spring Boot Application - DEV
-            ]</br>
-
-            (https://github.com/AriHealth/keycloak-auth/blob/master/src/
-main/java/net/atos/ari/auth/controller/AuthController.java)
-                keycloak-auth/AuthController.java at master · AriHealth/keycloak
--auth · GitHub
-                ]</br>
-               
-                (https://stackoverflow.com/questions/57974630/oauth2-cli
-ent-credentials-flow-via-spring-boot-keycloak-integration)
-                java - OAuth2 client credentials flow via Spring Boot Keycloak i
-ntegration - Stack Overflow
-                ]</br>
-                 
-                (https://medium.com/devops-dudes/keycloak-for-identity-a
-nd-access-management-9860a994bf0)
-                Keycloak for Identity and Access Management & High Availability
-Deployment with Kubernetes | by Dinuth De Zoysa | DevOps Dudes | Medium
-                ]</br>
-                (https://www.codeflow.site/fr/article/spring-security-ex
-pressions-basic)
-                Spring Security Expressions - Exemple avec hasRole
-                ]</br>
-               
-            (https://www.appsdeveloperblog.com/creating-oauth-2-scope-in
--keycloak/)
-            Creating OAuth 2 Scope in Keycloak - Apps Developer Blog
-            ]</br>
-             
-           
-            (https://stackoverflow.com/questions/61211598/spring-securit
-y-client-pkce-with-keycloak)
-            a - Spring security client PKCE with Keycloak - Stack Overflow
-            ]</br>
-           
-
-           
-    ## OAUTH2
-- [plusieurs articles OAUTH2](https://www.appsdeveloperblog.com/tag/oauth-2/)  
-- [Spring Security 5 - Connexion OAuth2 ](https://www.codeflow.site/fr/article/spring-security-5-oauth2-login)
-- [Using Spring Security 5 to integrate with OAuth 2-secured services such as Facebook and GitHub](https://spring.io/blog/2018/03/06/using-spring-security-5-to-- - [integrate-with-oauth-2-secured-services-such-as-facebook-and-github)
-- [Spring Security OAuth 2 Social Logout - Apps Developer Blog](https://www.appsdeveloperblog.com/spring-security-oauth-2-social-logout/)
-- [PKCE Verification in Authorization Code Grant - Apps Developer Blog](https://www.appsdeveloperblog.com/pkce-verification-in-authorization-code-grant/)
-- [Authorization Code Flow with PKCE in Spring Security OAuth](https://sultanov.dev/blog/authorization-code-flow-with-pkce-in-spring-security-oauth/)
-- [Authorization Code Flow with PKCE in Spring Security OAuth](https://sultanov.dev/blog/authorization-code-flow-with-pkce-in-spring-security-oauth/)
-- [Spring boot + Spring Security 5 + OAuth2/OIDC Client - Basics - DEV](https://dev.to/shyamala_u/spring-boot--spring-security-5--oauth2oidc-client---basics-4ibo)
-- [Spring Security - How to configure an OAuth2 client | TwiNNatioN](https://twinnation.org/articles/18/spring-security-how-to-configure-an-oauth2-client)
-- [Secure Reactive Microservices with Spring Cloud Gateway | Okta Developer](https://developer.okta.com/blog/2019/08/28/reactive-microservices-spring-cloud-gateway)
-- [Implement OAuth 2.0 Easily with Spring Boot and Spring Security - DZone Security](https://dzone.com/articles/implement-oauth-20-easily-with-spring-boot-and-spr)
-- [OAuth 2.0 Migration Guide · spring-projects/spring-security Wiki · GitHub](https://github.com/spring-projects/spring-security/wiki/OAuth-2.0-Migration-Guide)
-- [spring-security-oauth-5-2-migrate/pom.xml at master · jgrandja/spring-security-oauth-5-2-migrate · GitHub](https://github.com/jgrandja/spring-security-oauth-5-2-migrate/blob/master/client-app/pom.xml)
-- [microservices-security/front/src at master · ImFlog/microservices-security · GitHub](https://github.com/ImFlog/microservices-security/tree/master/front/src)
-- [Microservices and Security — Part 2 | by Yogendra Mishra | Medium](https://medium.com/@imyom25/microservices-and-security-part-2-f2b44eb98a21)
-- [Which OAuth 2.0 Flow Should I Use?](https://auth0.com/docs/authorization/which-oauth-2-0-flow-should-i-use)
-- [The Phantom Token Approach | OAuth and OpenID Connect Done Better](https://curity.io/resources/architect/api-security/phantom-token-pattern/)
-- [The separation of concerns between API Gateway and microservice | by Johan Sydseter | Norway Community Site | Medium](https://medium.com/capgemini-norway/the-separation-of-concerns-between-api-gateway-and-microservice-d9dbce6f1cc8)
-- [OAuth2 authorization patterns and microservices | by Johan Sydseter | Norway Community Site | Medium](https://medium.com/capgemini-norway/oauth2-authorization-patterns-and-microservices-45ffc67a8541)
-- [How to Implement Oauth2 Security in Microservices - DZone Microservices](https://dzone.com/articles/how-to-achieve-oauth2-security-in-microservices-di)
-- [How to Implement Oauth2 Security in Microservices - DZone Microservices](https://dzone.com/articles/how-to-achieve-oauth2-security-in-microservices-di)
-- [spring-security-samples/README.adoc at master · timtebeek/spring-security-samples · GitHub](https://github.com/timtebeek/spring-security-samples/blob/master/spring-cloud-gateway-oidc-tokenrelay/README.adoc)
-- [Spring Cloud Gateway with OpenID Connect and Token Relay - JDriven Blog](https://blog.jdriven.com/2019/11/Spring-Cloud-Gateway-with-OpenID-Connect-and-Token-Relay)
-- [Access management | wstutorial.com](https://wstutorial.com/am.html)
-- [sso/SsoApplication.java at master · spring-cloud-samples/sso · GitHub](https://github.com/spring-cloud-samples/sso/blob/master/src/main/java/demo/SsoApplication.java)
-- [Supercharge Java Authentication with JSON Web Tokens (JWTs)](https://www.baeldung.com/java-json-web-tokens-jjwt)
-- [https://dzone.com/articles/how-do-you-ensure-security](https://dzone.com/articles/how-do-you-ensure-security)
-
 
 ## Spring security documentation 
  
