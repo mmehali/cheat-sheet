@@ -1042,15 +1042,11 @@ sso/SsoApplication.java at master · spring-cloud-samples/sso · GitHub
 - [How to read nested groups in OpenLdap connected to Keycloak - Stack Overflow](https://stackoverflow.com/questions/64357006/how-to-read-nested-groups-in-openldap-connected-to-keycloak?r=SearchResults)
 - [aucun objet](https://tylersguides.com/guides/openldap-memberof-overlay/#configuration_tag)
 - [Openldap Keycloak and docker](https://blog.exceptionerror.io/2018/08/29/openldap-keycloak-and-docker/amp/)
- 
-
-
- Openldap Keycloak and docker](https://blog.exceptionerror.io/2018/08/29/openldap-keycloak-and-docker/
- LDAP Federation with KeyCloak – ID Access Man](https://idaccessman.wordpress.com/2018/08/26/ldap-federation-with-keycloak/
-How to Setup User Federation using LDAP on Keycloak](https://www.bantrain.com/detail-setup-for-user-federation-on-keycloak/
-[Spring Security LDAP Authentication Example using Spring Boot Application](https://www.pixeltrice.com/spring-security-ldap-authentication-example-using-spring-boot-application/)
-
-Openldap Keycloak and docker](https://blog.exceptionerror.io/2018/08/29/openldap-keycloak-and-docker/amp/ 
+- [Openldap Keycloak and docker](https://blog.exceptionerror.io/2018/08/29/openldap-keycloak-and-docker/)
+- [LDAP Federation with KeyCloak – ID Access Man](https://idaccessman.wordpress.com/2018/08/26/ldap-federation-with-keycloak/)
+- [How to Setup User Federation using LDAP on Keycloak](https://www.bantrain.com/detail-setup-for-user-federation-on-keycloak/)
+- [Spring Security LDAP Authentication Example using Spring Boot Application](https://www.pixeltrice.com/spring-security-ldap-authentication-example-using-spring-boot-application/)
+- [Openldap Keycloak and docker](https://blog.exceptionerror.io/2018/08/29/openldap-keycloak-and-docker/amp/ 
 
 
 version: 1
