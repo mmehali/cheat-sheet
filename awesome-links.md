@@ -134,9 +134,8 @@
 - [a - Spring security client PKCE with Keycloak - Stack Overflow](https://stackoverflow.com/questions/61211598/spring-security-client-pkce-with-keycloak)
            
 
-
 ## OAUTH2
-- [plusieurs articlesOAUTH2](https://www.appsdeveloperblog.com/tag/oauth-2/)
+- [plusieurs articles OAUTH2](https://www.appsdeveloperblog.com/tag/oauth-2/)
 - [Spring Security 5 - Connexion OAuth2 ](https://www.codeflow.site/fr/article/spring-security-5-oauth2-login)
 - [Using Spring Security 5 to integrate with OAuth 2-secured services such as Facebook and GitHub](https://spring.io/blog/2018/03/06/using-spring-security-5-to-integrate-with-oauth-2-secured-services-such-as-facebook-and-github)
 - [Spring Security OAuth 2 Social Logout - Apps Developer Blog](https://www.appsdeveloperblog.com/spring-security-oauth-2-social-logout/)
@@ -166,36 +165,6 @@
 - [https://dzone.com/articles/how-do-you-ensure-security](https://dzone.com/articles/how-do-you-ensure-security)
 
            
-    ## OAUTH2
-- [plusieurs articles OAUTH2](https://www.appsdeveloperblog.com/tag/oauth-2/)  
-- [Spring Security 5 - Connexion OAuth2 ](https://www.codeflow.site/fr/article/spring-security-5-oauth2-login)
-- [Using Spring Security 5 to integrate with OAuth 2-secured services such as Facebook and GitHub](https://spring.io/blog/2018/03/06/using-spring-security-5-to-- - [integrate-with-oauth-2-secured-services-such-as-facebook-and-github)
-- [Spring Security OAuth 2 Social Logout - Apps Developer Blog](https://www.appsdeveloperblog.com/spring-security-oauth-2-social-logout/)
-- [PKCE Verification in Authorization Code Grant - Apps Developer Blog](https://www.appsdeveloperblog.com/pkce-verification-in-authorization-code-grant/)
-- [Authorization Code Flow with PKCE in Spring Security OAuth](https://sultanov.dev/blog/authorization-code-flow-with-pkce-in-spring-security-oauth/)
-- [Authorization Code Flow with PKCE in Spring Security OAuth](https://sultanov.dev/blog/authorization-code-flow-with-pkce-in-spring-security-oauth/)
-- [Spring boot + Spring Security 5 + OAuth2/OIDC Client - Basics - DEV](https://dev.to/shyamala_u/spring-boot--spring-security-5--oauth2oidc-client---basics-4ibo)
-- [Spring Security - How to configure an OAuth2 client | TwiNNatioN](https://twinnation.org/articles/18/spring-security-how-to-configure-an-oauth2-client)
-- [Secure Reactive Microservices with Spring Cloud Gateway | Okta Developer](https://developer.okta.com/blog/2019/08/28/reactive-microservices-spring-cloud-gateway)
-- [Implement OAuth 2.0 Easily with Spring Boot and Spring Security - DZone Security](https://dzone.com/articles/implement-oauth-20-easily-with-spring-boot-and-spr)
-- [OAuth 2.0 Migration Guide · spring-projects/spring-security Wiki · GitHub](https://github.com/spring-projects/spring-security/wiki/OAuth-2.0-Migration-Guide)
-- [spring-security-oauth-5-2-migrate/pom.xml at master · jgrandja/spring-security-oauth-5-2-migrate · GitHub](https://github.com/jgrandja/spring-security-oauth-5-2-migrate/blob/master/client-app/pom.xml)
-- [microservices-security/front/src at master · ImFlog/microservices-security · GitHub](https://github.com/ImFlog/microservices-security/tree/master/front/src)
-- [Microservices and Security — Part 2 | by Yogendra Mishra | Medium](https://medium.com/@imyom25/microservices-and-security-part-2-f2b44eb98a21)
-- [Which OAuth 2.0 Flow Should I Use?](https://auth0.com/docs/authorization/which-oauth-2-0-flow-should-i-use)
-- [The Phantom Token Approach | OAuth and OpenID Connect Done Better](https://curity.io/resources/architect/api-security/phantom-token-pattern/)
-- [The separation of concerns between API Gateway and microservice | by Johan Sydseter | Norway Community Site | Medium](https://medium.com/capgemini-norway/the-separation-of-concerns-between-api-gateway-and-microservice-d9dbce6f1cc8)
-- [OAuth2 authorization patterns and microservices | by Johan Sydseter | Norway Community Site | Medium](https://medium.com/capgemini-norway/oauth2-authorization-patterns-and-microservices-45ffc67a8541)
-- [How to Implement Oauth2 Security in Microservices - DZone Microservices](https://dzone.com/articles/how-to-achieve-oauth2-security-in-microservices-di)
-- [How to Implement Oauth2 Security in Microservices - DZone Microservices](https://dzone.com/articles/how-to-achieve-oauth2-security-in-microservices-di)
-- [spring-security-samples/README.adoc at master · timtebeek/spring-security-samples · GitHub](https://github.com/timtebeek/spring-security-samples/blob/master/spring-cloud-gateway-oidc-tokenrelay/README.adoc)
-- [Spring Cloud Gateway with OpenID Connect and Token Relay - JDriven Blog](https://blog.jdriven.com/2019/11/Spring-Cloud-Gateway-with-OpenID-Connect-and-Token-Relay)
-- [Access management | wstutorial.com](https://wstutorial.com/am.html)
-- [sso/SsoApplication.java at master · spring-cloud-samples/sso · GitHub](https://github.com/spring-cloud-samples/sso/blob/master/src/main/java/demo/SsoApplication.java)
-- [Supercharge Java Authentication with JSON Web Tokens (JWTs)](https://www.baeldung.com/java-json-web-tokens-jjwt)
-- [https://dzone.com/articles/how-do-you-ensure-security](https://dzone.com/articles/how-do-you-ensure-security)
-
-
 
 ## Spring security documentation 
 - [String security 5 documentation](https://docs.spring.io/spring-security/site/docs/current/reference/html5/#oauth2)
