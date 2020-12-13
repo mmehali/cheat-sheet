@@ -192,69 +192,47 @@
 ## Keyclock Angular
 
    
-    (http://robferguson.org/blog/2019/12/29/angular-openid-connect-keycloak/)Angular, OpenID Connect and Keycloak]
-    (https://dev.to/anjnkmr/keycloak-integration-in-angular-application-5a43)Keycloak Integration in Angular Application]
-    (https://blog.bitsrc.io/integrating-keycloak-with-angular-for-sso-authentication-9d1c6c2d2742)Integrating KeyCloak With Angular For SSO Authentication]
-    (https://medium.com/@sairamkrish/keycloak-integration-part-1-overview-812010d6c7cf)Keycloak Integration : Overview]
-    (https://medium.com/@sairamkrish/keycloak-integration-part-2-integration-with-angular-frontend-f2716c696a28)Keycloak Integration : Part 2: Integration with Angular Frontend]
-    (https://github.com/Robinyo/serendipity)]un projet complet  (https://geeks18.com/?p=1397)Keycloak Integration with AngularAPP]
-    (https://symbiotics.co.za/integrating-keycloak-with-an-angular-4-web-application-part-5/)Integrating Keycloak with an Angular 4 Web Application ]
-    (https://morioh.com/p/0e61e524f5ca)How to Add KeyCloak in Angular for SSO Authentication]
+- [Angular, OpenID Connect and Keycloak](http://robferguson.org/blog/2019/12/29/angular-openid-connect-keycloak/)
+- [Keycloak Integration in Angular Application](https://dev.to/anjnkmr/keycloak-integration-in-angular-application-5a43)
+- [Integrating KeyCloak With Angular For SSO Authentication](https://blog.bitsrc.io/integrating-keycloak-with-angular-for-sso-authentication-9d1c6c2d2742)
+- [Keycloak Integration : Overview](https://medium.com/@sairamkrish/keycloak-integration-part-1-overview-812010d6c7cf)
+- [Keycloak Integration : Part 2: Integration with Angular Frontend](https://medium.com/@sairamkrish/keycloak-integration-part-2-integration-with-angular-frontend-f2716c696a28)
+- [un projet complet  (https://geeks18.com/?p=1397)Keycloak Integration with AngularAPP](https://github.com/Robinyo/serendipity)
+- [Integrating Keycloak with an Angular 4 Web Application ](https://symbiotics.co.za/integrating-keycloak-with-an-angular-4-web-application-part-5/)
+- [How to Add KeyCloak in Angular for SSO Authentication](https://morioh.com/p/0e61e524f5ca)
 
 
 ## manual with java 
 
-  (https://developer.okta.com/blog/2018/10/31/jwts-with-java)Tutorial: Create and Verify JWTs in Java]
-  (https://developer.okta.com/blog/2018/10/16/token-auth-for-java)Simple Token Authentication for Java Apps]
+- [Tutorial: Create and Verify JWTs in Java](https://developer.okta.com/blog/2018/10/31/jwts-with-java)
+- [Simple Token Authentication for Java Apps](https://developer.okta.com/blog/2018/10/16/token-auth-for-java)
 
 
 
 ## Keycloack - java app
-(https://www.janua.fr/how-to-secure-a-java-app-with-rh-sso-using-openid/)How to secure a Java App with RedHat SSO using OpenID]
+- [How to secure a Java App with RedHat SSO using OpenID](https://www.janua.fr/how-to-secure-a-java-app-with-rh-sso-using-openid/)
 
 ## Secure REST API 
 
-(https://www.toptal.com/spring/spring-boot-oauth2-jwt-rest-protection)Secure REST API using Spring Boot | Toptal]    
-
-https://developer.okta.com/blog/2018/05/17/microservices-spring-boot-2-oauth       
-
-(https://www.pixeltrice.com/spring-boot-security-using-oauth2-with-jwt/)Spring Boot Security using OAuth2 with JWT - PixelTrice]
-
-
-(https://www.tutorialspoint.com/spring_boot/spring_boot_oauth2_with_jwt.htm)Spring Boot - OAuth2 with JWT - Tutorialspoint]
-
-(https://spring.io/blog/2015/06/08/cors-support-in-spring-frameworkCORS support in Spring Framework]
-
-
-(https://dzone.com/articles/how-to-achieve-oauth2-security-in-microservices-di)How to Implement Oauth2 Security in Microservices - DZone Microservices
-]
-
-(https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2)An Introduction to OAuth 2 | DigitalOcean
-]
-
-(http://blog.ippon.fr/2017/10/31/gerer-lauthentification-dans-une-architecture-moderne-partie-1/)Gérer l’authentification dans une Architecture Moderne - Partie 1]
-
-(https://www.baeldung.com/spring-security-oauth-jwt)Using JWT with Spring Security OAuth | Baeldung]
-
-
-(https://www.baeldung.com/spring-security-oauth-resource-server)OAuth 2.0 Resource Server With Spring Security 5 | Baeldung]
-
-<li><a href=https://spring.io/blog/2015/06/08/cors-support-in-spring-framework)CORS support in Spring Framework]
-
-
-(https://github.com/summerwind/opa-nginx-rbac)    GitHub - summerwind/opa-nginx-rbac: A proof of concept for RBAC on nginx with Open Policy Agent
-]
- 
-(ttps://www.nginx.com/blog/building-microservices-inter-process-communication/)Building Microservices: Inter-Process Communication in a Microservices Architecture]
+- [Secure REST API using Spring Boot | Toptal](https://www.toptal.com/spring/spring-boot-oauth2-jwt-rest-protection)
+- [df] (https://developer.okta.com/blog/2018/05/17/microservices-spring-boot-2-oauth)
+- [Spring Boot Security using OAuth2 with JWT - PixelTrice](https://www.pixeltrice.com/spring-boot-security-using-oauth2-with-jwt/)
+- [Spring Boot - OAuth2 with JWT - Tutorialspoint](https://www.tutorialspoint.com/spring_boot/spring_boot_oauth2_with_jwt.htm)
+- [CORS support in Spring Framework](https://spring.io/blog/2015/06/08/cors-support-in-spring-framework
+- [How to Implement Oauth2 Security in Microservices - DZone Microservices](https://dzone.com/articles/how-to-achieve-oauth2-security-in-microservices-di)
+- [An Introduction to OAuth 2 | DigitalOcean]](https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2)
+- [Gérer l’authentification dans une Architecture Moderne - Partie1](http://blog.ippon.fr/2017/10/31/gerer-lauthentification-dans-une-architecture-moderne-partie-1/)
+- [Using JWT with Spring Security OAuth | Baeldung](https://www.baeldung.com/spring-security-oauth-jwt)
+- [OAuth 2.0 Resource Server With Spring Security 5 | Baeldung](https://www.baeldung.com/spring-security-oauth-resource-server)
+- [CORS support in Spring Framework](https://spring.io/blog/2015/06/08/cors-support-in-spring-framework)
+- [GitHub - summerwind/opa-nginx-rbac: A proof of concept for RBAC on nginx with Open Policy Agent](https://github.com/summerwind/opa-nginx-rbac)
+- [Building Microservices: Inter-Process Communication in a Microservices Architecture](ttps://www.nginx.com/blog/building-microservices-inter-process-communication/)
 
 
 
 ## Keycloak - Themes
-
-
-    (https://robferguson.org/blog/2020/04/12/keycloak-themes-part-1/)   Keycloak Themes - Part 1]
-   (http://robferguson.org/blog/2020/04/17/keycloak-themes-part-2/)    Keycloak Themes - Part 2]
-  
+- [Keycloak Themes - Part 1](https://robferguson.org/blog/2020/04/12/keycloak-themes-part-1/) 
+- [Keycloak Themes - Part 2](http://robferguson.org/blog/2020/04/17/keycloak-themes-part-2/)
 
 
 ## Keycloak
