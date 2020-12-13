@@ -1046,8 +1046,7 @@ sso/SsoApplication.java at master · spring-cloud-samples/sso · GitHub
 - [LDAP Federation with KeyCloak – ID Access Man](https://idaccessman.wordpress.com/2018/08/26/ldap-federation-with-keycloak/)
 - [How to Setup User Federation using LDAP on Keycloak](https://www.bantrain.com/detail-setup-for-user-federation-on-keycloak/)
 - [Spring Security LDAP Authentication Example using Spring Boot Application](https://www.pixeltrice.com/spring-security-ldap-authentication-example-using-spring-boot-application/)
-- [Openldap Keycloak and docker](https://blog.exceptionerror.io/2018/08/29/openldap-keycloak-and-docker/amp/ 
-
+- [Openldap Keycloak and docker](https://blog.exceptionerror.io/2018/08/29/openldap-keycloak-and-docker/amp/)
 
 version: 1
 
@@ -1106,36 +1105,36 @@ uid: sjobs
 uidnumber: 1001
 userpassword: {MD5}ICy5YqxZB1uWSwcVLSNLcA==
 
-[OAuth 2.0 Patterns with Spring Cloud Gateway | Okta Developer](https://developer.okta.com/blog/2020/08/14/spring-gateway-patterns)
-[Jimena Garbarino | Okta Developer](https://developer.okta.com/blog/authors/jimena-garbarino/)
-[Protégez les API REST avec Spring Security et JWT](https://medium.com/zero-equals-false/protect-rest-apis-with-spring-security-and-jwt-5fbc90305cc5)
-[GitHub - manfredsteyer/angular-oauth2-oidc: Support for OAuth 2 and OpenId Connect (OIDC) in Angular](https://github.com/manfredsteyer/angular-oauth2-oidc)
-[Sécuriser vos APIs Spring Webflux avec Keycloak et OAuth2 - Blog Ineat](https://blog.ineat-group.com/2019/01/securiser-vos-apis-spring-webflux-avec-keycloak-et-oauth2/)
-[Implicit flow authentication using angular-oauth2-oidc (Angular) - DEV](https://dev.to/deekshithrajbasa/implicit-flow-authentication-usingangular-oauth2-oidc-angular-2n90)
-[Reactive Spring Security For WebFlux REST Web Services - DZone Security](https://dzone.com/articles/reactive-spring-security-for-webflux-rest-web-serv)
-[Hiding Services & Runtime Discovery with Spring Cloud Gateway](https://spring.io/blog/2019/07/01/hiding-services-runtime-discovery-with-spring-cloud-gateway)
-[Securing Services with Spring Cloud Gateway](https://spring.io/blog/2019/08/16/securing-services-with-spring-cloud-gateway)
-[Build a reactive application with Spring Boot 2.0 and Angular | by Hantsy | Medium](https://hantsy.medium.com/build-a-reactive-application-with-spring-boot-2-0-and-angular-de0ee5837fed)
-[Identity Propagation in an API Gateway Architecture | by Robert Broeckelmann | Medium](https://medium.com/@robert.broeckelmann/identity-propagation-in-an-api-gateway-architecture-c0f9bbe9273b)
-[authentication - Keycloak retrieve custom attributes to KeycloakPrincipal - Stack Overflow](https://stackoverflow.com/questions/32678883/keycloak-retrieve-custom-attributes-to-keycloakprincipal)
-[OAuth 2.0 Patterns with Spring Cloud Gateway | Okta Developer](https://developer.okta.com/blog/2020/08/14/spring-gateway-patterns)
-[Protect REST APIs with Spring Security Reactive and JWT | by Hantsy | Zero Equals False | Medium](https://medium.com/zero-equals-false/protect-rest-apis-with-spring-security-reactive-and-jwt-7b209a0510f1)
-[Secures your application with Spring Security 5 and Keycloak | by Hantsy | Medium](https://hantsy.medium.com/secures-your-application-with-spring-security-5-and-keycloak-2804ee912b0f)
-[keycloak-documentation/token-exchange.adoc at master · keycloak/keycloak-documentation · GitHub](https://github.com/keycloak/keycloak-documentation/blob/master/securing_apps/topics/token-exchange/token-exchange.adoc)
-[How to exchange token from an external provider to a keycloak token](http://www.mathieupassenaud.fr/token-exchange-keycloak/)
-[OAuth 2.0 Patterns with Spring Cloud Gateway | Okta Developer](https://developer.okta.com/blog/2020/08/14/spring-gateway-patterns)
-[OAuth 2.0 Patterns with Spring Cloud Gateway | Okta Developer](https://developer.okta.com/blog/2020/08/14/spring-gateway-patterns)
-[java - client roles havent assigned during creating new user in Keycloak - Stack Overflow](https://stackoverflow.com/questions/49818453/client-roles-havent-assigned-during-creating-new-user-in-keycloak)
-[security - Keycloak: Role based client log-in access restriction for users - Stack Overflow](https://stackoverflow.com/questions/57287497/keycloak-role-based-client-log-in-access-restriction-for-users)
-[Keycloak spring boot configuration for client roles - Stack Overflow](https://stackoverflow.com/questions/43449721/keycloak-spring-boot-configuration-for-client-roles)
-[Learn How to Secure Service-to-Service Microservices - DZone Microservices](https://dzone.com/articles/learn-how-to-secure-service-to-service-microservic)
-[AQuick Guide to Using Keycloak with Spring Boot | Baeldung](https://www.baeldung.com/spring-boot-keycloak)
+- [OAuth 2.0 Patterns with Spring Cloud Gateway | Okta Developer](https://developer.okta.com/blog/2020/08/14/spring-gateway-patterns)
+- [Jimena Garbarino | Okta Developer](https://developer.okta.com/blog/authors/jimena-garbarino/)
+- [Protégez les API REST avec Spring Security et JWT](https://medium.com/zero-equals-false/protect-rest-apis-with-spring-security-and-jwt-5fbc90305cc5)
+- [GitHub - manfredsteyer/angular-oauth2-oidc: Support for OAuth 2 and OpenId Connect (OIDC) in Angular](https://github.com/manfredsteyer/angular-oauth2-oidc)
+- [Sécuriser vos APIs Spring Webflux avec Keycloak et OAuth2 - Blog Ineat](https://blog.ineat-group.com/2019/01/securiser-vos-apis-spring-webflux-avec-keycloak-et-oauth2/)
+- [Implicit flow authentication using angular-oauth2-oidc (Angular) - DEV](https://dev.to/deekshithrajbasa/implicit-flow-authentication-usingangular-oauth2-oidc-angular-2n90)
+- [Reactive Spring Security For WebFlux REST Web Services - DZone Security](https://dzone.com/articles/reactive-spring-security-for-webflux-rest-web-serv)
+- [Hiding Services & Runtime Discovery with Spring Cloud Gateway](https://spring.io/blog/2019/07/01/hiding-services-runtime-discovery-with-spring-cloud-gateway)
+- [Securing Services with Spring Cloud Gateway](https://spring.io/blog/2019/08/16/securing-services-with-spring-cloud-gateway)
+- [Build a reactive application with Spring Boot 2.0 and Angular | by Hantsy | Medium](https://hantsy.medium.com/build-a-reactive-application-with-spring-boot-2-0-and-angular-de0ee5837fed)
+- [Identity Propagation in an API Gateway Architecture | by Robert Broeckelmann | Medium](https://medium.com/@robert.broeckelmann/identity-propagation-in-an-api-gateway-architecture-c0f9bbe9273b)
+- [authentication - Keycloak retrieve custom attributes to KeycloakPrincipal - Stack Overflow](https://stackoverflow.com/questions/32678883/keycloak-retrieve-custom-attributes-to-keycloakprincipal)
+- [OAuth 2.0 Patterns with Spring Cloud Gateway | Okta Developer](https://developer.okta.com/blog/2020/08/14/spring-gateway-patterns)
+- [Protect REST APIs with Spring Security Reactive and JWT | by Hantsy | Zero Equals False | Medium](https://medium.com/zero-equals-false/protect-rest-apis-with-spring-security-reactive-and-jwt-7b209a0510f1)
+- [Secures your application with Spring Security 5 and Keycloak | by Hantsy | Medium](https://hantsy.medium.com/secures-your-application-with-spring-security-5-and-keycloak-2804ee912b0f)
+- [keycloak-documentation/token-exchange.adoc at master · keycloak/keycloak-documentation · GitHub](https://github.com/keycloak/keycloak-documentation/blob/master/securing_apps/topics/token-exchange/token-exchange.adoc)
+- [How to exchange token from an external provider to a keycloak token](http://www.mathieupassenaud.fr/token-exchange-keycloak/)
+- [OAuth 2.0 Patterns with Spring Cloud Gateway | Okta Developer](https://developer.okta.com/blog/2020/08/14/spring-gateway-patterns)
+- [OAuth 2.0 Patterns with Spring Cloud Gateway | Okta Developer](https://developer.okta.com/blog/2020/08/14/spring-gateway-patterns)
+- [java - client roles havent assigned during creating new user in Keycloak - Stack Overflow](https://stackoverflow.com/questions/49818453/client-roles-havent-assigned-during-creating-new-user-in-keycloak)
+- [security - Keycloak: Role based client log-in access restriction for users - Stack Overflow](https://stackoverflow.com/questions/57287497/keycloak-role-based-client-log-in-access-restriction-for-users)
+- [Keycloak spring boot configuration for client roles - Stack Overflow](https://stackoverflow.com/questions/43449721/keycloak-spring-boot-configuration-for-client-roles)
+- [Learn How to Secure Service-to-Service Microservices - DZone Microservices](https://dzone.com/articles/learn-how-to-secure-service-to-service-microservic)
+- [AQuick Guide to Using Keycloak with Spring Boot | Baeldung](https://www.baeldung.com/spring-boot-keycloak)
 
 
 --------------------------------------------------------------------------------
 Keycloak- gravitee
 --------------------------------------------------------------------------------
-GitHub - gravitee-io/gravitee-resource-oauth2-provider-keycloak: Gravitee.io - API Management - Resource - Keycloak Adapter](https://github.com/gravitee-io/gravitee-resource-oauth2-provider-keycloak
+[GitHub - gravitee-io/gravitee-resource-oauth2-provider-keycloak: Gravitee.io - API Management - Resource - Keycloak Adapter](https://github.com/gravitee-io/gravitee-resource-oauth2-provider-keycloak
 Understanding Keycloak RedHat SSO Authentication - JANUA](https://www.janua.fr/understanding-keycloak-redhat-sso-authentication/)
 Keycloak Identity Provider Extension Released - Camunda](https://camunda.com/blog/2019/08/keycloak-identity-provider-extension/)
 GitHub - thomasdarimont/keycloak-extension-playground: Simple project environment for creating custom Keycloak extensions](https://github.com/thomasdarimont/keycloak-extension-playground)
