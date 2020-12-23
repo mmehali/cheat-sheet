@@ -2,12 +2,13 @@
   - https://localhost:6971/auth/realms/OCS2/protocol/saml/descriptor
   - https://localhost:7981/auth/realms/DCS/protocol/saml/descriptor
 
-
+## saml with java
+- [Implementing Single-Signon in Java with SAML](https://blog.imaginea.com/implementing-java-single-signon-with-saml/)
 
 ## Brokering saml & openid
+ - [How to secure a Spring Boot app with SAML and Keycloak](https://blog.codecentric.de/en/2019/03/secure-spring-boot-app-saml-keycloak/)
  - [AWS SAML based User Federation using Keycloak](https://neuw.medium.com/aws-connect-saml-based-identity-provider-using-keycloak-9b3e6d0111e6)
  - [AWS user account OpenID federation using Keycloak](https://neuw.medium.com/aws-account-openid-federation-using-keycloak-40d22b952a43)
- - [How to secure a Spring Boot app with SAML and Keycloak](https://blog.codecentric.de/en/2019/03/secure-spring-boot-app-saml-keycloak/)
  - [keycloak_saml_client_default_scopes - Terraform Provider: Keycloak](https://mrparkers.github.io/terraform-provider-keycloak/resources/keycloak_saml_client_default_scopes/)
  - [saml-example/public at master · anbarium/saml-example · GitHub](https://github.com/anbarium/saml-example/tree/master/public)
  - [Using kc_idp_hint to skip default idp with SAML? - Getting advice - Keycloak](https://keycloak.discourse.group/t/using-kc-idp-hint-to-skip-default-idp-with-saml/4500)
