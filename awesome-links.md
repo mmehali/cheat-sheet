@@ -1,6 +1,6 @@
-idp descriptor :
-  https://localhost:6971/auth/realms/OCS2/protocol/saml/descriptor
-   https://localhost:7981/auth/realms/DCS/protocol/saml/descriptor
+### idp descriptor :
+  - https://localhost:6971/auth/realms/OCS2/protocol/saml/descriptor
+  - https://localhost:7981/auth/realms/DCS/protocol/saml/descriptor
 
 ### token exchange 
 - [GitHub - lucabaggi/keycloak-token-exchange: POC for Keycloak token exchange functionality, based on Docker](https://github.com/lucabaggi/keycloak-token-exchange)
@@ -64,19 +64,8 @@ idp descriptor :
  
 
 
-## Spring security documentation
- - [String security 5 documentation](https://docs.spring.io/spring-security/site/docs/current/reference/html5/#oauth2")
- - [Spring Boot and OAuth2](https://spring.io/guides/tutorials/spring-boot-oauth2/)
- - [Spting security architecture](https://spring.io/guides/topicals/spring-security-architecture)
- - [Spring security oath (deprecated)](https://projects.spring.io/spring-security-oauth/docs/oauth2.html)
- 
-## REST
 
- - [REST API with Spring Boot](https://www.youtube.com/watch?v=bK9PXo7IQSo&list=PLdW9lrB9HDw101ImXtR_xkvTe1HWx7Gc6)
- - [Securing REST API using Keycloak and Spring Oauth2 ](https://medium.com/@bcarunmail/securing-rest-api-using-keycloak-and-spring-oauth2-6ddf3a1efcc2)
- - [Accessing Secure REST API using Spring OAuth2RestTemplate | by Arun B Chandrasekaran | Medium](https://medium.com/@bcarunmail/accessing-secure-rest-api-using-spring-oauth2resttemplate-ef18377e2e05)
- - [Spring Cloud Gateway with OpenID Connect and Token Relay](https://blog.jdriven.com/2019/11/spring-cloud-gateway-with-openid-connect-and-token-relay/)
- - [Sécurisez l’accès à vos APIs avec OAuth2](https://nexworld.fr/securiser-api-oauth2/)
+ 
 
 
 ## Keycloak javaFX
@@ -203,14 +192,12 @@ idp descriptor :
   - [Spting security architecture](https://spring.io/guides/topicals/spring-security-architecture)
   - [Spring security oath (deprecated)](https://projects.spring.io/spring-security-oauth/docs/oauth2.html)
 
- 
 ## REST
 - [REST API with Spring Boot](https://www.youtube.com/watch?v=bK9PXo7IQSo&list=PLdW9lrB9HDw101ImXtR_xkvTe1HWx7Gc6)
 - [Securing REST API using Keycloak and Spring Oauth2](https://medium.com/@bcarunmail/securing-rest-api-using-keycloak-and-spring-oauth2-6ddf3a1efcc2)
 - [Accessing Secure REST API using Spring OAuth2RestTemplate](https://medium.com/@bcarunmail/accessing-secure-rest-api-using-spring-oauth2resttemplate-ef18377e2e05) 
 - [Spring Cloud Gateway with OpenID Connect and Token Relay](https://blog.jdriven.com/2019/11/spring-cloud-gateway-with-openid-connect-and-token-relay/)
 - [Sécurisez l’accès à vos APIs avec OAuth2](https://nexworld.fr/securiser-api-oauth2/) 
-
 
 
 ## HTTPS certificate for the server
