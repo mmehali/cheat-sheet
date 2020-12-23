@@ -7,85 +7,30 @@ idp descriptor :
 
 
 
-
-- oidc-group-mapper/src/main/java/br/com/luizcarlosvianamelo/keycloak/broker/oidc/mappers at master · amomra/oidc-group-mapper · GitHub
-- https://github.com/amomra/oidc-group-mapper/tree/master/src/main/java/br/com/luizcarlosvianamelo/keycloak/broker/oidc/mappers
-
-- GitHub - mingisme/keycloak-default-idp-spring-boot-demo: Keycloak default idp demo
-- https://github.com/mingisme/keycloak-default-idp-spring-boot-demo
-
-- azure active directory - How keycloak sets up user information from an external identity provider - Stack Overflow
-- https://stackoverflow.com/questions/58703940/how-keycloak-sets-up-user-information-from-an-external-identity-provider
-
-
-
-- client suggested identity provider – codehumsafar
-- https://codehumsafar.wordpress.com/tag/client-suggested-identity-provider/
- 
-
-- Keycloak: How to auto redirect Keycloak user to OKTA SSO page instead of clicking on button? - Stack Overflow
-- https://stackoverflow.com/questions/51925423/keycloak-how-to-auto-redirect-keycloak-user-to-okta-sso-page-instead-of-clickin
-
-
-- elasticsearch - In keycloak, how to redirect to an IDP with kc_idp_hint? - Stack Overflow
-- https://stackoverflow.com/questions/60461401/in-keycloak-how-to-redirect-to-an-idp-with-kc-idp-hint
-
-
-- Setup User Federation with Keycloak (LDAP Integration)
-- https://documentation.abas.cloud/en/abas-keycloak/setup-user-federation-ldap.html#_setting_up_user_federation_with_keycloak_ldap_server_integration
- 
- 
-
-
-
-- qseok_on_minikube/readme.md at master · ChristofSchwarz/qseok_on_minikube · GitHub
-- https://github.com/ChristofSchwarz/qseok_on_minikube/blob/master/keycloak/readme.md
-
-
-- Keycloak Single Sign On (SSO) For Your Application | Keycloak SSO
-- https://idp.miniorange.com/login-using-keycloak/
-
-
-- GitHub - vbhayden/keycloak-federation-examples: Dockerized Keycloak example to accompany training materials
-- https://github.com/vbhayden/keycloak-federation-examples
-
-
-
-- Keycloak Single Sign On (SSO) For Your Application | Keycloak SSO
-- https://idp.miniorange.com/login-using-keycloak/
+## Autres
+- [oidc-group-mapper/src/main/java/br/com/luizcarlosvianamelo/keycloak/broker/oidc/mappers at master · amomra/oidc-group-mapper · GitHub](https://github.com/amomra/oidc-group-mapper/tree/master/src/main/java/br/com/luizcarlosvianamelo/keycloak/broker/oidc/mappers)
+- [GitHub - mingisme/keycloak-default-idp-spring-boot-demo: Keycloak default idp demo](https://github.com/mingisme/keycloak-default-idp-spring-boot-demo)
+- [azure active directory - How keycloak sets up user information from an external identity provider - Stack Overflow](https://stackoverflow.com/questions/58703940/how-keycloak-sets-up-user-information-from-an-external-identity-provider)
+- [client suggested identity provider – codehumsafar](https://codehumsafar.wordpress.com/tag/client-suggested-identity-provider/)
+- [Keycloak: How to auto redirect Keycloak user to OKTA SSO page instead of clicking on button? - Stack Overflow](https://stackoverflow.com/questions/51925423/keycloak-how-to-auto-redirect-keycloak-user-to-okta-sso-page-instead-of-clickin)
+- [elasticsearch - In keycloak, how to redirect to an IDP with kc_idp_hint? - Stack Overflow](https://stackoverflow.com/questions/60461401/in-keycloak-how-to-redirect-to-an-idp-with-kc-idp-hint)
+- [Setup User Federation with Keycloak (LDAP Integration)](https://documentation.abas.cloud/en/abas-keycloak/setup-user-federation-ldap.html#_setting_up_user_federation_with_keycloak_ldap_server_integration)
+- [Keycloak Single Sign On (SSO) For Your Application | Keycloak SSO](https://idp.miniorange.com/login-using-keycloak/)
+- [GitHub - vbhayden/keycloak-federation-examples: Dockerized Keycloak example to accompany training materials](https://github.com/vbhayden/keycloak-federation-examples)
+- [Keycloak Single Sign On (SSO) For Your Application | Keycloak SSO](https://idp.miniorange.com/login-using-keycloak/)
 
  
 
-- [keycloak-user] Dump user profile data from Social Identity Provider
-- https://lists.jboss.org/pipermail/keycloak-user/2015-July/002605.html
-
-
-
-- keycloak_ldap_group_mapper - Terraform Provider: Keycloak
-- https://mrparkers.github.io/terraform-provider-keycloak/resources/keycloak_ldap_group_mapper/
+- [keycloak-user: Dump user profile data from Social Identity Provider](https://lists.jboss.org/pipermail/keycloak-user/2015-July/002605.html)
+- [keycloak_ldap_group_mapper - Terraform Provider: Keycloak](https://mrparkers.github.io/terraform-provider-keycloak/resources/keycloak_ldap_group_mapper/)
+- [Keycloak-identity-broker/identity-broker-realm.json at master · lgraf/keycloak-identity-broker · GitHub](https://github.com/lgraf/keycloak-identity-broker/blob/master/identity-broker/identity-broker-realm.json)
+- [Connect keycloak to LDAP over SSL - Configuring the server - Keycloak](https://keycloak.discourse.group/)
  
 
-- Keycloak-identity-broker/identity-broker-realm.json at master · lgraf/keycloak-identity-broker · GitHub
-- https://github.com/lgraf/keycloak-identity-broker/blob/master/identity-broker/identity-broker-realm.json
-
-
-- Connect keycloak to LDAP over SSL - Configuring the server - Keycloak
-- https://keycloak.discourse.group/
- 
-
-- Keycloak create a custom identity provider mapper - Stack Overflow
-- https://stackoverflow.com/questions/46595425/keycloak-create-a-custom-identity-provider-mapper
- 
-
-- How to define mappers for keycloak identity providers? - Stack Overflow
-- https://stackoverflow.com/questions/46219937/how-to-define-mappers-for-keycloak-identity-providers
- 
-- LDAP integration with Keycloak - JANUA
-- https://www.janua.fr/ldap-integration-with-keycloak/
-
-
-- Azure AD iDP with Keycloak as SP. Creating a Directory inside Azure: - | by Surya Prakash Pandey | Medium
-- https://suryaprakash-pandey.medium.com/azure-ad-idp-with-keycloak-as-sp-1ca933d71388
+- [Keycloak create a custom identity provider mapper - Stack Overflow](https://stackoverflow.com/questions/46595425/keycloak-create-a-custom-identity-provider-mapper)
+ - [How to define mappers for keycloak identity providers? - Stack Overflow](https://stackoverflow.com/questions/46219937/how-to-define-mappers-for-keycloak-identity-providers)
+- [LDAP integration with Keycloak - JANUA](https://www.janua.fr/ldap-integration-with-keycloak/)
+- [Azure AD iDP with Keycloak as SP. Creating a Directory inside Azure: - | by Surya Prakash Pandey | Medium](https://suryaprakash-pandey.medium.com/azure-ad-idp-with-keycloak-as-sp-1ca933d71388)
  
 
 
@@ -95,6 +40,8 @@ idp descriptor :
 - [SAML configuration with Okta ‒ Qlik Sense on Windows](https://help.qlik.com/en-US/sense/June2019)
 - [GitHub - johsund/Qliklogin: Sample login solution based on Node.JS for Qlik Sense with LDAP authentication](https://github.com/johsund/Qliklogin)
 - [QlikSense Single Sign On | SSO | SAML Solution](https://www.miniorange.com/index.php)
+- [qseok_on_minikube/readme.md at master · ChristofSchwarz/qseok_on_minikube · GitHub](https://github.com/ChristofSchwarz/qseok_on_minikube/blob/master/keycloak/readme.md)
+
 
 ## a ranger
 
@@ -183,21 +130,15 @@ idp descriptor :
 
 
 
-## Keycloak - Themes
-
-- [Keycloak Themes - Part 1](https://robferguson.org/blog/2020/04/12/keycloak-themes-part-1/)
-- [Keycloak Themes - Part 2](http://robferguson.org/blog/2020/04/17/keycloak-themes-part-2/)
-
-
 ## Keycloak
 - [Securing Applications using Spring Boot Keycloak Integration – Part 1](http://progressivecoder.com/spring-boot-keycloak-integration-part-1/)
 - [Securing Applications using Spring Boot Keycloak Integration – Part 2](http://progressivecoder.com/securing-applications-using-spring-boot-keycloak-integration-part-2/)
 - [fdf](https://farinmedia.ir/udemy-oauth-2-0-in-spring-boot-applications/)
 - [Keycloak Archives - Apps Developer Blog](https://www.appsdeveloperblog.com/category/keycloak/) 
-- [[Get UserId from Keycloak JWT Access Token - Apps Developer Blog](https://www.appsdeveloperblog.com/get-userid-from-keycloak-jwt-access-token/)
+- [Get UserId from Keycloak JWT Access Token - Apps Developer Blog](https://www.appsdeveloperblog.com/get-userid-from-keycloak-jwt-access-token/)
 - [Keycloak: Client Credentials Grant Example - Apps Developer Blog](https://www.appsdeveloperblog.com/keycloak-client-credentials-grant-example/)
 - [GitHub - thomasdarimont/awesome-keycloak: A curated list of resources for learning about keycloak](https://github.com/thomasdarimont/awesome-keycloak)
-- [[Getting started with Keycloak](http://robferguson.org/blog/2019/12/24/getting-started-with-keycloak/)
+- [Getting started with Keycloak](http://robferguson.org/blog/2019/12/24/getting-started-with-keycloak/)
 - [Securing Web Applications With Keycloak Using OAuth 2.0 Authorization Code Flow and PKCE - Jeroen Meys — Ordina JWorks Tech Blog](https://ordina-jworks.github.io/security/2019/08/22/Securing-Web-Applications-With-Keycloak.html)
 -[Securing Web Applications With Keycloak Using OAuth 2.0 Authorization Code Flow and PKCE - Jeroen Meys — Ordina JWorks Tech Blog](https://ordina-jworks.github.io/security/2019/08/22/Securing-Web-Applications-With-Keycloak.html)
 - [Keycloak OAuth2 PKCE — Framework Repositories 1.0 documentation](https://frameworks.readthedocs.io/en/latest/spring-boot/spring-boot2/keycloakOAuth2PKCE.html)
@@ -251,7 +192,7 @@ idp descriptor :
 - [https://dzone.com/articles/how-do-you-ensure-security](https://dzone.com/articles/how-do-you-ensure-security)
 
 
-## manual with java 
+## Manual with java 
 
  - [Tutorial: Create and Verify JWTs in Java](https://developer.okta.com/blog/2018/10/31/jwts-with-java)
  - [Simple Token Authentication for Java Apps](https://developer.okta.com/blog/2018/10/16/token-auth-for-java)
@@ -262,7 +203,6 @@ idp descriptor :
 - [Keycloak Themes - Part 1](https://robferguson.org/blog/2020/04/12/keycloak-themes-part-1/) 
 - [Keycloak Themes - Part 2](http://robferguson.org/blog/2020/04/17/keycloak-themes-part-2/)
 
-  
 
 ## Spring security documentation 
  
