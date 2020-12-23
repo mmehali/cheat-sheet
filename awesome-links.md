@@ -4,7 +4,8 @@
 
 ### token exchange 
 - [GitHub - lucabaggi/keycloak-token-exchange: POC for Keycloak token exchange functionality, based on Docker](https://github.com/lucabaggi/keycloak-token-exchange)
-
+- [keycloak-documentation/token-exchange.adoc at master · keycloak/keycloak-documentation · GitHub](https://github.com/keycloak/keycloak-documentation/blob/master/securing_apps/topics/token-exchange/token-exchange.adoc)
+- [How to exchange token from an external provider to a keycloak token](http://www.mathieupassenaud.fr/token-exchange-keycloak/)
 
 
 ## Autres
@@ -315,8 +316,7 @@
 - [OAuth 2.0 Patterns with Spring Cloud Gateway | Okta Developer](https://developer.okta.com/blog/2020/08/14/spring-gateway-patterns)
 - [Protect REST APIs with Spring Security Reactive and JWT | by Hantsy | Zero Equals False | Medium](https://medium.com/zero-equals-false/protect-rest-apis-with-spring-security-reactive-and-jwt-7b209a0510f1)
 - [Secures your application with Spring Security 5 and Keycloak | by Hantsy | Medium](https://hantsy.medium.com/secures-your-application-with-spring-security-5-and-keycloak-2804ee912b0f)
-- [keycloak-documentation/token-exchange.adoc at master · keycloak/keycloak-documentation · GitHub](https://github.com/keycloak/keycloak-documentation/blob/master/securing_apps/topics/token-exchange/token-exchange.adoc)
-- [How to exchange token from an external provider to a keycloak token](http://www.mathieupassenaud.fr/token-exchange-keycloak/)
+
 - [OAuth 2.0 Patterns with Spring Cloud Gateway | Okta Developer](https://developer.okta.com/blog/2020/08/14/spring-gateway-patterns)
 - [OAuth 2.0 Patterns with Spring Cloud Gateway | Okta Developer](https://developer.okta.com/blog/2020/08/14/spring-gateway-patterns)
 - [java - client roles havent assigned during creating new user in Keycloak - Stack Overflow](https://stackoverflow.com/questions/49818453/client-roles-havent-assigned-during-creating-new-user-in-keycloak)
