@@ -2,32 +2,42 @@
   - https://localhost:6971/auth/realms/OCS2/protocol/saml/descriptor
   - https://localhost:7981/auth/realms/DCS/protocol/saml/descriptor
 
-### token exchange 
-- [GitHub - lucabaggi/keycloak-token-exchange: POC for Keycloak token exchange functionality, based on Docker](https://github.com/lucabaggi/keycloak-token-exchange)
-- [keycloak-documentation/token-exchange.adoc at master · keycloak/keycloak-documentation · GitHub](https://github.com/keycloak/keycloak-documentation/blob/master/securing_apps/topics/token-exchange/token-exchange.adoc)
-- [How to exchange token from an external provider to a keycloak token](http://www.mathieupassenaud.fr/token-exchange-keycloak/)
 
 
-## Autres
-- [oidc-group-mapper/src/main/java/br/com/luizcarlosvianamelo/keycloak/broker/oidc/mappers at master · amomra/oidc-group-mapper · GitHub](https://github.com/amomra/oidc-group-mapper/tree/master/src/main/java/br/com/luizcarlosvianamelo/keycloak/broker/oidc/mappers)
-- [GitHub - mingisme/keycloak-default-idp-spring-boot-demo: Keycloak default idp demo](https://github.com/mingisme/keycloak-default-idp-spring-boot-demo)
-- [azure active directory - How keycloak sets up user information from an external identity provider - Stack Overflow](https://stackoverflow.com/questions/58703940/how-keycloak-sets-up-user-information-from-an-external-identity-provider)
+## Brokering saml & openid 
+- [AWS SAML based User Federation using Keycloak](https://neuw.medium.com/aws-connect-saml-based-identity-provider-using-keycloak-9b3e6d0111e6)
+- [AWS user account OpenID federation using Keycloak](https://neuw.medium.com/aws-account-openid-federation-using-keycloak-40d22b952a43)
+- [How to secure a Spring Boot app with SAML and Keycloak](https://blog.codecentric.de/en/2019/03/secure-spring-boot-app-saml-keycloak/)
+- [keycloak_saml_client_default_scopes - Terraform Provider: Keycloak](https://mrparkers.github.io/terraform-provider-keycloak/resources/keycloak_saml_client_default_scopes/)
+- [saml-example/public at master · anbarium/saml-example · GitHub](https://github.com/anbarium/saml-example/tree/master/public)
+- [- Using kc_idp_hint to skip default idp with SAML? - Getting advice - Keycloak](https://keycloak.discourse.group/t/using-kc-idp-hint-to-skip-default-idp-with-saml/4500)
 - [client suggested identity provider – codehumsafar](https://codehumsafar.wordpress.com/tag/client-suggested-identity-provider/)
 - [Keycloak: How to auto redirect Keycloak user to OKTA SSO page instead of clicking on button? - Stack Overflow](https://stackoverflow.com/questions/51925423/keycloak-how-to-auto-redirect-keycloak-user-to-okta-sso-page-instead-of-clickin)
 - [elasticsearch - In keycloak, how to redirect to an IDP with kc_idp_hint? - Stack Overflow](https://stackoverflow.com/questions/60461401/in-keycloak-how-to-redirect-to-an-idp-with-kc-idp-hint)
+- [Enhancing SAML response with some xml tags? - Getting advice - Keycloak](https://keycloak.discourse.group/t/enhancing-saml-response-with-some-xml-tags/1045)
+- [Configure Azure Active Directory as a SAML Identity Provider | Pivotal Docs](https://docs.pivotal.io/p-identity/1-5/azure/config-azure.html)
+- [Keycloak with Okta SAML Provider · Ultimate Security Professional Blog](https://ultimatesecurity.pro/post/okta-saml/)
+
+- [oidc-group-mapper/src/main/java/br/com/luizcarlosvianamelo/keycloak/broker/oidc/mappers at master · amomra/oidc-group-mapper · GitHub](https://github.com/amomra/oidc-group-mapper/tree/master/src/main/java/br/com/luizcarlosvianamelo/keycloak/broker/oidc/mappers)
+- [GitHub - mingisme/keycloak-default-idp-spring-boot-demo: Keycloak default idp demo](https://github.com/mingisme/keycloak-default-idp-spring-boot-demo)
+- [azure active directory - How keycloak sets up user information from an external identity provider - Stack Overflow](https://stackoverflow.com/questions/58703940/how-keycloak-sets-up-user-information-from-an-external-identity-provider)
 - [Keycloak Single Sign On (SSO) For Your Application | Keycloak SSO](https://idp.miniorange.com/login-using-keycloak/)
 - [GitHub - vbhayden/keycloak-federation-examples: Dockerized Keycloak example to accompany training materials](https://github.com/vbhayden/keycloak-federation-examples)
 - [Keycloak Single Sign On (SSO) For Your Application | Keycloak SSO](https://idp.miniorange.com/login-using-keycloak/)
-
- 
-
 - [keycloak-user: Dump user profile data from Social Identity Provider](https://lists.jboss.org/pipermail/keycloak-user/2015-July/002605.html)
 - [Keycloak-identity-broker/identity-broker-realm.json at master · lgraf/keycloak-identity-broker · GitHub](https://github.com/lgraf/keycloak-identity-broker/blob/master/identity-broker/identity-broker-realm.json)
 - [Keycloak create a custom identity provider mapper - Stack Overflow](https://stackoverflow.com/questions/46595425/keycloak-create-a-custom-identity-provider-mapper)
  - [How to define mappers for keycloak identity providers? - Stack Overflow](https://stackoverflow.com/questions/46219937/how-to-define-mappers-for-keycloak-identity-providers)
 
 - [Azure AD iDP with Keycloak as SP. Creating a Directory inside Azure: - | by Surya Prakash Pandey | Medium](https://suryaprakash-pandey.medium.com/azure-ad-idp-with-keycloak-as-sp-1ca933d71388)
+
+### token exchange 
+- [GitHub - lucabaggi/keycloak-token-exchange: POC for Keycloak token exchange functionality, based on Docker](https://github.com/lucabaggi/keycloak-token-exchange)
+- [keycloak-documentation/token-exchange.adoc at master · keycloak/keycloak-documentation · GitHub](https://github.com/keycloak/keycloak-documentation/blob/master/securing_apps/topics/token-exchange/token-exchange.adoc)
+- [How to exchange token from an external provider to a keycloak token](http://www.mathieupassenaud.fr/token-exchange-keycloak/)
+
  
+
 
 
 ## Qlik Sense 
@@ -51,16 +61,7 @@
  - [Keycloak with drupal](https://github.com/wadmiraal/docker-drupal)
  - [keycloak openId connect drupal module](https://www.drupal.org/project/keycloak)
 
-## Brokering saml & openid 
-- [AWS SAML based User Federation using Keycloak](https://neuw.medium.com/aws-connect-saml-based-identity-provider-using-keycloak-9b3e6d0111e6)
-- [AWS user account OpenID federation using Keycloak](https://neuw.medium.com/aws-account-openid-federation-using-keycloak-40d22b952a43)
-- [How to secure a Spring Boot app with SAML and Keycloak](https://blog.codecentric.de/en/2019/03/secure-spring-boot-app-saml-keycloak/)
-- [keycloak_saml_client_default_scopes - Terraform Provider: Keycloak](https://mrparkers.github.io/terraform-provider-keycloak/resources/keycloak_saml_client_default_scopes/)
-- [saml-example/public at master · anbarium/saml-example · GitHub](https://github.com/anbarium/saml-example/tree/master/public)
-- [- Using kc_idp_hint to skip default idp with SAML? - Getting advice - Keycloak](https://keycloak.discourse.group/t/using-kc-idp-hint-to-skip-default-idp-with-saml/4500)
-- [Enhancing SAML response with some xml tags? - Getting advice - Keycloak](https://keycloak.discourse.group/t/enhancing-saml-response-with-some-xml-tags/1045)
-- [Configure Azure Active Directory as a SAML Identity Provider | Pivotal Docs](https://docs.pivotal.io/p-identity/1-5/azure/config-azure.html)
-- [Keycloak with Okta SAML Provider · Ultimate Security Professional Blog](https://ultimatesecurity.pro/post/okta-saml/)
+
  
  
 
