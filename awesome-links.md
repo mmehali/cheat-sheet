@@ -2,23 +2,17 @@ idp descriptor :
   https://localhost:6971/auth/realms/OCS2/protocol/saml/descriptor
    https://localhost:7981/auth/realms/DCS/protocol/saml/descriptor
 
+### token exchange 
+- [GitHub - lucabaggi/keycloak-token-exchange: POC for Keycloak token exchange functionality, based on Docker](https://github.com/lucabaggi/keycloak-token-exchange)
 
-- GitHub - lucabaggi/keycloak-token-exchange: POC for Keycloak token exchange functionality, based on Docker
-- https://github.com/lucabaggi/keycloak-token-exchange
 
 
-- saml-example/public at master · anbarium/saml-example · GitHub
-- https://github.com/anbarium/saml-example/tree/master/public
 
 - oidc-group-mapper/src/main/java/br/com/luizcarlosvianamelo/keycloak/broker/oidc/mappers at master · amomra/oidc-group-mapper · GitHub
 - https://github.com/amomra/oidc-group-mapper/tree/master/src/main/java/br/com/luizcarlosvianamelo/keycloak/broker/oidc/mappers
 
 - GitHub - mingisme/keycloak-default-idp-spring-boot-demo: Keycloak default idp demo
 - https://github.com/mingisme/keycloak-default-idp-spring-boot-demo
-
-- keycloak_saml_client_default_scopes - Terraform Provider: Keycloak
-- https://mrparkers.github.io/terraform-provider-keycloak/resources/keycloak_saml_client_default_scopes/
- 
 
 - azure active directory - How keycloak sets up user information from an external identity provider - Stack Overflow
 - https://stackoverflow.com/questions/58703940/how-keycloak-sets-up-user-information-from-an-external-identity-provider
@@ -29,10 +23,6 @@ idp descriptor :
 - https://codehumsafar.wordpress.com/tag/client-suggested-identity-provider/
  
 
-- Using kc_idp_hint to skip default idp with SAML? - Getting advice - Keycloak
-- https://keycloak.discourse.group/t/using-kc-idp-hint-to-skip-default-idp-with-saml/4500
- 
-
 - Keycloak: How to auto redirect Keycloak user to OKTA SSO page instead of clicking on button? - Stack Overflow
 - https://stackoverflow.com/questions/51925423/keycloak-how-to-auto-redirect-keycloak-user-to-okta-sso-page-instead-of-clickin
 
@@ -40,36 +30,12 @@ idp descriptor :
 - elasticsearch - In keycloak, how to redirect to an IDP with kc_idp_hint? - Stack Overflow
 - https://stackoverflow.com/questions/60461401/in-keycloak-how-to-redirect-to-an-idp-with-kc-idp-hint
 
-- Enhancing SAML response with some xml tags? - Getting advice - Keycloak
-- https://keycloak.discourse.group/t/enhancing-saml-response-with-some-xml-tags/1045
-
-
-- Qlik Sense: Common error messages when using SAML
-- https://support.qlik.com/articles/000041560
-
-
-- Gravitee.io API Platform Documentation | Home page for Gravitee.io API Platform documentation
-- https://docs.gravitee.io/apim/1.x/apim_installguide_authentication_keycloak.html
 
 - Setup User Federation with Keycloak (LDAP Integration)
 - https://documentation.abas.cloud/en/abas-keycloak/setup-user-federation-ldap.html#_setting_up_user_federation_with_keycloak_ldap_server_integration
  
  
-- Gestion des fournisseurs d'identité ‒ Éditions SaaS de Qlik Sense
-- https://help.qlik.com/fr-FR/cloud-services/Subsystems/Hub/Content/Sense_Hub/Admin/mc-create-idp-configuration.htm
 
-
-
-- SAML configuration with Okta ‒ Qlik Sense on Windows
-- https://help.qlik.com/en-US/sense/June2019
-
-
-- GitHub - johsund/Qliklogin: Sample login solution based on Node.JS for Qlik Sense with LDAP authentication
-- https://github.com/johsund/Qliklogin
-
-
-- QlikSense Single Sign On | SSO | SAML Solution
-- https://www.miniorange.com/index.php
 
 
 - qseok_on_minikube/readme.md at master · ChristofSchwarz/qseok_on_minikube · GitHub
@@ -88,13 +54,6 @@ idp descriptor :
 - Keycloak Single Sign On (SSO) For Your Application | Keycloak SSO
 - https://idp.miniorange.com/login-using-keycloak/
 
-
-- Configure Azure Active Directory as a SAML Identity Provider | Pivotal Docs
-- https://docs.pivotal.io/p-identity/1-5/azure/config-azure.html
-
-
-- Keycloak with Okta SAML Provider · Ultimate Security Professional Blog
-- https://ultimatesecurity.pro/post/okta-saml/
  
 
 - [keycloak-user] Dump user profile data from Social Identity Provider
@@ -130,7 +89,12 @@ idp descriptor :
  
 
 
-
+## Qlik Sense 
+- [Qlik Sense: Common error messages when using SAML](https://support.qlik.com/articles/000041560)
+- [Gestion des fournisseurs d'identité ‒ Éditions SaaS de Qlik Sense](https://help.qlik.com/fr-FR/cloud-services/Subsystems/Hub/Content/Sense_Hub/Admin/mc-create-idp-configuration.htm)
+- [SAML configuration with Okta ‒ Qlik Sense on Windows](https://help.qlik.com/en-US/sense/June2019)
+- [GitHub - johsund/Qliklogin: Sample login solution based on Node.JS for Qlik Sense with LDAP authentication](https://github.com/johsund/Qliklogin)
+- [QlikSense Single Sign On | SSO | SAML Solution](https://www.miniorange.com/index.php)
 
 ## a ranger
 
@@ -148,12 +112,21 @@ idp descriptor :
 - [AWS SAML based User Federation using Keycloak](https://neuw.medium.com/aws-connect-saml-based-identity-provider-using-keycloak-9b3e6d0111e6)
 - [AWS user account OpenID federation using Keycloak](https://neuw.medium.com/aws-account-openid-federation-using-keycloak-40d22b952a43)
 - [How to secure a Spring Boot app with SAML and Keycloak](https://blog.codecentric.de/en/2019/03/secure-spring-boot-app-saml-keycloak/)
+- [keycloak_saml_client_default_scopes - Terraform Provider: Keycloak](https://mrparkers.github.io/terraform-provider-keycloak/resources/keycloak_saml_client_default_scopes/)
+- [saml-example/public at master · anbarium/saml-example · GitHub](https://github.com/anbarium/saml-example/tree/master/public)
+- [- Using kc_idp_hint to skip default idp with SAML? - Getting advice - Keycloak](https://keycloak.discourse.group/t/using-kc-idp-hint-to-skip-default-idp-with-saml/4500)
+- [Enhancing SAML response with some xml tags? - Getting advice - Keycloak](https://keycloak.discourse.group/t/enhancing-saml-response-with-some-xml-tags/1045)
+- [Configure Azure Active Directory as a SAML Identity Provider | Pivotal Docs](https://docs.pivotal.io/p-identity/1-5/azure/config-azure.html)
+- [Keycloak with Okta SAML Provider · Ultimate Security Professional Blog](https://ultimatesecurity.pro/post/okta-saml/)
+ 
+ 
+
+
 ## Spring security documentation
  - [String security 5 documentation](https://docs.spring.io/spring-security/site/docs/current/reference/html5/#oauth2")
  - [Spring Boot and OAuth2](https://spring.io/guides/tutorials/spring-boot-oauth2/)
  - [Spting security architecture](https://spring.io/guides/topicals/spring-security-architecture)
  - [Spring security oath (deprecated)](https://projects.spring.io/spring-security-oauth/docs/oauth2.html)
-
  
 ## REST
 
@@ -163,13 +136,6 @@ idp descriptor :
  - [Spring Cloud Gateway with OpenID Connect and Token Relay](https://blog.jdriven.com/2019/11/spring-cloud-gateway-with-openid-connect-and-token-relay/)
  - [Sécurisez l’accès à vos APIs avec OAuth2](https://nexworld.fr/securiser-api-oauth2/)
 
-
-## HTTPS certificate for the server
- - [HTTPS sercificate](https://medium.com/@sairamkrish/keycloak-integration-part-1-overview-812010d6c7cf)
-
-## Keyclock containers:mysql, mssql, mariadb, etc
-
- - [docker-compose mysql, mssql, etc](https://github.com/keycloak/keycloak-containers/tree/master/docker-compose-examples)
 
 ## Keycloak javaFX
 
@@ -191,12 +157,6 @@ idp descriptor :
 - [Keycloak Integration with AngularAPP](https://geeks18.com/?p=1397)
 - [Integrating Keycloak with an Angular 4 Web Application](https://symbiotics.co.za/integrating-keycloak-with-an-angular-4-web-application-part-5/)
 - [How to Add KeyCloak in Angular for SSO Authentication](https://morioh.com/p/0e61e524f5ca)
-
-
-## Manual with java 
-
-- [Tutorial: Create and Verify JWTs in Java](https://developer.okta.com/blog/2018/10/31/jwts-with-java)
-- [Simple Token Authentication for Java Apps](https://developer.okta.com/blog/2018/10/16/token-auth-for-java)
 
 
 ## Keycloack - java app
@@ -231,7 +191,7 @@ idp descriptor :
 
 ## Keycloak
 - [Securing Applications using Spring Boot Keycloak Integration – Part 1](http://progressivecoder.com/spring-boot-keycloak-integration-part-1/)
-- [Securing Applications using Spring Boot Keycloak Integration – Part 1](http://progressivecoder.com/securing-applications-using-spring-boot-keycloak-integration-part-2/)
+- [Securing Applications using Spring Boot Keycloak Integration – Part 2](http://progressivecoder.com/securing-applications-using-spring-boot-keycloak-integration-part-2/)
 - [fdf](https://farinmedia.ir/udemy-oauth-2-0-in-spring-boot-applications/)
 - [Keycloak Archives - Apps Developer Blog](https://www.appsdeveloperblog.com/category/keycloak/) 
 - [[Get UserId from Keycloak JWT Access Token - Apps Developer Blog](https://www.appsdeveloperblog.com/get-userid-from-keycloak-jwt-access-token/)
@@ -290,37 +250,11 @@ idp descriptor :
 - [Supercharge Java Authentication with JSON Web Tokens (JWTs)](https://www.baeldung.com/java-json-web-tokens-jjwt)
 - [https://dzone.com/articles/how-do-you-ensure-security](https://dzone.com/articles/how-do-you-ensure-security)
 
-           
-
-## Spring security documentation 
-- [String security 5 documentation](https://docs.spring.io/spring-security/site/docs/current/reference/html5/#oauth2)
-- [Spring Boot and OAuth2](https://spring.io/guides/tutorials/spring-boot-oauth2/)
-- [Spting security architecture](https://spring.io/guides/topicals/spring-security-architecture)
-- [Spring security oath (deprecated)](https://projects.spring.io/spring-security-oauth/docs/oauth2.html)
-
- 
-## REST
-- [REST API with Spring Boot](https://www.youtube.com/watch?v=bK9PXo7IQSo&list=PLdW9lrB9HDw101ImXtR_xkvTe1HWx7Gc6)
-- [Securing REST API using Keycloak and Spring Oauth2](https://medium.com/@bcarunmail/securing-rest-api-using-keycloak-and-spring-oauth2-6ddf3a1efcc2)
-- [Accessing Secure REST API using Spring OAuth2RestTemplate](https://medium.com/@bcarunmail/accessing-secure-rest-api-using-spring-oauth2resttemplate-ef18377e2e05) 
-- [Spring Cloud Gateway with OpenID Connect and Token Relay](https://blog.jdriven.com/2019/11/spring-cloud-gateway-with-openid-connect-and-token-relay/)
-- [Sécurisez l’accès à vos APIs avec OAuth2](https://nexworld.fr/securiser-api-oauth2/) 
-
-
-## HTTPS certificate for the server
- - [HTTPS sercificate](https://medium.com/@sairamkrish/keycloak-integration-part-1-overview-812010d6c7cf)
-
-## Keyclock containers:mysql, mssql, mariadb, etc
- - [docker-compose mysql, mssql, etc](https://github.com/keycloak/keycloak-containers/tree/master/docker-compose-examples)
-
-
-
 
 ## manual with java 
 
-- [Tutorial: Create and Verify JWTs in Java](https://developer.okta.com/blog/2018/10/31/jwts-with-java)
-- [Simple Token Authentication for Java Apps](https://developer.okta.com/blog/2018/10/16/token-auth-for-java)
-
+ - [Tutorial: Create and Verify JWTs in Java](https://developer.okta.com/blog/2018/10/31/jwts-with-java)
+ - [Simple Token Authentication for Java Apps](https://developer.okta.com/blog/2018/10/16/token-auth-for-java)
 
 
 
@@ -339,27 +273,19 @@ idp descriptor :
 
  
 ## REST
+- [REST API with Spring Boot](https://www.youtube.com/watch?v=bK9PXo7IQSo&list=PLdW9lrB9HDw101ImXtR_xkvTe1HWx7Gc6)
+- [Securing REST API using Keycloak and Spring Oauth2](https://medium.com/@bcarunmail/securing-rest-api-using-keycloak-and-spring-oauth2-6ddf3a1efcc2)
+- [Accessing Secure REST API using Spring OAuth2RestTemplate](https://medium.com/@bcarunmail/accessing-secure-rest-api-using-spring-oauth2resttemplate-ef18377e2e05) 
+- [Spring Cloud Gateway with OpenID Connect and Token Relay](https://blog.jdriven.com/2019/11/spring-cloud-gateway-with-openid-connect-and-token-relay/)
+- [Sécurisez l’accès à vos APIs avec OAuth2](https://nexworld.fr/securiser-api-oauth2/) 
 
- - [REST API with Spring Boot](https://www.youtube.com/watch?v=bK9PXo7IQSo&list=PLdW9lrB9HDw101ImXtR_xkvTe1HWx7Gc6)
- - [Securing REST API using Keycloak and Spring Oauth](https://medium.com/@bcarunmail/securing-rest-api-using-keycloak-and-spring-oauth2-6ddf3a1efcc2)
- - [Accessing Secure REST API using Spring OAuth2RestTemplate | by Arun B Chandrasekaran | Medium](https://medium.com/@bcarunmail/accessing-secure-rest-api-using-spring-oauth2resttemplate-ef18377e2e05)
- - [Spring Cloud Gateway with OpenID Connect and Token Relay](https://blog.jdriven.com/2019/11/spring-cloud-gateway-with-openid-connect-and-token-relay/)
- - [Sécurisez l’accès à vos APIs avec OAuth2](https://nexworld.fr/securiser-api-oauth2/)
+
 
 ## HTTPS certificate for the server
   - [HTTPS sercificate](https://medium.com/@sairamkrish/keycloak-integration-part-1-overview-812010d6c7cf)
 
 ## Keyclock containers:mysql, mssql, mariadb, etc
-
   - [docker-compose mysql, mssql, etc](https://github.com/keycloak/keycloak-containers/tree/master/docker-compose-examples)
-
-
-
-
-## manual with java 
-
- - [Tutorial: Create and Verify JWTs in Java](https://developer.okta.com/blog/2018/10/31/jwts-with-java)
- - [Simple Token Authentication for Java Apps](https://developer.okta.com/blog/2018/10/16/token-auth-for-java)
 
 
 
@@ -397,62 +323,6 @@ idp descriptor :
 - [Spring Security LDAP Authentication Example using Spring Boot Application](https://www.pixeltrice.com/spring-security-ldap-authentication-example-using-spring-boot-application/)
 - [Openldap Keycloak and docker](https://blog.exceptionerror.io/2018/08/29/openldap-keycloak-and-docker/amp/)
 
-version: 1
-
-dn: ou=groups,dc=exceptionerror,dc=io
-objectClass: organizationalUnit
-objectClass: top
-ou: groups
-
-dn: cn=Ensign,ou=groups,dc=exceptionerror,dc=io
-objectClass: top
-objectClass: groupOfUniqueNames
-cn: Ensign
-uniqueMember: 
-
-dn: cn=Crewman,ou=groups,dc=exceptionerror,dc=io
-objectClass: top
-objectClass: groupOfUniqueNames
-cn: Crewman
-uniqueMember:
-
-dn: cn=Engineer,ou=groups,dc=exceptionerror,dc=io
-objectClass: top
-objectClass: groupOfUniqueNames
-cn: Engineer
-uniqueMember:
-
-dn: cn=Commander,ou=groups,dc=exceptionerror,dc=io
-objectClass: top
-objectClass: groupOfUniqueNames
-cn: Commander
-uniqueMember:
-
-dn: cn=Mark Cuban,ou=users,dc=exceptionerror,dc=io
-cn: Mark Cuban
-gidnumber: 500
-givenname: Mark
-homedirectory: /home/users/mcuban
-objectclass: inetOrgPerson
-objectclass: posixAccount
-objectclass: top
-sn: Cuban
-uid: mcuban
-uidnumber: 1002
-userpassword: {MD5}ICy5YqxZB1uWSwcVLSNLcA==
-
-dn: cn=Steve Jobs,ou=users,dc=exceptionerror,dc=io
-cn: Steve Jobs
-gidnumber: 500
-givenname: Steve
-homedirectory: /home/users/sjobs
-objectclass: inetOrgPerson
-objectclass: posixAccount
-objectclass: top
-sn: Jobs
-uid: sjobs
-uidnumber: 1001
-userpassword: {MD5}ICy5YqxZB1uWSwcVLSNLcA==
 
 - [OAuth 2.0 Patterns with Spring Cloud Gateway | Okta Developer](https://developer.okta.com/blog/2020/08/14/spring-gateway-patterns)
 - [Jimena Garbarino | Okta Developer](https://developer.okta.com/blog/authors/jimena-garbarino/)
@@ -481,9 +351,12 @@ userpassword: {MD5}ICy5YqxZB1uWSwcVLSNLcA==
 
 
 --------------------------------------------------------------------------------
-Keycloak- gravitee
+## gravitee
 --------------------------------------------------------------------------------
 - [GitHub - gravitee-io/gravitee-resource-oauth2-provider-keycloak: Gravitee.io - API Management - Resource - Keycloak Adapter](https://github.com/gravitee-io/gravitee-resource-oauth2-provider-keycloak)
+- [Gravitee.io API Platform Documentation | Home page for Gravitee.io API Platform documentation](https://docs.gravitee.io/apim/1.x/apim_installguide_authentication_keycloak.html)
+
+## keycloak 
 - [Understanding Keycloak RedHat SSO Authentication - JANUA](https://www.janua.fr/understanding-keycloak-redhat-sso-authentication/)
 - [Keycloak Identity Provider Extension Released - Camunda](https://camunda.com/blog/2019/08/keycloak-identity-provider-extension/)
 - [GitHub - thomasdarimont/keycloak-extension-playground: Simple project environment for creating custom Keycloak extensions](https://github.com/thomasdarimont/keycloak-extension-playground)
@@ -498,7 +371,6 @@ Keycloak- gravitee
 - [Using Keycloak Admin Client to create user with roles (Realm and Client level) · GitHub](https://gist.github.com/thomasdarimont/c4e739c5a319cf78a4cff3b87173a84b)
 - [Http - Le Guide Angular | Marmicode](https://guide-angular.wishtack.io/angular/http)
 - [API ReST | Bonnes Pratiques et Sécurité – Wishtack](https://blog.wishtack.com/api-rest-bonnes-pratiques-et-securite/)
-- [Route Guards - Le Guide Angular | Marmicode](https://guide-angular.wishtack.io/angular/routing/route-guards)
 - [Route Guards - Le Guide Angular | Marmicode](https://guide-angular.wishtack.io/angular/routing/route-guards)
 - [Keycloak Integration in Angular Application - DEV](https://dev.to/anjnkmr/keycloak-integration-in-angular-application-5a43)
 - [spring-boot - Keycloak Spring configuration de démarrage](https://stackoverrun.com/fr/q/11431538)
