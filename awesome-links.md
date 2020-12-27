@@ -6,6 +6,8 @@
 - [Implementing Single-Signon in Java with SAML](https://blog.imaginea.com/implementing-java-single-signon-with-saml/)
 
 ## Brokering saml & openid
+ - [Keycloak with Okta SAML Provider](https://ultimatesecurity.pro/post/okta-saml/)
+ - [Update Keycloak User Attributes from Okta SAML Provider](https://ultimatesecurity.pro/post/okta-update-user/)
  - [How to secure a Spring Boot app with SAML and Keycloak](https://blog.codecentric.de/en/2019/03/secure-spring-boot-app-saml-keycloak/)
  - [AWS SAML based User Federation using Keycloak](https://neuw.medium.com/aws-connect-saml-based-identity-provider-using-keycloak-9b3e6d0111e6)
  - [AWS user account OpenID federation using Keycloak](https://neuw.medium.com/aws-account-openid-federation-using-keycloak-40d22b952a43)
