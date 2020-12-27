@@ -2,8 +2,18 @@
   - https://localhost:6971/auth/realms/OCS2/protocol/saml/descriptor
   - https://localhost:7981/auth/realms/DCS/protocol/saml/descriptor
 
+## keyclock & vpn 
+- [keyclock & vpn](https://blog.please-open.it/openvpn-keycloak/)
+
 ## saml with java
 - [Implementing Single-Signon in Java with SAML](https://blog.imaginea.com/implementing-java-single-signon-with-saml/)
+## concur
+- [Concur (IdP-initiated) Integration Guide - SecureAuth IdP 9.1 - 9.2 Documentation - Site global](https://docs.secureauth.com/display/91docs/Concur+%28IdP-initiated%29+Integration+Guide)
+- [Mathieu Passenaud](https://www.mathieupassenaud.fr/)
+- [SAP Concur Developer Center | Migrating old tokens to new Oauth2 Bearer Tokens](https://developer.concur.com/api-reference/authentication/migrationguide.html)
+- [Tutorial: Azure Active Directory single sign-on (SSO) integration with Concur | Microsoft Docs](https://docs.microsoft.com/en-us/azure/active-directory/saas-apps/concur-tutorial)
+- [Concur Single Sign-On Integration(https://auth0.com/docs/integrations/sso/concur#configure-integration-with-concur)
+
 
 ## Brokering saml & openid
  - [blog - plusieurs articles](https://ultimatesecurity.pro/tags/keycloak/)
@@ -41,8 +51,10 @@
 - [keycloak-documentation/token-exchange.adoc at master · keycloak/keycloak-documentation · GitHub](https://github.com/keycloak/keycloak-documentation/blob/master/securing_apps/topics/token-exchange/token-exchange.adoc)
 - [How to exchange token from an external provider to a keycloak token](http://www.mathieupassenaud.fr/token-exchange-keycloak/)
 
- 
 
+ 
+## HTTPS
+- [HTTPS request with trust store for server certificates | Connect2id](https://connect2id.com/products/nimbus-oauth-openid-connect-sdk/examples/utils/custom-trust-store)
 
 
 ## Qlik Sense 
