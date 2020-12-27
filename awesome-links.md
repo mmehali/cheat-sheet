@@ -1,3 +1,11 @@
+## keycloack doc
+- [endpoints](https://www.keycloak.org/docs/latest/securing_apps/#endpoints-2)
+- [flows](https://www.keycloak.org/docs/latest/securing_apps/#flows)
+- [saml](https://www.keycloak.org/docs/latest/securing_apps/#saml-2)
+- [Token Exchange](https://www.keycloak.org/docs/latest/securing_apps/#_token-exchange)
+- [SAML Role Mappings SPI](https://www.keycloak.org/docs/latest/server_development/#_saml_role_mappings_spi)
+- [Modifying First Broker Login Flow](https://www.keycloak.org/docs/latest/server_development/#modifying-first-broker-login-flow)
+
 ### idp descriptor :
   - https://localhost:6971/auth/realms/OCS2/protocol/saml/descriptor
   - https://localhost:7981/auth/realms/DCS/protocol/saml/descriptor
@@ -12,7 +20,7 @@
 - [Mathieu Passenaud](https://www.mathieupassenaud.fr/)
 - [SAP Concur Developer Center | Migrating old tokens to new Oauth2 Bearer Tokens](https://developer.concur.com/api-reference/authentication/migrationguide.html)
 - [Tutorial: Azure Active Directory single sign-on (SSO) integration with Concur | Microsoft Docs](https://docs.microsoft.com/en-us/azure/active-directory/saas-apps/concur-tutorial)
-- [Concur Single Sign-On Integration(https://auth0.com/docs/integrations/sso/concur#configure-integration-with-concur)
+- [Concur Single Sign-On Integration](https://auth0.com/docs/integrations/sso/concur#configure-integration-with-concur)
 
 
 ## Brokering saml & openid
