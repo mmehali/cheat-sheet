@@ -1,7 +1,7 @@
 - [SECURING WEB APPLICATIONS WITH KEYCLOAK USING OAUTH 2.0 AUTHORIZATION CODE FLOW AND PKCE](https://ordina-jworks.github.io/security/2019/08/22/Securing-Web-Applications-With-Keycloak.html)
 - [User Authentication with Keycloak – Part 1: React front-end](https://scalac.io/user-authentication-keycloak-1)
 - [User Authentication with Keycloak – Part 2: Akka HTTP backend](https://scalac.io/user-authentication-keycloak-2/)
-Applications-With-Keycloak.html)
+
 
 ## keycloack doc
 - [endpoints](https://www.keycloak.org/docs/latest/securing_apps/#endpoints-2)
