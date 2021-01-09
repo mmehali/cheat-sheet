@@ -79,21 +79,24 @@ Vous pouvez généralement les trouver sur le site principal de la base de donn�
 
 Par exemple, le pilote JDBC de PostgreSQL peut être trouvé ici: https://jdbc.postgresql.org/download.html
 
-#### Packaging et installation du pilote 
-La documentation officielle est une bonne ressource pour savoir comment pakager le pilote pour une 
-utilisation avec Keycloak, et il est inutile de dupliquer le mêmes infos ici. 
+#### Packaging et installation du pilote.
 
-Le pilote peut être trouvé ici: https://www.keycloak.org/docs/latest/server_installation/index.html#package-the-jdbc-driver
+Avant de pouvoir utiliser ce pilote, vous devez le packager dans un module et l'installer sur le serveur. 
+Les modules définissent les JAR qui sont chargés dans le chemin de classe Keycloak et les dépendances que ces JAR ont sur d'autres modules. 
+Ils sont assez simples à mettre en place.
 
-Cela revient à  ajouter une structure de dossier, à copier le fichier .jar et à ajouter un fichier .xml comme suit:
-
-``` 
-<?xml version="1.0" ?>
-<module xmlns="urn:jboss:module:1.3" name="org.postgresql">
-  
+Dans le répertoire **/modules/system/layers/keycloak** de votre distribution Keycloak, vous devez créer une structure 
+de répertoires pour contenir la définition de votre module. 
+La convention consiste à utiliser le nom de package Java du pilote JDBC comme nom de la structure de répertoires. Pour PostgreSQL vous devez :
+ - créez le répertoire **org/postgresql/main**. 
+ - Copiez le JAR du pilote de base de données dans ce répertoire 
+ - créez également un fichier **module.xml** vide.
+ - ouvrez le fichier **module.xml** et créez le XML suivant:
+ ```
+ <?xml version="1.0" ?>
+ <module xmlns="urn:jboss:module:1.3" name="org.postgresql">
     <resources>
-        <!-- update the filename to match your PostgreSQL JDBC driver file name -->
-        <resource-root path="postgresql-9.4.1212.jar"/> 
+        <resource-root path="postgresql-9.4.1212.jar"/>
     </resources>
 
     <dependencies>
@@ -103,6 +106,9 @@ Cela revient à  ajouter une structure de dossier, à copier le fichier .jar et 
 </module>
 ```
 Assurez-vous de mettre à jour le chemin avec le nom de fichier correct.
+
+Plus de detail [ici](https://www.keycloak.org/docs/latest/server_installation/index.html#package-the-jdbc-driver)
+
 
 #### Déclarer et charger le pilote
 Cette partie, ainsi que la modification de la source de données sont un peu plus avancées, je vais donc les passer 
