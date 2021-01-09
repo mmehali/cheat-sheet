@@ -22,7 +22,37 @@ La configuration matérielle requise, ainsi que la structure du répertoire de d
 sont disponibles à l'adresse :
 
    - https://www.keycloak.org/docs/latest/server_installation/index.html#installation
-   
+
+## Configuration matérielle requise 
+
+Configuration requise
+
+Keycloak peu s'executer sur importe quel système d'exploitation exécutant Java.
+Voici la configuration matérielle requise pour un serveur Keycloak:
+
+- Java 8 JDK
+- zip ou gzip et tar
+- Au moins 512 Mo de RAM
+- Au moins 1 Go d'espace disque
+- Une **base de données externe** partagée comme PostgreSQL, MySQL, Oracle, etc: Keycloak nécessite une base de données partagée externe si vous souhaitez exécuter dans un cluster. Veuillez consulter la section de configuration de la base de données de ce guide pour plus d'informations.
+- Prise en charge de la multidiffusion réseau sur votre ordinateur si vous souhaitez exécuter dans un cluster. Keycloak peut être mis en cluster sans multidiffusion, mais cela nécessite un tas de changements de configuration. Veuillez consulter la section sur le clustering de ce guide pour plus d'informations.
+
+**Important** Sous Linux, il est recommandé d'utiliser **/dev/urandom** comme source de données aléatoires pour éviter que Keycloak ne se bloque en raison du manque d'entropie disponible, à moins que l'utilisation de **/dev/random** ne soit requise par votre politique de sécurité. Pour ce faire sur Oracle JDK 8 et OpenJDK 8, définissez la propriété système **java.security.egd** au démarrage sur fichier: **/dev/urandom**.
+
+## Structure du répertoire de distribution
+
+Voici la structure des répertoires de la distribution serveur.
+
+Examinons l'objectif de certains des répertoires:
+
+- **bin**: contient divers scripts pour démarrer le serveur ou effectuer des actions de gestion sur le serveur.
+- **domain**: contient les fichiers de configuration et le répertoire de travail lors de l'exécution de Keycloak en **mode domaine**.
+- **modules** : contient toutes les bibliothèques Java utilisées par le serveur.
+- **standalone**: contient les fichiers de configuration et le répertoire de travail lors de l'exécution de Keycloak en **mode autonome**.
+- **standalone/deployments**: contient les extensions de keycloak par des tiers, vous pouvez placer vos extensions ici. *Consultez le Guide du développeur de serveur pour plus d'informations à ce sujet*.
+- **themes**: contient tous les html, feuilles de style, fichiers JavaScript et images utilisés pour afficher tout écran d'interface utilisateur affiché par le serveur. Ici, vous pouvez modifier un thème existant ou créer le vôtre. *Consultez le Guide du développeur de serveur pour plus d'informations à ce sujet*.
+
+
 ## Choix du mode de fonctionnement
 La première chose à laquelle vous devez penser lors du déploiement de Keycloak est le mode de 
 fonctionnement que vous souhaitez utiliser. Cela dépendra principalement de votre environnement, 
