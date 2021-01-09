@@ -4,11 +4,12 @@
 - [SSO with SAML, Keycloak and Nextcloud](https://stackoverflow.com/questions/48400812/sso-with-saml-keycloak-and-nextcloud)
 
 ## keycloak installation
-[Keycloak SSO Part 2: Setting up Keycloak](https://medium.com/@just_insane/keycloak-sso-part-2-setting-up-keycloak-746be8b937b7)
-[System Requirements](https://www.keycloak.org/docs/latest/server_installation/index.html#installation)
-[Database configuration](https://www.keycloak.org/docs/latest/server_installation/index.html#_database)
-[DataSource configuration](http://docs.wildfly.org/21/Admin_Guide.html#DataSource)
-[ansible keycloak] (https://github.com/andrewrothstein/ansible-keycloak)
+- [Keycloak SSO Part 2: Setting up Keycloak](https://medium.com/@just_insane/keycloak-sso-part-2-setting-up-keycloak-746be8b937b7)
+- [System Requirements](https://www.keycloak.org/docs/latest/server_installation/index.html#installation)
+- [Database configuration](https://www.keycloak.org/docs/latest/server_installation/index.html#_database)
+- [DataSource configuration](http://docs.wildfly.org/21/Admin_Guide.html#DataSource)
+- [ansible keycloak](https://github.com/andrewrothstein/ansible-keycloak)
+
 ## keycloack doc
 - [endpoints](https://www.keycloak.org/docs/latest/securing_apps/#endpoints-2)
 - [flows](https://www.keycloak.org/docs/latest/securing_apps/#flows)
