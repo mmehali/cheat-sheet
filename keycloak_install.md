@@ -63,9 +63,10 @@ Le pilote peut être trouvé ici: https://www.keycloak.org/docs/latest/server_in
 
 Cela revient à  ajouter une structure de dossier, à copier le fichier .jar et à ajouter un fichier .xml comme suit:
 
+``` 
 <?xml version="1.0" ?>
 <module xmlns="urn:jboss:module:1.3" name="org.postgresql">
-
+  
     <resources>
         <!-- update the filename to match your PostgreSQL JDBC driver file name -->
         <resource-root path="postgresql-9.4.1212.jar"/> 
@@ -76,7 +77,7 @@ Cela revient à  ajouter une structure de dossier, à copier le fichier .jar et 
         <module name="javax.transaction.api"/>
     </dependencies>
 </module>
-
+```
 Assurez-vous de mettre à jour le chemin avec le nom de fichier correct.
 
 #### Déclarer et charger le pilote
@@ -91,7 +92,7 @@ du pilote h2 et mettre à jour les informations concernant PostgreSQL.
 
 Voici un exemple de pilote instandalone-ha.xml
 
-
+``` 
 <drivers>
     <driver name="h2" module="com.h2database.h2">
         <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
@@ -100,6 +101,7 @@ Voici un exemple de pilote instandalone-ha.xml
         <xa-datasource-class>org.postgresql.xa.PGXADataSource</xa-datasource-class>
     </driver>
 </drivers>
+``` 
 
 
 Comme nous pouvons le voir, la déclaration du pilote est presque identique à celle du pilote de 
@@ -108,7 +110,7 @@ base de données H2 préconfigurée.
 #### Modifier la source de données Keycloak
 Ci-dessous, nous verrons un exemple de configuration de source de données PostgreSQL fonctionnelle.
 
-
+``` 
 <datasource jndi-name="java:jboss/datasources/KeycloakDS" pool-name="KeycloakDS" enabled="true" use-java-context="true">
     <connection-url>jdbc:postgresql://$URL:$PORT/$DATABASE</connection-url>
     <driver>postgresql</driver>
@@ -120,6 +122,7 @@ Ci-dessous, nous verrons un exemple de configuration de source de données Postg
         <password>$PASSWORD</password>
     </security>
 </datasource>
+``` 
 
 
 
@@ -132,6 +135,7 @@ Ci-dessous, nous verrons un exemple de configuration de source de données Postg
 
 En fin de compte, vous devriez vous retrouver avec une section datasource qui ressemble à ce qui suit:
 
+``` 
 <subsystem xmlns="urn:jboss:domain:datasources:5.0">
     <datasources>
         <datasource jndi-name="java:jboss/datasources/KeycloakDS" pool-name="KeycloakDS" enabled="true" use-java-context="true">
@@ -155,7 +159,7 @@ En fin de compte, vous devriez vous retrouver avec une section datasource qui re
         </drivers>
     </datasources>
 </subsystem>
-
+``` 
 
 
 ## Clustering
@@ -179,6 +183,7 @@ Il est très important que Keycloak soit capable d'identifier les adresses IP de
 
 Vous devrez configurer le bloc urn: jboss: domain: undertow: 6.0 pour qu'il ressemble à ci-dessous:
 
+``` 
 <subsystem xmlns="urn:jboss:domain:undertow:6.0">
    <buffer-cache name="default"/>
    <server name="default-server">
@@ -188,38 +193,41 @@ Vous devrez configurer le bloc urn: jboss: domain: undertow: 6.0 pour qu'il ress
    </server>
    ...
 </subsystem>
-
+``` 
 
 #### Activer HTTPS avec le reverse proxy
 Si vous avez un reverse proxy en front de Keycloak qui gère les connexions et terminaisons SSL, vous devez apporter les modifications suivantes:
 
 Dans le bloc 'urn:jboss:domain:undertow:6.0' (configuré ci-dessus) changez 'redirect-socket' de 'https' en 'socket-binding' que nous définirons.
 
-
+``` 
 <subsystem xmlns="urn:jboss:domain:undertow:6.0">
     ...
     <http-listener name="default" socket-binding="http"
         proxy-address-forwarding="true" redirect-socket="proxy-https"/>
     ...
 </subsystem>
-
+``` 
 
 Nous allons maintenant devoir ajouter une nouvelle socket-binding à l'élément socket-binding-group, comme ci-dessous:
 
+``` 
 <socket-binding-group name="standard-sockets" default-interface="public"
     port-offset="${jboss.socket.binding.port-offset:0}">
     ...
     <socket-binding name="proxy-https" port="443"/>
     ...
 </socket-binding-group>
-
+``` 
 
 ## Tester le cluster
 Une fois les modifications effectuées sur tous vos serveurs Keycloak, nous pouvons 
 démarrer manuellement les serveurs Keycloak dans n'importe quel ordre. La commande 
 pour ce faire est
 
+``` 
 bin/standalone.sh --server-config = standalone-ha.xml 
+``` 
 
 Les serveurs Keycloak se configureront automatiquement s'ils sont connectés à la même base de données externe, et vous pouvez utiliser votre équilibreur de charge ou reverse proxy pour vous connecter à l'un des serveurs afin d'effectuer des opérations d'authentification.
 
@@ -231,6 +239,7 @@ En supposant que vos tests ont réussi et que vous pouvez accéder directement �
 
 Vous trouverez ci-dessous une copie du fichier unit systemd que vous devez utiliser, qui est à placer dans /etc/systemd/system/keycloak.service:
 
+``` 
 [Unit]
 Description=Keycloak Identity Provider
 After=syslog.target network.target
@@ -246,14 +255,16 @@ ExecStart=/usr/local/keycloak/bin/standalone.sh --server-config=standalone-ha.xm
 #StandardOutput=null
 [Install]
 WantedBy=multi-user.target
+``` 
 
 Une fois cette étape terminée, vous pouvez démarrer et activer le service en exécutant les commandes ci-dessous sur tous vos serveurs Keycloak:
 
-
+``` 
 systemctl enable keycloak
 
 
 systemctl start keycloak
+``` 
 
 
 
