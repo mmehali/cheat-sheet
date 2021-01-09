@@ -21,6 +21,7 @@ plusieurs serveurs.
 ### Installation
 La configuration matérielle requise, ainsi que la structure du répertoire de distribution et les informations sur le mode de fonctionnement 
 sont disponibles à l'adresse :
+
    - https://www.keycloak.org/docs/latest/server_installation/index.html#installation
    
 ### Choix du mode de fonctionnement
@@ -56,14 +57,18 @@ Par exemple, le pilote JDBC de PostgreSQL peut être trouvé ici: https://jdbc.p
 
 #### Packagez le pilote JAR et installez
 La documentation officielle est une bonne ressource pour savoir comment pakager le pilote pour une 
-utilisation avec Keycloak, et il est inutile de dupliquer le mêmes infos ici. Il peut être trouvé ici: https://www.keycloak.org/docs/latest/server_installation/index.html#package-the-jdbc-driver
+utilisation avec Keycloak, et il est inutile de dupliquer le mêmes infos ici. 
+
+Le pilote peut être trouvé ici: https://www.keycloak.org/docs/latest/server_installation/index.html#package-the-jdbc-driver
+
 Cela revient à  ajouter une structure de dossier, à copier le fichier .jar et à ajouter un fichier .xml comme suit:
 
 <?xml version="1.0" ?>
 <module xmlns="urn:jboss:module:1.3" name="org.postgresql">
 
     <resources>
-        <resource-root path="postgresql-9.4.1212.jar"/> <!-- update the filename to match your PostgreSQL JDBC driver file name -->
+        <!-- update the filename to match your PostgreSQL JDBC driver file name -->
+        <resource-root path="postgresql-9.4.1212.jar"/> 
     </resources>
 
     <dependencies>
