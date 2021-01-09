@@ -12,7 +12,7 @@ Le déploiements **standalone** est l'installation d'un serveur unique. C'est bi
 **Standalone-HA** est un ou plusieurs serveurs qui peuvent tous deux être utilisés pour répondre aux demandes d'authentification.
 Cette méthode nécessite une base de données partagée et chaque serveur est configuré manuellement. 
 
-Dans une installation **domain-clustured**, il existe un serveur maître appelé contrôleur de domaine et un ou plusieurs contrôleurs hôtes 
+Dans une installation **domain-clustered**, il existe un serveur maître appelé contrôleur de domaine et un ou plusieurs contrôleurs hôtes 
 qui traitent les demandes d'authentification. Ce mode permet aux contrôleurs hôtes d'avoir tous une configuration mise à jour 
 lorsqu'elle est modifiée sur le contrôleur de domaine, ce qui réduit considérablement la surcharge d'administration avec 
 plusieurs serveurs.
@@ -30,9 +30,11 @@ et la configuration de la plupart des modes est la même, juste dans des fichier
 
 Je suis plus expérimenté avec le mode Standalone-HA, c'est donc ce avec quoi nous allons travailler dans cette série.
 
-La configuration de ce mode se fait dans le fichier de configuration standalone-ha.xml qui se trouve dans $ keycloak_home/standalone/configuration/standalone-ha.xml. 
+La configuration de ce mode se fait dans le fichier de configuration standalone-ha.xml qui se trouve dans :
+ 
+    $ **keycloak_home/standalone/configuration/standalone-ha.xml**
 
-Ce fichier doit être modifié sur tous les serveurs dans une configuration de cluster ha-standalone.
+**Important** : ***Ce fichier doit être modifié sur tous les serveurs dans une configuration de cluster ha-standalone.***
 
 
 ## Configuration de la base de données
@@ -52,7 +54,7 @@ Vous pouvez généralement les trouver sur le site principal de la base de donn�
 
 Par exemple, le pilote JDBC de PostgreSQL peut être trouvé ici: https://jdbc.postgresql.org/download.html
 
-#### Packagez le pilote JAR et installez
+#### Packaging et installation du pilote 
 La documentation officielle est une bonne ressource pour savoir comment pakager le pilote pour une 
 utilisation avec Keycloak, et il est inutile de dupliquer le mêmes infos ici. 
 
