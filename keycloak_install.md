@@ -7,13 +7,12 @@ Il existe trois types de déploiement différents pour Keycloak :
 - Standalone-HA et 
 - Domain Clustered. 
 
-Les déploiements autonomes sont des serveurs uniques, c'est bien pour un environnement de développement ou de test, 
-mais pas très utile pour une utilisation en production. 
+Le déploiements **standalone** est l'installation d'un serveur unique. C'est bien pour un environnement de développement ou de test, mais ce n'est pas très utile pour une utilisation en production. 
 
-Standalone-HA est un ou plusieurs serveurs qui peuvent tous deux être utilisés pour répondre aux demandes d'authentification.
+**Standalone-HA** est un ou plusieurs serveurs qui peuvent tous deux être utilisés pour répondre aux demandes d'authentification.
 Cette méthode nécessite une base de données partagée et chaque serveur est configuré manuellement. 
 
-Dans un déploiement de domaine, il existe un serveur maître appelé contrôleur de domaine et un ou plusieurs contrôleurs hôtes 
+Dans une installation **domain-clustured**, il existe un serveur maître appelé contrôleur de domaine et un ou plusieurs contrôleurs hôtes 
 qui traitent les demandes d'authentification. Ce mode permet aux contrôleurs hôtes d'avoir tous une configuration mise à jour 
 lorsqu'elle est modifiée sur le contrôleur de domaine, ce qui réduit considérablement la surcharge d'administration avec 
 plusieurs serveurs.
@@ -29,11 +28,9 @@ La première chose à laquelle vous devez penser lors du déploiement de Keycloa
 fonctionnement que vous souhaitez utiliser. Cela dépendra principalement de votre environnement, 
 et la configuration de la plupart des modes est la même, juste dans des fichiers différents. 
 
-Je suis plus expérimenté avec le mode Standalone-HA, c'est donc ce avec quoi nous allons travailler 
-dans cette série.
+Je suis plus expérimenté avec le mode Standalone-HA, c'est donc ce avec quoi nous allons travailler dans cette série.
 
-La configuration de ce mode se fait dans le fichier de configuration standalone-ha.xml qui se 
-trouve dans $ keycloak_home/standalone/configuration/standalone-ha.xml. 
+La configuration de ce mode se fait dans le fichier de configuration standalone-ha.xml qui se trouve dans $ keycloak_home/standalone/configuration/standalone-ha.xml. 
 
 Ce fichier doit être modifié sur tous les serveurs dans une configuration de cluster ha-standalone.
 
@@ -47,7 +44,7 @@ La configuration d'une base de données accessible de manière centralisée dép
 Sachez simplement que nous allons utiliser une base de données PostgreSQL hébergée en dehors des deux 
 serveurs Keycloak.
 
-#### Téléchargez un pilote JDBC
+#### Téléchargez le pilote JDBC
 La première étape de la configuration d'une base de données pour Keycloak consiste à télécharger le pilote JDBC pour 
 de la  base de données. Cela permet à keycloak (Java) d'interagir avec la base de données. 
 
