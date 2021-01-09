@@ -1,7 +1,7 @@
 
 Dans ce document, nous allons examiner la mise en place de l'installation de keycloak sur deux serveurs CentOS 7.
 
-### Mode de fonctionnement :
+## Mode de fonctionnement :
 Il existe trois types de déploiement différents pour Keycloak :
 - Standalone
 - Standalone-HA et 
@@ -18,13 +18,13 @@ qui traitent les demandes d'authentification. Ce mode permet aux contrôleurs h�
 lorsqu'elle est modifiée sur le contrôleur de domaine, ce qui réduit considérablement la surcharge d'administration avec 
 plusieurs serveurs.
 
-### Installation
+## Installation
 La configuration matérielle requise, ainsi que la structure du répertoire de distribution et les informations sur le mode de fonctionnement 
 sont disponibles à l'adresse :
 
    - https://www.keycloak.org/docs/latest/server_installation/index.html#installation
    
-### Choix du mode de fonctionnement
+## Choix du mode de fonctionnement
 La première chose à laquelle vous devez penser lors du déploiement de Keycloak est le mode de 
 fonctionnement que vous souhaitez utiliser. Cela dépendra principalement de votre environnement, 
 et la configuration de la plupart des modes est la même, juste dans des fichiers différents. 
@@ -38,7 +38,7 @@ trouve dans $ keycloak_home/standalone/configuration/standalone-ha.xml.
 Ce fichier doit être modifié sur tous les serveurs dans une configuration de cluster ha-standalone.
 
 
-### Configuration de la base de données
+## Configuration de la base de données
 La prochaine chose que nous devons faire est de configurer Keycloak pour utiliser une base de données, 
 puisque nous allons créer un déploiement avec plusieurs serveurs, nous allons avoir besoin d'une base 
 de données partagée. 
@@ -105,7 +105,7 @@ Voici un exemple de pilote instandalone-ha.xml
 Comme nous pouvons le voir, la déclaration du pilote est presque identique à celle du pilote de 
 base de données H2 préconfigurée.
 
-### Modifier la source de données Keycloak
+#### Modifier la source de données Keycloak
 Ci-dessous, nous verrons un exemple de configuration de source de données PostgreSQL fonctionnelle.
 
 
@@ -158,7 +158,7 @@ En fin de compte, vous devriez vous retrouver avec une section datasource qui re
 
 
 
-### Clustering
+## Clustering
 Les étapes ci-dessus permettront une configuration de base d'une base de données partagée, mais pour installer correctement Keycloak en mode cluster, il y a quelques étapes supplémentaires à compléter.
 
 Les sections pertinentes de la documentation Keycloak sont ci-dessous:
@@ -170,7 +170,8 @@ Les sections pertinentes de la documentation Keycloak sont ci-dessous:
 
 Nous avons déjà terminé les étapes 1 et 2 de la configuration d'un cluster. Des configurations supplémentaires sont nécessaires pour les deux opérations suivantes, dont certaines parties sont réparables ici, mais sont couvertes plus en détail dans les liens ci-dessus.
 
-### Configurer un équilibreur de charge
+## Configurer un équilibreur de charge
+
 #### Identification des adresses IP des clients
 
 Il est très important que Keycloak soit capable d'identifier les adresses IP des clients pour diverses raisons, qui sont expliquées plus en détail dans la documentation. Nous allons passer en revue les modifications à apporter dans standalone-ha.xml ici.
@@ -213,7 +214,7 @@ Nous allons maintenant devoir ajouter une nouvelle socket-binding à l'élément
 </socket-binding-group>
 
 
-### Tester le cluster
+## Tester le cluster
 Une fois les modifications effectuées sur tous vos serveurs Keycloak, nous pouvons 
 démarrer manuellement les serveurs Keycloak dans n'importe quel ordre. La commande 
 pour ce faire est
@@ -222,10 +223,10 @@ bin/standalone.sh --server-config = standalone-ha.xml
 
 Les serveurs Keycloak se configureront automatiquement s'ils sont connectés à la même base de données externe, et vous pouvez utiliser votre équilibreur de charge ou reverse proxy pour vous connecter à l'un des serveurs afin d'effectuer des opérations d'authentification.
 
-### Le Pare-feu
+## Le Pare-feu
 Vérifiez que vous avez correctement configuré le pare-feu, Keycloak écoute par défaut sur les ports 8080 et 8443. Il se peut que des ports supplémentaires doivent être ouverts en fonction de votre configuration.
 
-### Lancer keycloak au boot
+## Lancer keycloak au boot
 En supposant que vos tests ont réussi et que vous pouvez accéder directement à vos deux serveurs Keycloak et aussi via votre équilibreur de charge, vous êtes prêt à configurer un fichier unit systemd et à démarrer Keycloak au boot de la machine.
 
 Vous trouverez ci-dessous une copie du fichier unit systemd que vous devez utiliser, qui est à placer dans /etc/systemd/system/keycloak.service:
