@@ -111,16 +111,13 @@ Plus de detail [ici](https://www.keycloak.org/docs/latest/server_installation/in
 
 
 #### Déclarer et charger le pilote
-Cette partie, ainsi que la modification de la source de données sont un peu plus avancées, je vais donc les passer 
-en revue un peu plus en détail ici, mais la documentation est toujours très utile.
 
-Nous allons examiner le fichier 'standalone-ha.xml sur lequel nous travaillions plus tôt, en particulier 
-le bloc XML 'drivers'. 
+Nous allons examiner le fichier **standalone-ha.xml** sur et reperer le tag XML **drivers**. 
 
-Dans ce bloc, nous ajouterons un pilote supplémentaire. Nous pouvons principalement copier le format existant 
-du pilote h2 et mettre à jour les informations concernant PostgreSQL. 
+Dans ce bloc, nous ajouterons un pilote supplémentaire. Nous pouvons principalement copier  
+la configuration existante du pilote h2 et mettre à jour les informations concernant PostgreSQL. 
 
-Voici un exemple de pilote instandalone-ha.xml
+Voici un exemple de pilote **instandalone-ha.xml**
 
 ``` 
 <drivers>
@@ -137,7 +134,7 @@ Voici un exemple de pilote instandalone-ha.xml
 Comme nous pouvons le voir, la déclaration du pilote est presque identique à celle du pilote de 
 base de données H2 préconfigurée.
 
-#### Modifier la source de données Keycloak
+#### Modifier la source de données
 Ci-dessous, nous verrons un exemple de configuration de source de données PostgreSQL fonctionnelle.
 
 ``` 
