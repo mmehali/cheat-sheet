@@ -20,8 +20,6 @@ plusieurs serveurs.
 
 ## Configuration matérielle requise 
 
-Configuration requise
-
 Keycloak peu s'executer sur importe quel système d'exploitation exécutant Java.
 Voici la [configuration matérielle  requise](https://www.keycloak.org/docs/latest/server_installation/index.html#installation) pour un serveur Keycloak:
 
@@ -36,11 +34,11 @@ Voici la [configuration matérielle  requise](https://www.keycloak.org/docs/late
 
 Plus de details sur la configuration matérielle requise sont disponibles [ici](https://www.keycloak.org/docs/latest/server_installation/index.html#installation)
 
-## Structure du répertoire de distribution
+## Structure du répertoire de distribution keycloak.
+
+Keycloak est téléchargable [ici](https://www.keycloak.org/downloads)
 
 Voici la structure des répertoires de la distribution serveur.
-
-Examinons l'objectif de certains des répertoires:
 
 - **bin**: contient divers scripts pour démarrer le serveur ou effectuer des actions de gestion sur le serveur.
 - **domain**: contient les fichiers de configuration et le répertoire de travail lors de l'exécution de Keycloak en **mode domaine**.
