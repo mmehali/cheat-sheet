@@ -17,18 +17,13 @@ qui traitent les demandes d'authentification. Ce mode permet aux contrôleurs h�
 lorsqu'elle est modifiée sur le contrôleur de domaine, ce qui réduit considérablement la surcharge d'administration avec 
 plusieurs serveurs.
 
-## Installation
-La configuration matérielle requise, ainsi que la structure du répertoire de distribution et les informations sur le mode de fonctionnement 
-sont disponibles à l'adresse :
-
-   - https://www.keycloak.org/docs/latest/server_installation/index.html#installation
 
 ## Configuration matérielle requise 
 
 Configuration requise
 
 Keycloak peu s'executer sur importe quel système d'exploitation exécutant Java.
-Voici la configuration matérielle requise pour un serveur Keycloak:
+Voici la [configuration matérielle  requise](https://www.keycloak.org/docs/latest/server_installation/index.html#installation) pour un serveur Keycloak:
 
 - Java 8 JDK
 - zip ou gzip et tar
@@ -38,6 +33,8 @@ Voici la configuration matérielle requise pour un serveur Keycloak:
 - Prise en charge de la multidiffusion réseau sur votre ordinateur si vous souhaitez exécuter dans un cluster. Keycloak peut être mis en cluster sans multidiffusion, mais cela nécessite un tas de changements de configuration. Veuillez consulter la section sur le clustering de ce guide pour plus d'informations.
 
 **Important** Sous Linux, il est recommandé d'utiliser **/dev/urandom** comme source de données aléatoires pour éviter que Keycloak ne se bloque en raison du manque d'entropie disponible, à moins que l'utilisation de **/dev/random** ne soit requise par votre politique de sécurité. Pour ce faire sur Oracle JDK 8 et OpenJDK 8, définissez la propriété système **java.security.egd** au démarrage sur fichier: **/dev/urandom**.
+
+Plus de details sur la configuration matérielle requise sont disponibles [ici](https://www.keycloak.org/docs/latest/server_installation/index.html#installation)
 
 ## Structure du répertoire de distribution
 
