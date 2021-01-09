@@ -163,10 +163,10 @@ Les étapes ci-dessus permettront une configuration de base d'une base de donné
 
 Les sections pertinentes de la documentation Keycloak sont ci-dessous:
 
-- [Choisissez un mode de fonctionnement](https://www.keycloak.org/docs/latest/server_installation/index.html#_operating-mode)
-- [Configurer une base de données externe partagée](https://www.keycloak.org/docs/latest/server_installation/index.html#_database)
-- [Configurer un load balancer](https://www.keycloak.org/docs/latest/server_installation/index.html#_setting-up-a-load-balancer-or-proxy)
-- [Fournir un réseau privé prenant en charge le IP mulcast](https://www.keycloak.org/docs/latest/server_installation/index.html#multicast-network-setup)
+- [1- Choisissez un mode de fonctionnement](https://www.keycloak.org/docs/latest/server_installation/index.html#_operating-mode)
+- [2- Configurer une base de données externe partagée](https://www.keycloak.org/docs/latest/server_installation/index.html#_database)
+- [3- Configurer un load balancer](https://www.keycloak.org/docs/latest/server_installation/index.html#_setting-up-a-load-balancer-or-proxy)
+- [4- Fournir un réseau privé prenant en charge le IP mulcast](https://www.keycloak.org/docs/latest/server_installation/index.html#multicast-network-setup)
 
 Nous avons déjà terminé les étapes 1 et 2 de la configuration d'un cluster. Des configurations supplémentaires sont nécessaires pour les deux opérations suivantes, dont certaines parties sont réparables ici, mais sont couvertes plus en détail dans les liens ci-dessus.
 
