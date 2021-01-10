@@ -50,7 +50,7 @@ de l'utilisateur au service.
 ## Qu'est-ce qu'une affirmation SAML ?
 Une **affirmation SAML** est le document XML que le fournisseur d'identité envoie au fournisseur
 de services et qui contient l'autorisation utilisateur. Il existe trois types différents 
-d'Assertions SAML - authentification, attribut et décision d'autorisation.
+d'Assertions SAML - **authentification, attribut et décision d'autorisation**.
 
 Les **affirmations d'authentification** prouvent l'identification de l'utilisateur et indiquent 
 l'heure à laquelle l'utilisateur s'est connecté et la méthode d'authentification 
@@ -77,3 +77,31 @@ de se connecter qu'une seule fois.
 Chaque fournisseur d'identité et fournisseur de services doit convenir de la configuration de
 SAML. Les deux extrémités doivent avoir la configuration exacte pour que l'authentification
 SAML fonctionne.
+
+
+## Comment fonctionne SAML
+SAML SSO fonctionne en transférant l'**identité de l'utilisateur** du **fournisseur d'identité** au 
+**fournisseur de service**. Cela se fait grâce à un **échange de documents XML signés** numériquement.
+
+Considérez le scénario suivant: Un utilisateur est connecté à un système qui agit en tant que 
+fournisseur d'identité. L'utilisateur souhaite se connecter à une **application distante** (le fournisseur de service).
+
+Ce qui suit se produit:
+
+- L'**utilisateur accède à l'application distante** à l'aide d'un lien sur un intranet, 
+et l'application se charge.
+
+- L'**application** identifie l'origine de l'utilisateur (par sous-domaine d'application, 
+adresse IP de l'utilisateur ou similaire) et **redirige l'utilisateur vers le fournisseur d'identité**, 
+en demandant l'authentification. Il s'agit de la **demande d'authentification**.
+
+- L'**utilisateur** a une session de navigateur active existante avec le fournisseur d'identité 
+ou en établit une en **se connectant au fournisseur d'identité**.
+
+- Le **fournisseur d'identité** crée la **réponse d'authentification** sous la forme d'un 
+document XML contenant le nom d'utilisateur ou l'adresse e-mail de l'utilisateur, 
+**le signe à l'aide d'un certificat X.509** et **publie ces informations** auprès du **fournisseur de services**.
+
+- Le **fournisseur de services**, qui connaît déjà le fournisseur d'identité et possède une **empreinte de certificat**, **récupère la réponse** d'authentification et **la valide** à l'aide de l'empreinte de certificat.
+
+L'identité de l'utilisateur est établie et l'utilisateur a accès à l'application.
