@@ -104,4 +104,34 @@ document XML contenant le nom d'utilisateur ou l'adresse e-mail de l'utilisateur
 
 - Le **fournisseur de services**, qui connaît déjà le fournisseur d'identité et possède une **empreinte de certificat**, **récupère la réponse** d'authentification et **la valide** à l'aide de l'empreinte de certificat.
 
-L'identité de l'utilisateur est établie et l'utilisateur a accès à l'application.
+- L'identité de l'utilisateur est établie et l'utilisateur a accès à l'application.
+
+##illustration par l’exemple
+Prenons maintenant le cas simple d’une entreprise utilisant un proxy dans le nuage 
+comme ceux des solutions décrites dans cet article. Supposons que l’entreprise de 
+cet utilisateur dispose d’une solution de Single Sign On basée sur SAML dans un 
+datacenter et illustrons ce qui se passe quand un utilisateur veut accéder à un site 
+Internet en s’authentifiant à l’aide du protocole SAML.
+
+Lorsqu’une requête d’authentification arrive sur le proxy Cloud, celui-ci 
+examine les règles de sécurité et cherche à savoir si l’utilisateur peut 
+accéder au site demandé. Le SP regarde si le navigateur possède un cookie 
+d’authentification. Si le cookie d’authentification est déjà présent, l’utilisateur 
+est identifié et la politique de sécurité est appliquée en fonction du profil et 
+des droits de l’utilisateur.
+
+Si le SP ne trouve pas de cookie, une **requête d’authentification** est créée et 
+le processus d’authentification débute. Les flux passent par l’intermédiaire du 
+navigateur à l’intérieur de la même session et sont adressés à l’IdP.
+
+L’IdP vérifie les paramètres de l’utilisateur en interrogeant l’annuaire 
+de l’entreprise et récupère les paramètres liés à l’utilisateur. Il forge avec 
+tout cela l’**assertion SAML**.
+
+Une fois l’authentification finalisée, l’information provenant de l’**assertion SAML** 
+est stockée de façon sécurisée dans un cookie pour le domaine visité. L’accès au domaine 
+est accordé selon la requête d’origine de l’utilisateur et le cookie est stocké dans 
+le navigateur en accord avec la politique de sécurité définie par l’administrateur. 
+L’assertion sera valide jusqu’à l’expiration du cookie. Celui-ci peut être supprimé à 
+l’expiration de la session, à l’issu d’un délai ou être permanent.
+
