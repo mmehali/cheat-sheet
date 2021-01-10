@@ -106,7 +106,7 @@ document XML contenant le nom d'utilisateur ou l'adresse e-mail de l'utilisateur
 
 - L'identité de l'utilisateur est établie et l'utilisateur a accès à l'application.
 
-##illustration par l’exemple
+## Illustration par l’exemple
 Prenons maintenant le cas simple d’une entreprise utilisant un proxy dans le nuage 
 comme ceux des solutions décrites dans cet article. Supposons que l’entreprise de 
 cet utilisateur dispose d’une solution de Single Sign On basée sur SAML dans un 
