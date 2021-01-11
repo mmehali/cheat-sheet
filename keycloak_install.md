@@ -223,7 +223,7 @@ Au-delà de la configuration du proxy lui-même décrité [ici](https://www.keyc
 Si votre proxy transfère les demandes via le protocole HTTP, vous devez configurer Keycloak pour extraire l’adresse IP 
 du client de l’en-tête **X-Forwarded-For** plutôt que du paquet réseau. Pour ce faire, ouvrez le fichier de configuration du profil  **standalone-ha.xml** et recherchez le bloc XML urn:jboss:domain:undertow:11.0.
 
-Vous devrez configurer le bloc urn:jboss:domain:undertow:11.0 pour qu'il ressemble à ci-dessous:
+Vous devrez configurer le bloc **urn:jboss:domain:undertow:11.0** pour qu'il ressemble à ci-dessous:
 
 ``` 
 <subsystem xmlns="urn:jboss:domain:undertow:11.0">
@@ -236,12 +236,13 @@ Vous devrez configurer le bloc urn:jboss:domain:undertow:11.0 pour qu'il ressemb
    ...
 </subsystem>
 ``` 
+Nous avons ajouté l'attribut **proxy-address-forwarding** à l'élément **http-listener** et initilialisé sa valeur à **true**.
 
 #### Activer HTTPS avec le reverse proxy
-Si vous avez un reverse proxy en front de Keycloak qui gère les connexions et terminaisons SSL, vous devez apporter les modifications suivantes:
+Si vous avez un reverse proxy en front de Keycloak qui gère les connexions et terminaisons SSL mais qui utilise un port autre 
+que 8443, par exemple 443, vous devez apporter les modifications suivantes:
 
-Dans le bloc 'urn:jboss:domain:undertow:11.0' (configuré ci-dessus) changez la valeur de **redirect-socket** de **https** à **socket-binding** 
-que nous devons définir.
+Dans le bloc 'urn:jboss:domain:undertow:11.0' (configuré ci-dessus) changez la valeur de **redirect-socket** de **https** à **socket-binding** que nous devons définir.
 
 ``` 
 <subsystem xmlns="urn:jboss:domain:undertow:6.0">
@@ -252,7 +253,7 @@ que nous devons définir.
 </subsystem>
 ``` 
 
-Nous allons maintenant devoir ajouter une nouvelle **socket-binding** à l'élément **socket-binding-group**, comme ci-dessous:
+Nous allons maintenant définit ajouter un nouveau élément **socket-binding** à l'élément **socket-binding-group**, comme ci-dessous:
 
 ``` 
 <socket-binding-group name="standard-sockets" default-interface="public"
@@ -264,15 +265,36 @@ Nous allons maintenant devoir ajouter une nouvelle **socket-binding** à l'élé
 ``` 
 
 ## Tester le cluster
-Une fois les modifications effectuées sur tous vos serveurs Keycloak, nous pouvons 
-démarrer manuellement les serveurs Keycloak dans n'importe quel ordre. La commande 
-pour ce faire est
+Une fois les modifications effectuées sur tous vos serveurs Keycloak, nous pouvons demarrer et tester le cluster.
+
+#### Démarage du cluster
+Démarrer manuellement les serveurs Keycloak dans n'importe quel ordre. La commande 
+pour ce faire est la suivante :
 
 ``` 
 bin/standalone.sh --server-config=standalone-ha.xml 
 ``` 
+Les serveurs Keycloak se configureront automatiquement s'ils sont connectés à la même base de données externe, et vous pouvez utiliser votre load Balancer ou reverse proxy pour vous connecter à l'un des serveurs afin d'effectuer des opérations d'authentification.
 
-Les serveurs Keycloak se configureront automatiquement s'ils sont connectés à la même base de données externe, et vous pouvez utiliser votre équilibreur de charge ou reverse proxy pour vous connecter à l'un des serveurs afin d'effectuer des opérations d'authentification.
+#### Verification du fonctionement du reverse proxy ou du LB
+Vous pouvez vérifier la configuration du reverse proxy ou du load balancer en ouvrant l'URL 
+```
+https://host_et_port_du_proxy_ou_du_LB/auth/realms/master/.well-known/openid-configuration. 
+```
+Cela affichera un document JSON répertoriant un certain nombre de endpoints Keycloak. 
+Assurez-vous que les endoints commencent par l'adresse (schéma, domaine et port) de votre reverse proxy ou du load balancer. 
+En faisant cela, vous vous assurez que Keycloak utilise les bons endpoints.
+
+#### Verification de l'adresse IP du client
+Vous devez aussi vérifier que Keycloak voit l'adresse IP source correcte de la machine cliente 
+à partir de laquelle les demandes sont effectuées. Pour vérifier cela, vous pouvez essayer de vous 
+connecter à la console d'administration avec un nom d'utilisateur et/ou un mot de passe invalides. 
+Cela devrait afficher un WARN dans le log du serveur. Ce WARN continent une une valeur du génre :
+````
+ipAddress=X.X.X.X,
+````
+Vérifiez que la valeur X.X.X.X est l'adresse IP de la machine avec laquelle vous êtes connecté 
+et non l'adresse IP du reverse proxy ou du load Balancer
 
 ## Le Pare-feu
 Vérifiez que vous avez correctement configuré le pare-feu, Keycloak écoute par défaut sur les ports 8080 et 8443. Il se peut que des ports supplémentaires doivent être ouverts en fonction de votre configuration.
