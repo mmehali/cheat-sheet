@@ -56,8 +56,8 @@ et la configuration de la plupart des modes est la même, juste dans des fichier
 Je suis plus expérimenté avec le mode Standalone-HA, c'est donc ce avec quoi nous allons travailler dans cette série.
 
 La configuration de ce mode se fait dans le fichier de configuration standalone-ha.xml qui se trouve dans :
- 
-    $ **keycloak_home/standalone/configuration/standalone-ha.xml**
+    
+    $keycloak_home/standalone/configuration/standalone-ha.xml
 
 **Important** : ***Ce fichier doit être modifié sur tous les serveurs dans une configuration de cluster ha-standalone.***
 
@@ -73,11 +73,9 @@ serveurs Keycloak.
 
 #### Téléchargez le pilote JDBC
 La première étape de la configuration d'une base de données pour Keycloak consiste à télécharger le pilote JDBC pour 
-de la  base de données. Cela permet à keycloak (Java) d'interagir avec la base de données. 
+de la  base de données. Cela permet à keycloak (Java) d'interagir avec cette dernière. 
 
-Vous pouvez généralement les trouver sur le site principal de la base de données de votre choix. 
-
-Par exemple, le pilote JDBC de PostgreSQL peut être trouvé ici: https://jdbc.postgresql.org/download.html
+Le pilote JDBC de PostgreSQL peut être trouvé ici: https://jdbc.postgresql.org/download.html
 
 #### Packaging et installation du pilote.
 
@@ -87,7 +85,7 @@ Ils sont assez simples à mettre en place.
 
 Dans le répertoire **/modules/system/layers/keycloak** de votre distribution Keycloak, vous devez créer une structure 
 de répertoires pour contenir la définition de votre module. 
-La convention consiste à utiliser le nom de package Java du pilote JDBC comme nom de la structure de répertoires. Pour PostgreSQL vous devez :
+La convention consiste à utiliser le nom du package Java du pilote JDBC comme nom de la structure de répertoires. Pour PostgreSQL vous devez :
  - créez le répertoire **org/postgresql/main**. 
  - Copiez le JAR du pilote de base de données dans ce répertoire 
  - créez également un fichier **module.xml** vide.
@@ -112,7 +110,7 @@ Plus de detail [ici](https://www.keycloak.org/docs/latest/server_installation/in
 
 #### Déclarer et charger le pilote
 
-Nous allons examiner le fichier **standalone-ha.xml** sur et reperer le tag XML **drivers**. 
+Nous allons ouvir le fichier **standalone-ha.xml** et reperer le tag XML **drivers**. 
 
 Dans ce bloc, nous ajouterons un pilote supplémentaire. Nous pouvons principalement copier  
 la configuration existante du pilote h2 et mettre à jour les informations concernant PostgreSQL. 
@@ -150,8 +148,6 @@ Ci-dessous, nous verrons un exemple de configuration de source de données Postg
     </security>
 </datasource>
 ``` 
-
-
 
 - $URL = L'URL ou l'adresse IP du serveur PostgreSQL
 - $PORT = Le port de la la base de données PostgreSQL
@@ -197,21 +193,40 @@ Les sections pertinentes de la documentation Keycloak sont ci-dessous:
 - [1- Choisissez un mode de fonctionnement](https://www.keycloak.org/docs/latest/server_installation/index.html#_operating-mode)
 - [2- Configurer une base de données externe partagée](https://www.keycloak.org/docs/latest/server_installation/index.html#_database)
 - [3- Configurer un load balancer](https://www.keycloak.org/docs/latest/server_installation/index.html#_setting-up-a-load-balancer-or-proxy)
-- [4- Fournir un réseau privé prenant en charge le IP mulcast](https://www.keycloak.org/docs/latest/server_installation/index.html#multicast-network-setup)
+- [4- Fournir un réseau privé prenant en charge le IP mulicast](https://www.keycloak.org/docs/latest/server_installation/index.html#multicast-network-setup)
 
-Nous avons déjà terminé les étapes 1 et 2 de la configuration d'un cluster. Des configurations supplémentaires sont nécessaires pour les deux opérations suivantes, dont certaines parties sont réparables ici, mais sont couvertes plus en détail dans les liens ci-dessus.
+Nous avons déjà terminé les étapes 1 et 2 de la configuration d'un cluster. Des configurations supplémentaires sont nécessaires pour les deux opérations suivantes, dont certaines parties sont ici, mais sont couvertes plus en détail dans les liens ci-dessus.
 
-## Configurer un équilibreur de charge
+## Configurer le load balancer
 
 #### Identification des adresses IP des clients
 
-Il est très important que Keycloak soit capable d'identifier les adresses IP des clients pour diverses raisons, qui sont expliquées plus en détail dans la documentation. Nous allons passer en revue les modifications à apporter dans standalone-ha.xml ici.
+Il est très important que Keycloak soit capable d'identifier les adresses IP des clients pour diverses raisons, qui sont expliquées plus en détail dans la [documentation](https://www.keycloak.org/docs/latest/server_installation/index.html#identifying-client-ip-addresses).
 
+Quelques fonctionnalités de Keycloak reposent sur le fait que l'adresse distante du client HTTP se connectant au serveur d'authentification est la véritable adresse IP de la machine cliente. Les exemples comprennent:
+  - Journaux d'événements - une tentative de connexion échouée serait enregistrée avec la mauvaise adresse IP source
+  - SSL requis - si le SSL requis est défini sur externe (par défaut), il doit exiger SSL pour toutes les demandes externes
+  - Flux d'authentification - un flux d'authentification personnalisé qui utilise l'adresse IP pour, par exemple, afficher OTP uniquement pour les demandes externes
+  - Inscription client dynamique.
+  
+Cela peut être problématique lorsque vous avez un reverse proxy ou un laod balancer devant votre serveur d'authentification Keycloak. 
+La configuration habituelle est que vous avez un proxy frontal se situant sur un réseau public qui équilibre la charge et transmet les  demandes aux instances de serveur principal Keycloak situées dans un réseau privé. Vous devez effectuer une configuration supplémentaire dans ce scénario pour que l'adresse IP réelle du client soit transmise et traitée par les instances de serveur Keycloak. 
+Plus précisément:
 
-Vous devrez configurer le bloc urn: jboss: domain: undertow: 6.0 pour qu'il ressemble à ci-dessous:
+ - Configurez votre reverse proxy ou votre Load balancer pour définir correctement les en-têtes **HTTP X-Forwarded-For** et **X-Forwarded-Proto**.
+- Configurez votre reverse proxy ou votre Load balancer pour conserver l'en-tête HTTP **Host** d'origine.
+- Configurez le serveur d'authentification pour lire l'adresse IP du client à partir de l'en-tête **X-Forwarded-For**.
+
+La configuration de votre proxy pour générer les en-têtes HTTP **X-Forwarded-For** et **X-Forwarded-Proto** et la préservation de l'en-tête HTTP **Host** d'origine sortent du cadre de ce guide. Prenez des précautions supplémentaires pour vous assurer que l'en-tête X-Forwarded-For est défini par votre proxy. Si votre proxy n'est pas configuré correctement, les clients non fiables peuvent définir cet en-tête eux-mêmes et faire croire à Keycloak que le client se connecte à partir d'une adresse IP différente de celle qu'elle est réellement. Cela devient vraiment important si vous effectuez une liste blanche (ou noir) d'adresses IP.
+
+Au-delà de la configuration du proxy lui-même décrité [ici](https://www.keycloak.org/docs/latest/server_installation/index.html#identifying-client-ip-addresses), il y a quelques éléments que vous devez configurer du côté de Keycloak. 
+Si votre proxy transfère les demandes via le protocole HTTP, vous devez configurer Keycloak pour extraire l’adresse IP 
+du client de l’en-tête **X-Forwarded-For** plutôt que du paquet réseau. Pour ce faire, ouvrez le fichier de configuration du profil  **standalone-ha.xml** et recherchez le bloc XML urn:jboss:domain:undertow:11.0.
+
+Vous devrez configurer le bloc urn:jboss:domain:undertow:11.0 pour qu'il ressemble à ci-dessous:
 
 ``` 
-<subsystem xmlns="urn:jboss:domain:undertow:6.0">
+<subsystem xmlns="urn:jboss:domain:undertow:11.0">
    <buffer-cache name="default"/>
    <server name="default-server">
       <ajp-listener name="ajp" socket-binding="ajp"/>
@@ -225,7 +240,8 @@ Vous devrez configurer le bloc urn: jboss: domain: undertow: 6.0 pour qu'il ress
 #### Activer HTTPS avec le reverse proxy
 Si vous avez un reverse proxy en front de Keycloak qui gère les connexions et terminaisons SSL, vous devez apporter les modifications suivantes:
 
-Dans le bloc 'urn:jboss:domain:undertow:6.0' (configuré ci-dessus) changez 'redirect-socket' de 'https' en 'socket-binding' que nous définirons.
+Dans le bloc 'urn:jboss:domain:undertow:11.0' (configuré ci-dessus) changez la valeur de **redirect-socket** de **https** à **socket-binding** 
+que nous devons définir.
 
 ``` 
 <subsystem xmlns="urn:jboss:domain:undertow:6.0">
@@ -236,7 +252,7 @@ Dans le bloc 'urn:jboss:domain:undertow:6.0' (configuré ci-dessus) changez 'red
 </subsystem>
 ``` 
 
-Nous allons maintenant devoir ajouter une nouvelle socket-binding à l'élément socket-binding-group, comme ci-dessous:
+Nous allons maintenant devoir ajouter une nouvelle **socket-binding** à l'élément **socket-binding-group**, comme ci-dessous:
 
 ``` 
 <socket-binding-group name="standard-sockets" default-interface="public"
@@ -253,7 +269,7 @@ démarrer manuellement les serveurs Keycloak dans n'importe quel ordre. La comma
 pour ce faire est
 
 ``` 
-bin/standalone.sh --server-config = standalone-ha.xml 
+bin/standalone.sh --server-config=standalone-ha.xml 
 ``` 
 
 Les serveurs Keycloak se configureront automatiquement s'ils sont connectés à la même base de données externe, et vous pouvez utiliser votre équilibreur de charge ou reverse proxy pour vous connecter à l'un des serveurs afin d'effectuer des opérations d'authentification.
