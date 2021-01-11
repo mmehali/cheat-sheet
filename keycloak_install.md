@@ -411,7 +411,7 @@ les nœuds du cluster; il est également illimité par défaut. Cependant, ce ca
 de mémoire car les entrées de ce cache sont de très courte durée.
 
 
-Réplication et basculement
+Réplication et Failover (basculement)
 
 Il existe des caches comme les **sessions, authenticationSessions, offlineSessions, loginFailures** et quelques autres (voir Eviction et expiration pour plus de détails), qui sont configurés comme des caches distribués lors de l'utilisation d'une configuration en cluster. 
 Les entrées ne sont pas répliquées sur chaque nœud, mais à la place, un ou plusieurs nœuds sont choisis comme propriétaire de ces données. Si un nœud n'est pas le propriétaire d'une entrée de cache spécifique, il interroge le cluster pour l'obtenir. Ce que cela signifie pour le basculement, c'est que si tous les nœuds qui possèdent un élément de données tombent en panne, ces données sont perdues à jamais. Par défaut, Keycloak ne spécifie qu'un seul propriétaire pour les données. Donc, si ce nœud tombe en panne, les données sont perdues. Cela signifie généralement que les utilisateurs seront déconnectés et devront se reconnecter.
@@ -442,6 +442,12 @@ Voici à quoi ressemble la configuration au départ.
  Pour désactiver le cache, définissez l'attribut enabled sur false pour le cache que vous souhaitez désactiver.
  Vous devez redémarrer votre serveur pour que cette modification prenne effet.
  
+
+### Effacer les caches pendant l'exécution (Exploitation)
+Pour vider le cache du realms ou des utilisateurs, accédez à la page **Realm Settings>Configuration du cache** de la console d'administration Keycloak. Sur cette page, vous pouvez vider le cache du realm, le cache des utilisateusr ou le cache des 
+clés publiques externes.
+
+
 
 
 
