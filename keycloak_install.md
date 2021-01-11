@@ -300,9 +300,12 @@ et non l'adresse IP du reverse proxy ou du load Balancer
 Vérifiez que vous avez correctement configuré le pare-feu, Keycloak écoute par défaut sur les ports 8080 et 8443. Il se peut que des ports supplémentaires doivent être ouverts en fonction de votre configuration.
 
 ## Lancer keycloak au boot
-En supposant que vos tests ont réussi et que vous pouvez accéder directement à vos deux serveurs Keycloak et aussi via votre équilibreur de charge, vous êtes prêt à configurer un fichier unit systemd et à démarrer Keycloak au boot de la machine.
+En supposant que vos tests ont réussi et que vous pouvez accéder directement à vos deux serveurs Keycloak et 
+aussi via votre load balancer, vous êtes prêt à configurer un fichier unité systemd et à démarrer Keycloak 
+au boot de la machine.
 
-Vous trouverez ci-dessous une copie du fichier unit systemd que vous devez utiliser, qui est à placer dans /etc/systemd/system/keycloak.service:
+Vous trouverez ci-dessous une copie du fichier d'unité systemd que vous devez utiliser, qui est 
+à placer dans /etc/systemd/system/keycloak.service:
 
 ``` 
 [Unit]
@@ -330,6 +333,116 @@ systemctl enable keycloak
 
 systemctl start keycloak
 ``` 
+
+## Configuration du cache (exploitation)
+Keycloak dispose de deux types de caches :
+- **Cache de base de données** : c'est un cache qui se trouve entre keycloak et la base de données. 
+  Il permet de réduire la charge sur la base de données ainsi que les temps de réponse globaux 
+  en conservant les données en mémoire. Les métadonnées des realms, des clients, des rôles et 
+  des utilisateurs sont conservées dans ce type de cache. 
+  Ce cache est un cache local. Les caches locaux n'utilisent pas la réplication même si le cluster
+  contient plusieurs serveur keycloak. Au lieu de cela, 
+  ils ne conservent que des copies localement et si l'entrée est mise à jour, un message 
+  d'invalidation est envoyé au reste du cluster et l'entrée est supprimée du cahce. 
+  Cela réduit considérablement le trafic réseau, rend les 
+  choses efficaces et évite de transmettre des métadonnées sensibles sur le réseau.
+
+- **Cache de session**: c'est un cache qui gère les sessions utilisateur, les jetons hors ligne et 
+le suivi des échecs de connexion afin que le serveur puisse détecter le phishing par mot de passe 
+et d'autres attaques. Les données conservées dans ces caches sont temporaires, en mémoire uniquement, 
+mais peuvent être répliquées dans le cluster.
+
+Cette section décrit certaines options de configuration de ces caches pour les déploiements en cluster.
+
+Eviction et expiration
+
+Il existe plusieurs caches différents configurés pour Keycloak. 
+- un **cache de Realms** contenant des informations sur les applications sécurisées, 
+les données de sécurité générales et les options de configuration. 
+- un **cache des utilisateurs** contenant les métadonnées des utilisateurs. 
+
+Les deux caches ont par défaut un maximum de 10000 entrées et utilisent une stratégie d'eviction du moins récemment utilisée. 
+Chacun d'eux est également lié à :
+- un **cache de révisions** d'objets qui contrôle l'eviction dans une configuration en cluster. 
+Ce cache est créé implicitement et a deux fois la taille configurée. 
+Il en va de même pour le **cache d'autorisation**, qui contient les données d'autorisation. 
+- Le **cache de clés** contient des données sur les clés externes et n'a pas besoin d'avoir un cache de révisions dédié. 
+Au contraire, l'expiration est explicitement déclarée dessus, de sorte que les clés sont périodiquement expirées et 
+forcées d'être téléchargées périodiquement à partir de clients externes ou de fournisseurs d'identité.
+
+La stratégie d'éviction et les entrées max pour ces caches peuvent être configurées dans **standalone-ha.xml**. Dans le 
+fichier de configuration, il y a la partie avec le sous-système infinispan, qui ressemble à ceci:
+```
+<subsystem xmlns="urn:jboss:domain:infinispan:11.0">
+    <cache-container name="keycloak">
+        <local-cache name="realms">
+            <object-memory size="10000"/>
+        </local-cache>
+        <local-cache name="users">
+            <object-memory size="10000"/>
+        </local-cache>
+        ...
+        <local-cache name="keys">
+            <object-memory size="1000"/>
+            <expiration max-idle="3600000"/>
+        </local-cache>
+        ...
+    </cache-container>
+```
+
+Pour limiter ou augmenter le nombre d'entrées autorisées, ajoutez ou modifiez simplement l'élément objet ou 
+l'élément d'expiration d'une configuration de cache particulière.
+
+En outre, il existe également des  de caches distinctes, **clientSessions**, **offlineSessions**, **offlineClientSessions**, **loginFailures** et **actionTokens**. Ces caches sont **distribués** dans un environnement de cluster et leur **taille est illimitée** 
+par défaut. Si elles sont limitées, il serait alors possible que certaines sessions soient perdues. Les sessions expirées sont effacées en interne par Keycloak lui-même pour éviter d'augmenter la taille de ces caches sans limite. Si vous constatez des problèmes de mémoire dus à un grand nombre de sessions, vous pouvez essayer de:
+
+  - Augmenter la taille du cluster (plus de nœuds dans le cluster signifie que les sessions sont réparties 
+    de manière plus égale entre les nœuds)
+  - Augmentez la mémoire pour le processus du serveur Keycloak
+  - Diminuez le nombre de propriétaires pour vous assurer que les caches sont enregistrés au même endroit. 
+    Voir Réplication et basculement pour plus de détails
+  - Désactivez l1-lifespan pour les caches distribués. Voir la documentation Infinispan pour plus de détails
+  - Diminuez les délais d'expiration des sessions, ce qui peut être fait individuellement pour chaque relm dans 
+    la console d'administration Keycloak. Mais cela pourrait affecter la convivialité pour les utilisateurs finaux. 
+    Voir Délais d'expiration pour plus de détails.
+
+Il existe un cache répliqué supplémentaire, **work**, qui est principalement utilisé pour envoyer des messages entre 
+les nœuds du cluster; il est également illimité par défaut. Cependant, ce cache ne devrait pas causer de problèmes 
+de mémoire car les entrées de ce cache sont de très courte durée.
+
+
+Réplication et basculement
+
+Il existe des caches comme les **sessions, authenticationSessions, offlineSessions, loginFailures** et quelques autres (voir Eviction et expiration pour plus de détails), qui sont configurés comme des caches distribués lors de l'utilisation d'une configuration en cluster. 
+Les entrées ne sont pas répliquées sur chaque nœud, mais à la place, un ou plusieurs nœuds sont choisis comme propriétaire de ces données. Si un nœud n'est pas le propriétaire d'une entrée de cache spécifique, il interroge le cluster pour l'obtenir. Ce que cela signifie pour le basculement, c'est que si tous les nœuds qui possèdent un élément de données tombent en panne, ces données sont perdues à jamais. Par défaut, Keycloak ne spécifie qu'un seul propriétaire pour les données. Donc, si ce nœud tombe en panne, les données sont perdues. Cela signifie généralement que les utilisateurs seront déconnectés et devront se reconnecter.
+
+Vous pouvez modifier le nombre de nœuds qui répliquent un élément de données en modifiant l'attribut owner dans la déclaration de cache distribué.
+
+```
+<subsystem xmlns="urn:jboss:domain:infinispan:11.0">
+   <cache-container name="keycloak">
+       <distributed-cache name="sessions" owners="2"/>
+       ....
+```
+Ici, nous l'avons modifié afin qu'au moins deux nœuds répliquent une session de connexion utilisateur spécifique.
+
+
+### Désactiver la mise en cache (exploitation)
+Pour désactiver le cache du domaine ou de l'utilisateur, vous devez modifier le fichier standalone-ha.xml.
+Voici à quoi ressemble la configuration au départ.
+```
+ <spi name="userCache">
+        <provider name="default" enabled="true"/>
+    </spi>
+
+    <spi name="realmCache">
+        <provider name="default" enabled="true"/>
+    </spi>
+ ```
+ Pour désactiver le cache, définissez l'attribut enabled sur false pour le cache que vous souhaitez désactiver.
+ Vous devez redémarrer votre serveur pour que cette modification prenne effet.
+ 
+
 
 
 
