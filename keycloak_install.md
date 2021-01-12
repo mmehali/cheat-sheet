@@ -1,26 +1,25 @@
 
 Dans ce document, nous allons examiner la mise en place de l'installation de keycloak sur deux serveurs CentOS 7.
-
+# Introcuction
 ## Mode de fonctionnement :
-Il existe trois types de déploiement différents pour Keycloak :
+Il existe trois modes différents d'installation de Keycloak :
 - Standalone
 - Standalone-HA et 
 - Domain Clustered. 
 
-Le déploiements **standalone** est l'installation d'un serveur unique. C'est bien pour un environnement de développement ou de test, mais ce n'est pas très utile pour une utilisation en production. 
+Le mode de déploiment **standalone** consiste en l'installation d'un serveur unique. C'est bien pour un environnement de développement ou de test, mais ce n'est pas conseillé pour une instalation en production. 
 
-**Standalone-HA** est un ou plusieurs serveurs qui peuvent tous deux être utilisés pour répondre aux demandes d'authentification.
+Le mode de déploiment **Standalone-HA** consiste en l'instalation d'un ou de plusieurs serveurs qui peuvent tous deux être utilisés pour répondre aux demandes d'authentification.
 Cette méthode nécessite une base de données partagée et chaque serveur est configuré manuellement. 
 
-Dans une installation **domain-clustered**, il existe un serveur maître appelé contrôleur de domaine et un ou plusieurs contrôleurs hôtes 
-qui traitent les demandes d'authentification. Ce mode permet aux contrôleurs hôtes d'avoir tous une configuration mise à jour 
-lorsqu'elle est modifiée sur le contrôleur de domaine, ce qui réduit considérablement la surcharge d'administration avec 
-plusieurs serveurs.
-
+Dans une installation **domain-clustered**, il existe un serveur maître appelé contrôleur de domaine et un ou 
+plusieurs contrôleurs hôtes qui traitent les demandes d'authentification. Ce mode permet aux contrôleurs hôtes 
+d'avoir tous une configuration mise à jour lorsqu'elle est modifiée sur le contrôleur de domaine, ce qui réduit 
+considérablement la surcharge d'administration avec plusieurs serveurs.
 
 ## Configuration matérielle requise 
 
-Keycloak peu s'executer sur importe quel système d'exploitation exécutant Java.
+Keycloak peut s'executer sur importe quel système d'exploitation exécutant Java.
 Voici la [configuration matérielle  requise](https://www.keycloak.org/docs/latest/server_installation/index.html#installation) pour un serveur Keycloak:
 
 - Java 8 JDK
@@ -30,7 +29,7 @@ Voici la [configuration matérielle  requise](https://www.keycloak.org/docs/late
 - Une **base de données externe** partagée comme PostgreSQL, MySQL, Oracle, etc: Keycloak nécessite une base de données partagée externe si vous souhaitez exécuter dans un cluster. Veuillez consulter la section de configuration de la base de données de ce guide pour plus d'informations.
 - Prise en charge de la multidiffusion réseau sur votre ordinateur si vous souhaitez exécuter dans un cluster. Keycloak peut être mis en cluster sans multidiffusion, mais cela nécessite un tas de changements de configuration. Veuillez consulter la section sur le clustering de ce guide pour plus d'informations.
 
-**Important** Sous Linux, il est recommandé d'utiliser **/dev/urandom** comme source de données aléatoires pour éviter que Keycloak ne se bloque en raison du manque d'entropie disponible, à moins que l'utilisation de **/dev/random** ne soit requise par votre politique de sécurité. Pour ce faire sur Oracle JDK 8 et OpenJDK 8, définissez la propriété système **java.security.egd** au démarrage sur fichier: **/dev/urandom**.
+**Important** Sous Linux, il est recommandé d'utiliser **/dev/urandom** comme source de données aléatoires pour éviter que Keycloak ne se bloque quand l’activité du système (entropie) n’est pas suffisante (cf [wikepedia]( https://fr.wikipedia.org/wiki//dev/random). Sur Oracle JDK 8 et OpenJDK 8, ceci peut être effectué en définissant la propriété système java.security.egd au démarrage de keycloak sur fichier: **/dev/urandom** de la façon suivante :
 
 Plus de details sur la configuration matérielle requise sont disponibles [ici](https://www.keycloak.org/docs/latest/server_installation/index.html#installation)
 
@@ -47,6 +46,7 @@ Voici la structure des répertoires de la distribution serveur.
 - **standalone/deployments**: contient les extensions de keycloak par des tiers, vous pouvez placer vos extensions ici. *Consultez le Guide du développeur de serveur pour plus d'informations à ce sujet*.
 - **themes**: contient tous les html, feuilles de style, fichiers JavaScript et images utilisés pour afficher tout écran d'interface utilisateur affiché par le serveur. Ici, vous pouvez modifier un thème existant ou créer le vôtre. *Consultez le Guide du développeur de serveur pour plus d'informations à ce sujet*.
 
+# Choix  du mode d'installation et configuration 
 
 ## Choix du mode de fonctionnement
 La première chose à laquelle vous devez penser lors du déploiement de Keycloak est le mode de 
