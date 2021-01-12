@@ -20,7 +20,7 @@ considérablement la surcharge d'administration avec plusieurs serveurs.
 ## Configuration matérielle requise 
 
 Keycloak peut s'executer sur importe quel système d'exploitation exécutant Java.
-Voici la [configuration matérielle  requise](https://www.keycloak.org/docs/latest/server_installation/index.html#installation) pour un serveur Keycloak:
+Voici la configuration matérielle minimale requise pour un serveur Keycloak:
 
 - Java 8 JDK
 - zip ou gzip et tar
@@ -29,7 +29,7 @@ Voici la [configuration matérielle  requise](https://www.keycloak.org/docs/late
 - Une **base de données externe** partagée comme PostgreSQL, MySQL, Oracle, etc: Keycloak nécessite une base de données partagée externe si vous souhaitez exécuter dans un cluster. Veuillez consulter la section de configuration de la base de données de ce guide pour plus d'informations.
 - Prise en charge de la multidiffusion réseau sur votre ordinateur si vous souhaitez exécuter dans un cluster. Keycloak peut être mis en cluster sans multidiffusion, mais cela nécessite un tas de changements de configuration. Veuillez consulter la section sur le clustering de ce guide pour plus d'informations.
 
-**Important** Sous Linux, il est recommandé d'utiliser **/dev/urandom** comme source de données aléatoires pour éviter que Keycloak ne se bloque quand l’activité du système (entropie) n’est pas suffisante (cf [wikepedia]( https://fr.wikipedia.org/wiki//dev/random). Sur Oracle JDK 8 et OpenJDK 8, ceci peut être effectué en définissant la propriété système java.security.egd au démarrage de keycloak sur fichier: **/dev/urandom** de la façon suivante :
+**Important** Sous Linux, il est recommandé d'utiliser **/dev/urandom** comme source de données aléatoires pour éviter que Keycloak ne se bloque quand l’activité du système (entropie) n’est pas suffisante (cf [wikepedia](https://fr.wikipedia.org/wiki//dev/random)). Sur Oracle JDK 8 et OpenJDK 8, ceci peut être effectué en définissant la propriété système java.security.egd au démarrage de keycloak sur fichier: **/dev/urandom** de la façon suivante :
 
 Plus de details sur la configuration matérielle requise sont disponibles [ici](https://www.keycloak.org/docs/latest/server_installation/index.html#installation)
 
@@ -449,6 +449,94 @@ clés publiques externes.
 
 
 
+# Installation
+## installation JDK
+Keycloak nécessite Java 8 ou des versions ultérieures pour fonctionner. Vous pouvez vérifier et vérifier que Java est installé avec la commande suivante.
+```
+$java -version
+```
+Si java n'est pas installé, vous verrez «java: command not found». Exécutez les commandes ci-dessous pour installer Java.
+```
+$sudo apt-get update$ sudo apt-get install default-jdk -y
+```
+Après l'installation, vérifiez si java est correctement installé en exécutant la commande ci-dessous
+```
+$ java -version
+```
+Si Java est installé, la sortie doit ressembler à celle ci-dessus en fonction de la dernière version de java à ce moment-là.
 
+## Télécharger et extraire Keycloak Server
+Consultez la page de téléchargement de Keycloak pour les dernières versions avant de télécharger. 
+Pour ce docmenent, nous allons télécharger Keycloak 11.0.3 Standalone Server Distribution.
 
+Nous allons installer Keycloak dans le répertoire / opt, nous allons donc télécharger le package Keycloak à cet emplacement.
+Changez de répertoire en / opt et téléchargez Keycloak dans ce répertoire.
 
+```
+$cd /opt 
+$sudo wget https://downloads.jboss.org/keycloak/6.0.1/keycloak-6.0.1.tar.gz
+```
+Extrayez le package tar et renommez le répertoire extrait en keycloak. Ce sera le répertoire d’installation de Keycloak
+
+```
+$ sudo tar -xvzf keycloak-11.0.3.tar.gz 
+$ sudo mv keycloak-6.0.1 / opt / keycloak
+```
+
+## Créer un utilisateur et un groupe pour Keycloak
+Nous ne devons pas exécuter Keycloak sous l'utilisateur root pour des raisons de sécurité. 
+Créons un keycloak de groupe et ajoutons-y un keycloak utilisateur.
+
+De plus, le répertoire personnel de l'utilisateur **keycloak** sera le répertoire d'installation 
+de Keycloak, c'est-à-dire **/opt/keycloak**.
+
+```
+$sudo groupadd keycloak 
+$sudo useradd -r -g keycloak -d /opt/keycloak -s /sbin/nologin keycloak
+```
+
+## Modifier les permissions et la propriété du répertoire d'installation de Keycloak
+Ensuite, nous modifierons la propriété et l'autorisation du répertoire **/opt/keycloak**. 
+Nous donnerons également des permissions exécutables au répertoire **/opt/keycloak/bin/**. 
+Dans le répertoire **/opt**, exécutez les commandes suivantes:
+
+```
+$sudo chown -R keycloak: keycloak 
+$sudo chmod o + x /opt/keycloak/bin/
+```
+
+## Création d'un fichier de service SystemD pour Keycloak
+Créez un répertoire de configuration pour Keycloak sous le répertoire **/etc** sous le nom **keycloak**.
+```
+$cd /etc/
+$sudo mkdir keycloak
+```
+
+Copiez le fichier de configuration Keycloak **/opt/keycloak/docs/contrib/scripts/systemd/wildfly.conf**
+dans **/etc/keycloak/** et renommez-le en **keycloak.conf**
+
+```
+$ sudo cp /opt/keycloak/docs/contrib/scripts/systemd/wildfly.conf /etc/keycloak/keycloak.conf
+```
+
+Ensuite, copiez le script de lancement de Keycloak (launch.sh) sous **/opt/keycloak/docs/contrib/scripts/systemd/** 
+dans le répertoire **/opt/keycloak/bin/**
+```
+$sudo cp /opt/keycloak/docs/contrib/scripts/systemd/launch.sh  /opt/keycloak/bin/
+```
+
+Nous devons faire de keycloak user comme propriétaire de ce script afin qu'il puisse l'exécuter:
+
+```
+$ sudo chown keycloak: /opt/keycloak/bin/launch.sh
+```
+
+Ensuite, nous devons corriger le chemin d'installation de Keycloak dans **launch.sh**, alors ouvrez **launch.sh**
+dans un éditeur.
+```
+$ sudo nano /opt/keycloak/bin/launch.sh
+```
+Mettez à jour le chemin d'installation de Keycloak comme indiqué ci-dessous:
+ 
+		
+		 
