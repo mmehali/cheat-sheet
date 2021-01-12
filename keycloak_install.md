@@ -33,7 +33,7 @@ Voici la configuration matérielle minimale requise pour un serveur Keycloak:
 - Au moins 512 Mo de RAM
 - Au moins 1 Go d'espace disque
 - Une **base de données externe** partagée comme PostgreSQL, MySQL, Oracle, etc: Keycloak nécessite une base de données partagée externe si vous souhaitez exécuter dans un cluster. Veuillez consulter la section de configuration de la base de données de ce guide pour plus d'informations.
-- Prise en charge de la multidiffusion réseau sur votre ordinateur si vous souhaitez exécuter dans un cluster. Keycloak peut être mis en cluster sans multidiffusion, mais cela nécessite un tas de changements de configuration. Veuillez consulter la section sur le clustering de ce guide pour plus d'informations.
+- Prise en charge du multicast réseau ou se trouve le cluster. Keycloak peut être mis en cluster sans multicat, mais cela nécessite un tas de changements de configuration: Vous devrez reconfigurer la pile JGroups à l'intérieur de Wildfly pour utiliser le protocole TCP au lieu de l'UDP par défaut et utiliser TCPPING pour la découverte (TCPPING permet de lister tous les membres du cluster). Voir la documentation Wildfly et JGroups pour plus de détails sur la configuration de la pile.
 
 **Important** Sous Linux, il est recommandé d'utiliser **/dev/urandom** comme source de données aléatoires pour éviter que Keycloak ne se bloque quand l’activité du système (entropie) n’est pas suffisante (cf [wikepedia](https://fr.wikipedia.org/wiki//dev/random)). Sur Oracle JDK 8 et OpenJDK 8, ceci peut être effectué en définissant la propriété système java.security.egd au démarrage de keycloak sur fichier: **/dev/urandom** de la façon suivante :
 
@@ -795,6 +795,175 @@ $ systemctl start nginx
 Ouvrez les ports 80 et 443 dans votre pare-feu et vous avez terminé!
 
 
+# ANNEXE 
+## WildFly Clustering without Multicast
 
+## Contents
+
+    1 External
+    2 Internal
+    3 Procedure
+        3.1 Switch to a "tcp" Default Stack
+            3.1.1 Configuration File
+            3.1.2 Domain CLI
+            3.1.3 Standalone CLI
+        3.2 Replace the MPING protocol with TCPPING
+            3.2.1 Configuration File
+            3.2.2 CLI
+                3.2.2.1 Reload
+        3.3 Additional Verifications
+    4 Why Doesn't the Cluster Form?
+    5 Other Subsystems that May Require Switching to TCP
+
+Plus de détails [ici](https://kb.novaordis.com/index.php/WildFly_Clustering_without_Multicast)
+
+## Références :
+
+    How do I switch clustering to TCP instead of multicast UDP in EAP 6? https://access.redhat.com/solutions/140103
+    Configuring Cluster to run with TCP in Domain Mode of EAP6 using CLI https://access.redhat.com/solutions/146323
+
+## Internal
+
+    JGroups Subsystem Configuration
+    JBoss Clustering without Multicast
+    JGroups Protocol TCP
+## Procedure 
+### Switch to a "tcp" Default Stack
+#### Configuration File
+
+Locate the "jgroups" subsystem in standalone.xml or domain.xml relevant profile, and set default-stack value to "tcp":
+Localisez le subsystem "jgroups" dans le profil approprié standalone-ha.xml ou domain.xml et initialisez la valeur 
+de **default-stack** à "tcp":
+```
+<subsystem xmlns="urn:jboss:domain:jgroups:1.1" default-stack="tcp">
+...
+```
+
+WildFly 10.0 and higher:
+```
+...
+<subsystem xmlns="urn:jboss:domain:jgroups:4.0">
+   <channels ...>...</channels>
+    <stacks default="tcp">
+    ...
+```
+#### Domain CLI
+```
+/profile=ha/subsystem=jgroups:write-attribute(name=default-stack,value=tcp)
+```
+Notez que l'opération nécessite un rechargement de la configuration du serveur, mais vous ne devez recharger celle-ci qu'une 
+fois toute la procédure terminée (voir rechargement)
+
+#### Standalone CLI
+```
+/subsystem=jgroups:write-attribute(name=default-stack,value=tcp)
+```
+### Remplacer le protocole MPING par le protocol TCPPING
+#### Fichier de configuration
+Localisez la pile "tcp" dans le subsystème "jgroups" et remplacez le protocole MPING par TCPPING:
+```
+   ...
+   <stack name="tcp">
+      <transport type="TCP" socket-binding="jgroups-tcp"/>
+      <protocol type="TCPPING">
+          <property name="initial_hosts">1.2.3.4[7600],1.2.3.5[7600]</property>
+          <property name="num_initial_members">2</property>
+          <property name="port_range">0</property>
+          <property name="timeout">2000</property>
+       </protocol>
+       <!--<protocol type="MPING" socket-binding="jgroups-mping"/>-->
+       <protocol type="MERGE2"/>
+       ...
+   </stack>
+  ...
+```
+
+Si le mode domaine est utilisé et que le même profil est partagé par plusieurs groupes de serveurs, la propriété "initial_hosts" 
+doit être définie sur le server_group, comme suit:
+```
+   ...
+   <stack name="tcp">
+      <transport type="TCP" socket-binding="jgroups-tcp"/>
+      <protocol type="TCPPING">
+          <property name="initial_hosts">${jboss.cluster.tcp.initial_hosts}</property>
+          ...
+       </protocol>
+       ...
+   </stack>
+  ...
+```
+and the server group-specific values for the system property are set in the <server-group> element as follows:
+et les valeurs group-specific du serveur de la propriété système sont définies dans l'élément <server-group> comme suit:
+    ```
+    ...
+    <server-groups>
+        <server-group name="something" profile="ha">
+            <socket-binding-group ref="ha-sockets"/>
+            <system-properties>
+              <property name="jboss.cluster.tcp.initial_hosts" value="1.2.3.4[7600],1.2.3.5[7600]" />
+            </system-properties>
+       </server-group>
+      ...
+    <server-groups>
+ ```
+#### CLI
+
+Un exemple de mise en œuvre de cette procédure par "em" est disponible ici, recherchez "function jgroups-swap-MPING-with-TCPPING":
+```
+        https://github.com/NovaOrdis/em/blob/master/src/main/bash/bin/overlays/lib/jboss.shlib
+```
+
+Notez que nous ne pouvons pas simplement supprimer MPING et ajouter TCPING, l'API CLI n'est pas assez expressive pour nous permettre de spécifier la position du protocole dans la liste. Nous devons remplacer MPING par TCPPING comme suit:
+```
+/profile=ha/subsystem=jgroups/stack=tcp/protocol=MPING/:write-attribute(name=type,value=TCPPING)
+```
+        All CLI commands below keep referring to the protocol as "MPING", that won't change until the instance is restarted, so it's not a typo.
+
+Remove the "socket-binding" node:
+```
+/profile=ha/subsystem=jgroups/stack=tcp/protocol=MPING/:write-attribute(name=socket-binding)
+```
+```
+/profile=ha/subsystem=jgroups/stack=tcp/protocol=MPING/property=initial_hosts:add(value="1.2.3.4[7600],1.2.3.5[7600]")
+/profile=ha/subsystem=jgroups/stack=tcp/protocol=MPING/property=num_initial_members:add(value="2")
+/profile=ha/subsystem=jgroups/stack=tcp/protocol=MPING/property=port_range:add(value="0")
+/profile=ha/subsystem=jgroups/stack=tcp/protocol=MPING/property=timeout:add(value="2000")
+```
+        In domain mode, if the same profile is shared by several server groups, the "initial_hosts" property should be set on the server_group and not in the profile, as follows:
+
+```
+/profile=ha/subsystem=jgroups/stack=tcp/protocol=MPING/property=initial_hosts:add(value="${jboss.cluster.tcp.initial_hosts}")
+```
+
+In this case, the server group-specific values for the system property are set in the <server-group> element as described in manipulating per-server-group properties (note that the value must be set before :reload otherwise the reload will fail:
+
+```
+/server-group=web/system-property=jboss.cluster.tcp.initial_hosts:add(value="1.2.3.4[7600],1.2.3.5[7600]")
+```
+
+##### Reload
+
+The controllers must be reloaded, first the domain controller and then the host controllers. It is important to reload the domain controller first, otherwise MPING to TCPPING replacement does not propagate to the subordinate host controllers:
+
+```
+reload --host=dc1
+reload --host=h1 --restart-servers=true
+reload --host=h2 --restart-servers=true
+```
+For more details see [reload](https://kb.novaordis.com/index.php/Reload). 
+
+## Additional Verifications
+
+    Verify that the cluster members do actually bind to the IP addresses specified in initial_hosts.
+    See port_range recommendations.
+    See num_initial_members recommendations.
+
+## Why Doesn't the Cluster Form?
+
+Even if the cluster if correctly configured, the JGroups channels won't be initialized and won't form clusters at boot. This is because the JGroups groups only form if there are services requiring clustering.
+
+One way to start clustering is to deploy a <distributable> servlet.
+
+Another way is to declare cache containers as "eager" starters. For more details see WildFly Infinispan Subsystem Configuration#Caches_Do_Not_Start_at_Boot_Even_if_Declared_Eager. 
 
 
