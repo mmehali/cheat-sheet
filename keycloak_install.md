@@ -841,7 +841,6 @@ de **default-stack** à "tcp":
 
 WildFly 10.0 and higher:
 ```
-...
 <subsystem xmlns="urn:jboss:domain:jgroups:4.0">
    <channels ...>...</channels>
     <stacks default="tcp">
@@ -894,7 +893,7 @@ doit être définie sur le server_group, comme suit:
 ```
 and the server group-specific values for the system property are set in the <server-group> element as follows:
 et les valeurs group-specific du serveur de la propriété système sont définies dans l'élément <server-group> comme suit:
-    ```
+```
     ...
     <server-groups>
         <server-group name="something" profile="ha">
@@ -910,26 +909,28 @@ et les valeurs group-specific du serveur de la propriété système sont défini
 
 Un exemple de mise en œuvre de cette procédure par "em" est disponible ici, recherchez "function jgroups-swap-MPING-with-TCPPING":
 ```
-        https://github.com/NovaOrdis/em/blob/master/src/main/bash/bin/overlays/lib/jboss.shlib
+   https://github.com/NovaOrdis/em/blob/master/src/main/bash/bin/overlays/lib/jboss.shlib
 ```
 
 Notez que nous ne pouvons pas simplement supprimer MPING et ajouter TCPING, l'API CLI n'est pas assez expressive pour nous permettre de spécifier la position du protocole dans la liste. Nous devons remplacer MPING par TCPPING comme suit:
+
 ```
 /profile=ha/subsystem=jgroups/stack=tcp/protocol=MPING/:write-attribute(name=type,value=TCPPING)
 ```
-        All CLI commands below keep referring to the protocol as "MPING", that won't change until the instance is restarted, so it's not a typo.
+
+    All CLI commands below keep referring to the protocol as "MPING", that won't change until the instance is restarted, so it's not a typo.
 
 Remove the "socket-binding" node:
 ```
 /profile=ha/subsystem=jgroups/stack=tcp/protocol=MPING/:write-attribute(name=socket-binding)
-```
-```
+
 /profile=ha/subsystem=jgroups/stack=tcp/protocol=MPING/property=initial_hosts:add(value="1.2.3.4[7600],1.2.3.5[7600]")
 /profile=ha/subsystem=jgroups/stack=tcp/protocol=MPING/property=num_initial_members:add(value="2")
 /profile=ha/subsystem=jgroups/stack=tcp/protocol=MPING/property=port_range:add(value="0")
 /profile=ha/subsystem=jgroups/stack=tcp/protocol=MPING/property=timeout:add(value="2000")
 ```
-        In domain mode, if the same profile is shared by several server groups, the "initial_hosts" property should be set on the server_group and not in the profile, as follows:
+
+    In domain mode, if the same profile is shared by several server groups, the "initial_hosts" property should be set on the server_group and not in the profile, as follows:
 
 ```
 /profile=ha/subsystem=jgroups/stack=tcp/protocol=MPING/property=initial_hosts:add(value="${jboss.cluster.tcp.initial_hosts}")
@@ -941,29 +942,32 @@ In this case, the server group-specific values for the system property are set i
 /server-group=web/system-property=jboss.cluster.tcp.initial_hosts:add(value="1.2.3.4[7600],1.2.3.5[7600]")
 ```
 
-##### Reload
+##### Rechargement (Reload)
 
-The controllers must be reloaded, first the domain controller and then the host controllers. It is important to reload the domain controller first, otherwise MPING to TCPPING replacement does not propagate to the subordinate host controllers:
+Les contrôleurs doivent être rechargés, d'abord le domain controler de domaine, puis les hosts controlers. 
+Il est important de recharger d'abord le domain controler, sinon le remplacement de MPING vers TCPPING ne se propage 
+pas aux host controlers hôtes correspodants:
 
 ```
 reload --host=dc1
 reload --host=h1 --restart-servers=true
 reload --host=h2 --restart-servers=true
 ```
-For more details see [reload](https://kb.novaordis.com/index.php/Reload). 
+
+Pour plus de détails voir [reload](https://kb.novaordis.com/index.php/Reload). 
 
 ## Additional Verifications
 
-    Verify that the cluster members do actually bind to the IP addresses specified in initial_hosts.
-    See port_range recommendations.
-    See num_initial_members recommendations.
+ - Vérifiez que les membres du cluster se lient (bind) réellement aux adresses IP spécifiées dans initial_hosts.
+ - Voir les recommandations port_range.
+ - Voir les recommandations de num_initial_members
 
-## Why Doesn't the Cluster Form?
+## Pourquoi le cluster ne se forme-t-il pas?
 
-Even if the cluster if correctly configured, the JGroups channels won't be initialized and won't form clusters at boot. This is because the JGroups groups only form if there are services requiring clustering.
+Même si le cluster est correctement configuré, les canaux JGroups ne seront pas initialisés et ne formeront pas de clusters au démarrage. En effet, les groupes JGroups ne se forment que s'il existe des services nécessitant une mise en cluster.
 
-One way to start clustering is to deploy a <distributable> servlet.
+Une façon de démarrer le clustering consiste à déployer un servlet <distribuable>.
 
-Another way is to declare cache containers as "eager" starters. For more details see WildFly Infinispan Subsystem Configuration#Caches_Do_Not_Start_at_Boot_Even_if_Declared_Eager. 
+Une autre méthode consiste à déclarer les conteneurs de cache comme "eager starters". Pour plus de détails, consultez Configuration du sous-système WildFly Infinispan#Caches_Do_Not_Start_at_Boot_Even_if_Declared_Eager.
 
 
