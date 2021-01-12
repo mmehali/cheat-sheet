@@ -1,5 +1,11 @@
-
+Keycloak est une solution open source de gestion des identités et des accès.
 Dans ce document, nous allons examiner la mise en place de l'installation de keycloak sur deux serveurs CentOS 7.
+
+Keycloak nécessite au moins 2 cœurs de processeur et 2 Go de mémoire. Il est recommandé d'avoir 4 Go de mémoire 
+lorsque vous allez avoir beaucoup de trafic vers ce serveur d'identité.
+
+
+
 # Introcuction
 ## Mode de fonctionnement :
 Il existe trois modes différents d'installation de Keycloak :
@@ -96,7 +102,6 @@ La convention consiste à utiliser le nom du package Java du pilote JDBC comme n
     <resources>
         <resource-root path="postgresql-9.4.1212.jar"/>
     </resources>
-
     <dependencies>
         <module name="javax.api"/>
         <module name="javax.transaction.api"/>
@@ -107,6 +112,17 @@ Assurez-vous de mettre à jour le chemin avec le nom de fichier correct.
 
 Plus de detail [ici](https://www.keycloak.org/docs/latest/server_installation/index.html#package-the-jdbc-driver)
 
+**Avec jboss-li** :
+ ```
+ centos :
+ curl -L http://central.maven.org/maven2/mysql/mysql-connector-java/5.1.46/mysql-connector-java-5.1.46.jar -o /root/mysql-connector-java-5.1.46.jar
+ ```
+ Ouvrez la CLI Jboss et ajoutez le module MySQL
+ ```
+ $ ./bin/jboss-cli.sh
+ jboss-cli$ module add --name=org.postgresql  --dependencies=javax.api,javax.transaction.api --resources=/root/postgresql-9.4.1212.jar
+ jboss-cli$ exit
+ ```
 
 #### Déclarer et charger le pilote
 
@@ -122,7 +138,7 @@ Voici un exemple de pilote **instandalone-ha.xml**
     <driver name="h2" module="com.h2database.h2">
         <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
     </driver>
-    <driver name="postgresql" module="org.postgresql">
+    <driver name="postgresql" module="org.mysql">
         <xa-datasource-class>org.postgresql.xa.PGXADataSource</xa-datasource-class>
     </driver>
 </drivers>
@@ -132,6 +148,14 @@ Voici un exemple de pilote **instandalone-ha.xml**
 Comme nous pouvons le voir, la déclaration du pilote est presque identique à celle du pilote de 
 base de données H2 préconfigurée.
 
+**avec jboss-cli**
+```
+$ sudo -u keycloak ./bin/jboss-cli.sh 'embed-server,/subsystem=datasources/jdbc-driver=mysql:add(
+             driver-name=postgresql,
+	     driver-module-name=org.mysql,
+	     driver-class-name=org.postgresql.xa.PGXADataSource
+	     )'
+```
 #### Modifier la source de données
 Ci-dessous, nous verrons un exemple de configuration de source de données PostgreSQL fonctionnelle.
 
@@ -154,6 +178,7 @@ Ci-dessous, nous verrons un exemple de configuration de source de données Postg
 - $DATABASE = Le nom de la base de données configurée pour Keycloak
 - $USERNAME = Le nom d'utilisateur qui a accès à la base de données spécifiée.
 - $PASSWORD = Le mot de passe de l'utilisateur défini ci-dessus
+
 
 
 En fin de compte, vous devriez vous retrouver avec une section datasource qui ressemble à ce qui suit:
@@ -184,6 +209,35 @@ En fin de compte, vous devriez vous retrouver avec une section datasource qui re
 </subsystem>
 ``` 
 
+**avec jboss-cli:**
+Supprimez la source de données h2 KeycloakDS et ajoutez la source de données MySQL KeycloakDS. 
+Ne supprimez pas la base de données de test et changez YOURPASS en quelque chose d'aléatoire.
+```
+$sudo -u keycloak ./bin/jboss-cli.sh 'embed-server,/subsystem=datasources/data-source=KeycloakDS:remove'
+```
+
+```
+$sudo -u keycloak ./bin/jboss-cli.sh 'embed-server,/subsystem=datasources/data-source=KeycloakDS:add(
+        driver-name=mysql,
+	enabled=true,
+	use-java-context=true,
+	connection-url="jdbc:mysql://localhost:3306/keycloak?useSSL=false&amp;
+	useLegacyDatetimeCode=false&amp;
+	serverTimezone=Europe/Amsterdam&amp;
+	characterEncoding=UTF-8",
+	jndi-name="java:/jboss/datasources/KeycloakDS",
+	user-name=keycloak,password="YOURPASS",
+	valid-connection-checker-class-name=org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLValidConnectionChecker,
+	validate-on-match=true,
+	exception-sorter-class-name=org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLValidConnectionChecker
+	)'
+```
+Ajouter un compte administrateur keycloak :
+
+```
+$ sudo -u keycloak ./bin/add-user-keycloak.sh -u admin -p YOURPASS -r master
+# output: Added 'admin' to '/opt/keycloak/11.0.3/standalone/configuration/keycloak-add-user.json', restart server to load user
+```
 
 ## Clustering
 Les étapes ci-dessus permettront une configuration de base d'une base de données partagée, mais pour installer correctement Keycloak en mode cluster, il y a quelques étapes supplémentaires à compléter.
@@ -238,6 +292,15 @@ Vous devrez configurer le bloc **urn:jboss:domain:undertow:11.0** pour qu'il res
 ``` 
 Nous avons ajouté l'attribut **proxy-address-forwarding** à l'élément **http-listener** et initilialisé sa valeur à **true**.
 
+**avec jboss-cli:**
+We're going to run Keycloak behind a Nginx reverse proxy. To allow this, change http-listener and socket-binding configurations in Keycloak.
+Nous allons exécuter Keycloak derrière le reverse proxy Nginx. Pour permettre cela, modifiez les configurations d'écouteur **http** 
+et de **liaison de socket** dans Keycloak.
+
+```
+$ sudo -u keycloak ./bin/jboss-cli.sh 'embed-server,/subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=proxy-address-forwarding,value=true)'
+```
+
 #### Activer HTTPS avec le reverse proxy
 Si vous avez un reverse proxy en front de Keycloak qui gère les connexions et terminaisons SSL mais qui utilise un port autre 
 que 8443, par exemple 443, vous devez apporter les modifications suivantes:
@@ -251,7 +314,13 @@ Dans le bloc 'urn:jboss:domain:undertow:11.0' (configuré ci-dessus) changez la 
         proxy-address-forwarding="true" redirect-socket="proxy-https"/>
     ...
 </subsystem>
-``` 
+```
+
+**avec jboss-cli :**
+
+```
+$ sudo -u keycloak ./bin/jboss-cli.sh 'embed-server,/subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=redirect-socket,value=proxy-https)'
+```
 
 Nous allons maintenant définit ajouter un nouveau élément **socket-binding** à l'élément **socket-binding-group**, comme ci-dessous:
 
@@ -262,7 +331,13 @@ Nous allons maintenant définit ajouter un nouveau élément **socket-binding** 
     <socket-binding name="proxy-https" port="443"/>
     ...
 </socket-binding-group>
-``` 
+```
+
+**Avec jboss-cli:**
+
+```
+$ sudo -u keycloak ./bin/jboss-cli.sh 'embed-server,/socket-binding-group=standard-sockets/socket-binding=proxy-https:add(port=443)'
+```
 
 ## Tester le cluster
 Une fois les modifications effectuées sur tous vos serveurs Keycloak, nous pouvons demarrer et tester le cluster.
@@ -297,7 +372,8 @@ Vérifiez que la valeur X.X.X.X est l'adresse IP de la machine avec laquelle vou
 et non l'adresse IP du reverse proxy ou du load Balancer
 
 ## Le Pare-feu
-Vérifiez que vous avez correctement configuré le pare-feu, Keycloak écoute par défaut sur les ports 8080 et 8443. Il se peut que des ports supplémentaires doivent être ouverts en fonction de votre configuration.
+Vérifiez que vous avez correctement configuré le pare-feu, Keycloak écoute par défaut sur les ports 8080 et 8443. 
+Il se peut que des ports supplémentaires doivent être ouverts en fonction de votre configuration.
 
 ## Lancer keycloak au boot
 En supposant que vos tests ont réussi et que vous pouvez accéder directement à vos deux serveurs Keycloak et 
@@ -310,7 +386,7 @@ Vous trouverez ci-dessous une copie du fichier d'unité systemd que vous devez u
 ``` 
 [Unit]
 Description=Keycloak Identity Provider
-After=syslog.target network.target
+After=network.target
 Before=httpd.service
 
 [Service]
@@ -320,18 +396,35 @@ Group=keycloak
 LimitNOFILE=102642
 PIDFile=/var/run/keycloak/keycloak.pid
 ExecStart=/usr/local/keycloak/bin/standalone.sh --server-config=standalone-ha.xml
-#StandardOutput=null
+
 [Install]
 WantedBy=multi-user.target
 ``` 
+***centos:**
+cat > /etc/systemd/system/keycloak.service <<EOF
 
+```
+[Unit]
+Description=Keycloak
+After=network.target
+ 
+[Service]
+Type=idle
+User=keycloak
+Group=keycloak
+ExecStart=/opt/keycloak/current/bin/standalone.sh -b 0.0.0.0
+TimeoutStartSec=600
+TimeoutStopSec=600
+ 
+[Install]
+WantedBy=multi-user.target
+```
 Une fois cette étape terminée, vous pouvez démarrer et activer le service en exécutant les commandes ci-dessous sur tous vos serveurs Keycloak:
 
 ``` 
-systemctl enable keycloak
-
-
-systemctl start keycloak
+$systemctl daemon-reload
+$systemctl enable keycloak
+$systemctl start keycloak
 ``` 
 
 ## Configuration du cache (exploitation)
@@ -450,15 +543,21 @@ clés publiques externes.
 
 
 # Installation
+
+Nous utilisons le gestionnaire de packages YUM pour installer toutes les dépendances requises.
+
 ## installation JDK
-Keycloak nécessite Java 8 ou des versions ultérieures pour fonctionner. Vous pouvez vérifier et vérifier que Java est installé avec la commande suivante.
+
+Keycloak est basé sur Wildfly et nécessite Java 8 ou des versions ultérieures pour fonctionner. Vous pouvez vérifier et vérifier que Java est installé avec la commande suivante.
 ```
 $java -version
 ```
 Si java n'est pas installé, vous verrez «java: command not found». Exécutez les commandes ci-dessous pour installer Java.
+
 ```
-$sudo apt-get update$ sudo apt-get install default-jdk -y
+$ yum install java-1.8.0-openjdk
 ```
+
 Après l'installation, vérifiez si java est correctement installé en exécutant la commande ci-dessous
 ```
 $ java -version
@@ -483,9 +582,33 @@ $ sudo tar -xvzf keycloak-11.0.3.tar.gz
 $ sudo mv keycloak-6.0.1 / opt / keycloak
 ```
 
-## Créer un utilisateur et un groupe pour Keycloak
+#### Centos
+Accédez à la page de téléchargement de Keycloak et obtenez l'URL de la dernière version finale. 
+Téléchargez la version finale de Keycloak à partir du site Web et extrayez-la dans /opt/keycloak/$version.
+Utilisez un lien symbolique pour lier Keycloak à /opt/keycloak/current.
+
+```
+$ curl https://downloads.jboss.org/keycloak/11.0.3/keycloak-11.0.3.tar.gz -o keycloak.tar.gz
+$ mkdir -p /opt/keycloak/11.0.3
+$ ln -s /opt/keycloak/11.0.3 /opt/keycloak/current
+$ tar -xzf keycloak.tar.gz -C /opt/keycloak/current --strip-components=1
+$ chown keycloak: -R /opt/keycloak
+```
+Limitez l'accès au fichier autonome car il contient des données sensibles.
+```
+$ cd /opt/keycloak/current
+$ sudo -u keycloak chmod 700 standalone
+```
+install and start the MySQL server.
+
+$ yum install mysql-server
+$ systemctl start mysqld
+
+
+## Créer un utilisateur et un groupe pour Keycloak (centos)
 Nous ne devons pas exécuter Keycloak sous l'utilisateur root pour des raisons de sécurité. 
-Créons un keycloak de groupe et ajoutons-y un keycloak utilisateur.
+Nous allons exécuter l'application Keycloak avec l'utilisateur **keycloak**. 
+Créons un keycloak de groupe **keycloak**  et ajoutons-y un utilisateur **keycloak** utilisateur.
 
 De plus, le répertoire personnel de l'utilisateur **keycloak** sera le répertoire d'installation 
 de Keycloak, c'est-à-dire **/opt/keycloak**.
@@ -493,7 +616,18 @@ de Keycloak, c'est-à-dire **/opt/keycloak**.
 ```
 $sudo groupadd keycloak 
 $sudo useradd -r -g keycloak -d /opt/keycloak -s /sbin/nologin keycloak
+
+# Centos 7
+$ groupadd -r keycloak
+$ useradd -m -d /var/lib/keycloak -s /sbin/nologin -r -g keycloak keycloak
 ```
+
+Keycloak ne fournit pas de RPM, nous allons donc l'installer manuellement. Dans cet installation, j'utilise les chemins suivants:
+    - Chemin de base: /opt/keycloak
+    - Chemin de l'application: /opt/keycloak/current
+
+Le chemin de l'application est un lien symbolique vers une version spécifique. Cela simplifie le processus de mise à jour de keycloak 
+à l'avenir.
 
 ## Modifier les permissions et la propriété du répertoire d'installation de Keycloak
 Ensuite, nous modifierons la propriété et l'autorisation du répertoire **/opt/keycloak**. 
@@ -537,6 +671,130 @@ dans un éditeur.
 $ sudo nano /opt/keycloak/bin/launch.sh
 ```
 Mettez à jour le chemin d'installation de Keycloak comme indiqué ci-dessous:
+
+**Shcema ici**
+
+Enregistrez et quittez le fichier.
+
+Maintenant, copiez le fichier de définition de service (wildfly.service) sous /opt/keycloak/docs/contrib/scripts/systemd/ 
+dans le répertoire /etc/systemd/system/ et renommez-le en keycloak.service
+```
+$ sudo cp /opt/keycloak/docs/contrib/scripts/systemd/wildfly.service /etc/systemd/system/keycloak.service
+```
+Ouvrez keycloak.service dans un éditeur
+
+```
+$ sudo nano /etc/systemd/system/keycloak.service
+```
+Apportez les modifications marquées en gras ou vous pouvez simplement copier / coller le contenu ci-dessous tel quel.
+```
+[Unité]
+Description = Le serveur Keycloak
+Après = syslog.target network.target
+Avant = httpd.service [Service]
+Environnement = LAUNCH_JBOSS_IN_BACKGROUND = 1
+EnvironmentFile = / etc / keycloak / keycloak.conf
+Utilisateur = keycloak
+Groupe = keycloak
+LimitNOFILE = 102642
+PIDFile = / var / run / keycloak / keycloak.pid
+ExecStart = / opt / keycloak / bin / launch.sh $ WILDFLY_MODE $ WILDFLY_CONFIG $ WILDFLY_BIND
+StandardOutput = null [Installer]
+WantedBy = multi-user.target
+```
+Enregistrez et quittez le fichier.
+
+Recharger la configuration du gestionnaire systemd et activer le service keycloak au démarrage du système
+```
+$ sudo systemctl daemon-reload $ sudo systemctl activer keycloak
+```
+Pour démarrer le service système keycloak:
+```
+$ sudo systemctl démarrer keycloak
+```
+Une fois le service démarré, nous pouvons vérifier l'état en exécutant la commande ci-dessous:
+```
+$ sudo systemctl status keycloak
+```
+Si le service a démarré avec succès, nous devrions voir quelque chose comme ci-dessous:
+
+*** schema ici **
+
+L'état Actif, comme mis en évidence, ci-dessus vérifie que le service est opérationnel.
+
+Nous pouvons également suivre les journaux du serveur Keycloak avec la commande ci-dessous:
+```
+$ sudo tail -f /opt/keycloak/standalone/log/server.log
+```
+##Journaux du serveur Keycloak
+
+Accédez maintenant au serveur Keycloak à l'adresse:
+```
+http://<instance-public-ip>:8080/auth/
+```
+
  
-		
-		 
+## Installation NGINX
+Nous allons maintenant installer le serveur Nginx pour effectuer la terminaison SSL pour notre application Keycloak. Installez Nginx à l'aide du gestionnaire de packages YUM.
+```
+yum install nginx
+```
+Copiez les certificats SSL dans les chemins suivants sur le serveur:
+- Certificat: /etc/pki/tls/certs/
+- Clé privée: /etc/pki/tls/private/
+
+Configurez Nginx pour le trafic proxy pour Keycloak. (Remplacez my.url.com par votre propre URL)
+
+```
+cat > /etc/nginx/conf.d/keycloak.conf <<EOF
+upstream keycloak {
+    # Use IP Hash for session persistence
+    ip_hash;
+  
+    # List of Keycloak servers
+    server 127.0.0.1:8080;
+}
+  
+      
+server {
+    listen 80;
+    server_name my.url.com;
+ 
+    # Redirect all HTTP to HTTPS
+    location / {   
+      return 301 https://\$server_name\$request_uri;
+    }
+}
+  
+server {
+    listen 443 ssl http2;
+    server_name my.url.com;
+ 
+    ssl_certificate /etc/pki/tls/certs/my-cert.cer;
+    ssl_certificate_key /etc/pki/tls/private/my-key.key;
+    ssl_session_cache shared:SSL:1m;
+    ssl_prefer_server_ciphers on;
+ 
+    location / {
+      proxy_set_header Host $host;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Proto $scheme;
+      proxy_pass http://keycloak;
+    }
+}
+EOF
+```
+
+Activez et démarrez Nginx:
+```
+$ systemctl enable nginx
+$ systemctl start nginx
+```
+
+Ouvrez les ports 80 et 443 dans votre pare-feu et vous avez terminé!
+
+
+
+
+
