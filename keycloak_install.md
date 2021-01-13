@@ -1,10 +1,10 @@
 Keycloak est une solution open source de gestion des identités et des accès.
 Dans ce document, nous allons examiner la mise en place de l'installation de keycloak sur deux serveurs CentOS 7.
 
-Keycloak nécessite au moins 2 cœurs de processeur et 2 Go de mémoire. Il est recommandé d'avoir 4 Go de mémoire 
-lorsque vous allez avoir beaucoup de trafic vers ce serveur d'identité.
+Le but de ce docment est de parcourir les étapes à suivre pour déployer keycloak en environnement de production.
+Pour ce faire, vous devrez décider comment vous souhaitez gérer la configuration du serveur au moment de l'exécution (mode standaone ou domaine), configurer une base de données partagée pour le stockage Keycloak, configurer le chiffrement et HTTPS, et enfin configurer Keycloak pour qu'il s'exécute dans un cluster. 
 
-
+Keycloak est une extension du serveur d'applications WildFly. De nombreux aspects de la configuration de Keycloak tournent autour des éléments de configuration WildFly. Souvent, ce document vous dirigera vers la documentation en dehors du de ce document si vous souhaitez plus en détail
 
 # Introcuction
 ## Mode de fonctionnement :
@@ -27,15 +27,15 @@ considérablement la surcharge d'administration avec plusieurs serveurs.
 
 Keycloak peut s'executer sur importe quel système d'exploitation exécutant Java.
 Voici la configuration matérielle minimale requise pour un serveur Keycloak:
-
-- Java 8 JDK
+Keycloak nécessite au moins 2 cœurs de processeur et 2 Go de mémoire. Il est recommandé d'avoir 4 Go de mémoire 
+lorsque vous allez avoir beaucoup de trafic vers ce serveur d'identité.
+- Java 8 JDK ou une version superieure
 - zip ou gzip et tar
-- Au moins 512 Mo de RAM
-- Au moins 1 Go d'espace disque
+- Au moins 512 Mo de RAM : nous recommandons 2 cœurs de processeur et 4 Go de mémoire.
+- Au moins 1 Go d'espace disque : nous recomandons 8 Go (backup et logs)
 - Une **base de données externe** partagée comme PostgreSQL, MySQL, Oracle, etc: Keycloak nécessite une base de données partagée externe si vous souhaitez exécuter dans un cluster. Veuillez consulter la section de configuration de la base de données de ce guide pour plus d'informations.
 - Prise en charge du multicast réseau ou se trouve le cluster. Keycloak peut être mis en cluster sans multicat, mais cela nécessite un tas de changements de configuration: Vous devrez reconfigurer la pile JGroups à l'intérieur de Wildfly pour utiliser le protocole TCP au lieu de l'UDP par défaut et utiliser TCPPING pour la découverte (TCPPING permet de lister tous les membres du cluster). Voir la documentation Wildfly et JGroups pour plus de détails sur la configuration de la pile.
-
-**Important** Sous Linux, il est recommandé d'utiliser **/dev/urandom** comme source de données aléatoires pour éviter que Keycloak ne se bloque quand l’activité du système (entropie) n’est pas suffisante (cf [wikepedia](https://fr.wikipedia.org/wiki//dev/random)). Sur Oracle JDK 8 et OpenJDK 8, ceci peut être effectué en définissant la propriété système java.security.egd au démarrage de keycloak sur fichier: **/dev/urandom** de la façon suivante :
+- **Important** Sous Linux, il est recommandé d'utiliser **/dev/urandom** comme source de données aléatoires pour éviter que Keycloak ne se bloque quand l’activité du système (entropie) n’est pas suffisante (cf [wikepedia](https://fr.wikipedia.org/wiki//dev/random)). Sur Oracle JDK 8 et OpenJDK 8, ceci peut être effectué en définissant la propriété système java.security.egd au démarrage de keycloak sur fichier: **/dev/urandom** de la façon suivante :
 
 Plus de details sur la configuration matérielle requise sont disponibles [ici](https://www.keycloak.org/docs/latest/server_installation/index.html#installation)
 
