@@ -920,7 +920,7 @@ Notez que nous ne pouvons pas simplement supprimer MPING et ajouter TCPING, l'AP
 
     All CLI commands below keep referring to the protocol as "MPING", that won't change until the instance is restarted, so it's not a typo.
 
-Remove the "socket-binding" node:
+supprimer le noeud **socket-binding**:
 ```
 /profile=ha/subsystem=jgroups/stack=tcp/protocol=MPING/:write-attribute(name=socket-binding)
 
@@ -964,10 +964,144 @@ Pour plus de détails voir [reload](https://kb.novaordis.com/index.php/Reload).
 
 ## Pourquoi le cluster ne se forme-t-il pas?
 
-Même si le cluster est correctement configuré, les canaux JGroups ne seront pas initialisés et ne formeront pas de clusters au démarrage. En effet, les groupes JGroups ne se forment que s'il existe des services nécessitant une mise en cluster.
+Même si le cluster est correctement configuré, les canaux JGroups ne seront pas initialisés et ne formeront 
+pas de clusters au démarrage. En effet, les groupes JGroups ne se forment que s'il existe des services 
+nécessitant une mise en cluster.
 
 Une façon de démarrer le clustering consiste à déployer un servlet <distribuable>.
 
-Une autre méthode consiste à déclarer les conteneurs de cache comme "eager starters". Pour plus de détails, consultez Configuration du sous-système WildFly Infinispan#Caches_Do_Not_Start_at_Boot_Even_if_Declared_Eager.
+Une autre méthode consiste à déclarer les conteneurs de cache comme "eager starters". Pour plus de détails, 
+consultez Configuration du sous-système WildFly Infinispan#Caches_Do_Not_Start_at_Boot_Even_if_Declared_Eager.
 
+# ANNEXE2
+# Configuration via Jboss-cli
+En plus de la configuration manuelle, nous avons également la possibilité de modifier la configuration 
+en émettant des commandes via l'outil **jboss-cli**. La CLI vous permet de configurer les serveurs 
+localement ou à distance. Et il est particulièrement utile lorsqu'il est combiné avec des scripts.
+
+Pour démarrer l'interface de ligne de commande JBoss EAP, vous devez exécuter jboss-cli.
+```
+$ .../bin/jboss-cli.sh
+```
+
+Cela vous amènera à une invite comme celle-ci:
+**Schema ici**
+Si vous souhaitez exécuter des commandes sur un serveur en cours d'exécution, 
+vous exécuterez d'abord la commande de **connect**.
+
+**Schema ici**
+
+Vous pensez peut-être en vous-même: "Je n'ai entré aucun nom d'utilisateur ni mot de passe!". 
+Si vous exécutez jboss-cli sur la même machine que votre standalone server ou domain controler
+en cours d'exécution et que votre compte dispose des autorisations de fichiers 
+appropriées, vous n'avez pas à configurer ni à entrer un nom d'utilisateur et un mot de passe 
+d'administrateur. Consultez le [Guide de configuration de JBoss EAP](https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.1/html-single/configuration_guide/) pour 
+plus de détails sur la façon de sécuriser les choses si vous n'êtes pas à l'aise avec cette configuration.
+
+## Mode intégré CLI ( CLI embedded mode)
+
+Si vous vous trouvez sur la même machine que votre standalone serveur et que vous souhaitez émettre des 
+commandes alors que le serveur n'est pas actif, vous pouvez intégrer le serveur dans la CLI et 
+effectuer des modifications dans un mode spécial qui interdit les requetes entrantes.
+Pour ce faire, avant d'envoyer des commandes de configuration, exécutez d'abord la commande **embed* avec 
+le fichier de configuration que vous souhaitez modifier.
+```
+$[disconnected /] embed-server --server-config=standalone-ha.xml
+[standalone@embedded /]
+```
+
+## Mode GUI CLI
+
+La CLI peut également s'exécuter en mode GUI. Le mode GUI lance une application Swing qui vous permet 
+de visualiser et de modifier graphiquement l'ensemble du modèle de gestion d'un serveur en cours 
+d'exécution. Le mode GUI est particulièrement utile lorsque vous avez besoin d'aide pour formater 
+vos commandes CLI et découvrir les options disponibles. L'interface graphique peut également récupérée 
+les journaux du serveur à partir d'un serveur local ou distant.
+
+Démarrer en mode GUI
+```
+$ .../bin/jboss-cli.sh --gui
+```
+
+**Remarque**: pour vous connecter à un serveur distant, vous passez également l'option --connect. 
+Utilisez l'option --help pour plus de détails.
+
+Après avoir lancé le mode GUI, vous voudrez probablement faire défiler vers le bas pour trouver le nœud, 
+subsystem=keycloak-server. Si vous cliquez avec le bouton droit sur le nœud et cliquez sur 
+Explorer le subsystem=keycloak-server, vous obtiendrez un nouvel onglet qui affiche uniquement le 
+sous-système **keycloak-server**.
+
+
+**schema-ici**
+
+
+## Script de CLI
+
+L'interface de ligne de commande dispose de capacités de script étendues. Un script n'est qu'un fichier 
+texte contenant des commandes CLI. Considérez un script simple qui désactive la mise en cache des thèmes 
+et des modèles.
+
+```
+cat < turn-off-caching.cli
+/subsystem=keycloak-server/theme=defaults/:write-attribute(name=cacheThemes, value=false)
+/subsystem=keycloak-server/theme=defaults/:write-attribute(name=cacheTemplates, value=false)
+```
+
+Pour exécuter ce script, je peux suivre le menu Scripts de l'interface CLI, ou exécuter le script à partir 
+de la ligne de commande comme suit:
+
+```
+$ .../bin/jboss-cli.sh --file = desactiver-le-cache.cli
+```
+
+## Recettes CLI
+
+Voici quelques tâches de configuration et comment les exécuter avec les commandes CLI. Notez que dans tous les exemples sauf le premier, nous utilisons le chemin générique ** pour signifier que vous devez remplacer ou le chemin vers le sous-système keycloak-server.
+
+Pour Standalonee, cela signifie simplement:
+```
+**=/subsystem=keycloak-server
+```
+Pour le mode domaine, cela signifierait quelque chose comme:
+```
+**=/profile=auth-server-clustered/subsystem=keycloak-server
+```
+### Changer le contexte Web du serveur
+```
+/subsystem=keycloak-server/:write-attribute(name=web-context,value=myContext)
+```
+### Définir le thème par défaut global
+```
+**/theme=defaults/:write-attribute(name=default,value=myTheme)
+```
+###  Ajouter un nouveau SPI et un fournisseur
+```
+**/spi=mySPI/:add
+**/spi=mySPI/provider=myProvider/:add(enabled=true)
+```
+###  Désactiver un fournisseur
+```
+**/spi=mySPI/provider=myProvider/:write-attribute(name=enabled,value=false)
+```
+###  Changer le fournisseur par défaut d'une SPI
+```
+**/spi=mySPI/:write-attribute(name=default-provider,value=myProvider)
+```
+###  Configurer le SPI de dblock
+```
+**/spi=dblock/:add(default-provider=jpa)
+**/spi=dblock/provider=jpa/:add(properties={lockWaitTimeout => "900"},enabled=true)
+```
+###  Ajouter ou modifier une valeur de propriété unique pour un fournisseur
+```
+**/spi=dblock/provider=jpa/:map-put(name=properties,key=lockWaitTimeout,value=3)
+```
+###  Supprimer une seule propriété d'un fournisseur
+```
+**/spi=dblock/provider=jpa/:map-remove(nom=propriétés, key=lockRecheckTime)
+```
+### Définir des valeurs sur une propriété de fournisseur de type Liste
+```
+**/spi=eventsStore/provider=jpa/:map-put(name=properties,key=exclude-events,value=[EVENT1,EVENT2])
+```
 
