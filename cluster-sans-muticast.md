@@ -5,8 +5,8 @@
 Voir la documentation Wildfly et JGroups pour plus de détails sur la configuration de la pile
 
 ## Références :
-[How do I switch clustering to TCP instead of multicast UDP in EAP 6?](https://access.redhat.com/solutions/140103)
-[Configuring Cluster to run with TCP in Domain Mode of EAP6 using CLI](https://access.redhat.com/solutions/146323)
+- [How do I switch clustering to TCP instead of multicast UDP in EAP 6?](https://access.redhat.com/solutions/140103)
+- [Configuring Cluster to run with TCP in Domain Mode of EAP6 using CLI](https://access.redhat.com/solutions/146323)
 
 ## Internal
 - JGroups Subsystem Configuration
