@@ -5,16 +5,16 @@
 Voir la documentation Wildfly et JGroups pour plus de détails sur la configuration de la pile
 
 ## Références :
-How do I switch clustering to TCP instead of multicast UDP in EAP 6? https://access.redhat.com/solutions/140103
-Configuring Cluster to run with TCP in Domain Mode of EAP6 using CLI https://access.redhat.com/solutions/146323
+[How do I switch clustering to TCP instead of multicast UDP in EAP 6?](https://access.redhat.com/solutions/140103)
+[Configuring Cluster to run with TCP in Domain Mode of EAP6 using CLI](https://access.redhat.com/solutions/146323)
 
 ## Internal
-JGroups Subsystem Configuration
-JBoss Clustering without Multicast
-JGroups Protocol TCP
+- JGroups Subsystem Configuration
+- JBoss Clustering without Multicast
+- JGroups Protocol TCP
 
 ## Procedure
-### Switch to a "tcp" Default Stack
+### Definir la stack à "tcp" par défaut
 
 Localisez le subsystem "jgroups" dans standalone-ha.xml et initialisez la valeur de default-stack à "tcp":
 <subsystem xmlns="urn:jboss:domain:jgroups:4.0">
