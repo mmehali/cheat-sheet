@@ -32,7 +32,50 @@ rm -rf /opt/keycloak/standalone/configuration/standalone_xml_history
 bin/jboss-cli.sh --file=/opt/tools/cli/standalone-ha-configuration.cli
 rm -rf /opt/keycloak/standalone/configuration/standalone_xml_history
 ```
+##### contenu standalone-configuration.cli
+```
+embed-server --server-config=standalone-ha.xml --std-out=echo
+run-batch --file=/opt/jboss/tools/cli/loglevel.cli
+run-batch --file=/opt/jboss/tools/cli/proxy.cli
+run-batch --file=/opt/jboss/tools/cli/hostname.cli
+run-batch --file=/opt/jboss/tools/cli/theme.cli
+stop-embedded-server
+```
 
+##### configuration des logs
+ **contenu du fichier loglevel.cli :**
+   ```
+ /subsystem=logging/logger=org.keycloak:add
+ /subsystem=logging/logger=org.keycloak:write-attribute(name=level,value=${env.KEYCLOAK_LOGLEVEL:INFO})
+
+ /subsystem=logging/root-logger=ROOT:change-root-log-level(level=${env.ROOT_LOGLEVEL:INFO})
+
+ /subsystem=logging/root-logger=ROOT:remove-handler(name="FILE")
+ /subsystem=logging/periodic-rotating-file-handler=FILE:remove
+
+ /subsystem=logging/console-handler=CONSOLE:undefine-attribute(name=level)
+```
+
+##### configuration du proxy
+**contenu du fichier proxy.cli :**
+```
+/subsystem=undertow/server=default-server/http-listener=default: write-attribute(name=proxy-address-forwarding, value=${env.PROXY_ADDRESS_FORWARDING:false})
+/subsystem=undertow/server=default-server/https-listener=https: write-attribute(name=proxy-address-forwarding, value=${env.PROXY_ADDRESS_FORWARDING:false})
+```
+##### configuration du hostname
+**contenu du fichier hostname.cli :**
+```
+/subsystem=keycloak-server/spi=hostname:write-attribute(name=default-provider, value="${keycloak.hostname.provider:default}")
+/subsystem=keycloak-server/spi=hostname/provider=fixed/:add(properties={hostname => "${keycloak.hostname.fixed.hostname:localhost}",httpPort => "${keycloak.hostname.fixed.httpPort:-1}",httpsPort => "${keycloak.hostname.fixed.httpsPort:-1}",alwaysHttps => "${keycloak.hostname.fixed.alwaysHttps:false}"},enabled=true)
+```
+#### configruation des themes
+**contenu du fichier themes.cli :**
+```
+/subsystem=keycloak-server/theme=defaults:write-attribute(name=welcomeTheme,value=${env.KEYCLOAK_WELCOME_THEME:keycloak})
+/subsystem=keycloak-server/theme=defaults:write-attribute(name=default,value=${env.KEYCLOAK_DEFAULT_THEME:keycloak})
+```
+
+ 
 #### Garbage
 ```
 rm -rf /opt/keycloak/standalone/tmp/auth
