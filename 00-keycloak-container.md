@@ -6,7 +6,7 @@ JDBC_POSTGRES_VERSION=42.2.5
 ```
 ADD tools /opt/tools
 
-## RUN /opt/tools/build-keycloak.sh
+## Setup keycloak /opt/tools/build-keycloak.sh
 
 
 ### télécharger et extraire keycloak
@@ -208,13 +208,227 @@ stop-embedded-server
 ### autres configs 
 
  #### /opt/jboss/tools/x509.sh
- 
+ ```
+ #!/bin/bash
+
+function autogenerate_keystores() {
+  # Keystore infix notation as used in templates to keystore name mapping
+  declare -A KEYSTORES=( ["https"]="HTTPS" )
+
+  local KEYSTORES_STORAGE="${JBOSS_HOME}/standalone/configuration/keystores"
+  if [ ! -d "${KEYSTORES_STORAGE}" ]; then
+    mkdir -p "${KEYSTORES_STORAGE}"
+  fi
+
+  # Auto-generate the HTTPS keystore if volumes for OpenShift's
+  # serving x509 certificate secrets service were properly mounted
+  for KEYSTORE_TYPE in "${!KEYSTORES[@]}"; do
+
+    local X509_KEYSTORE_DIR="/etc/x509/${KEYSTORE_TYPE}"
+    local X509_CRT="tls.crt"
+    local X509_KEY="tls.key"
+    local NAME="keycloak-${KEYSTORE_TYPE}-key"
+    local PASSWORD=$(openssl rand -base64 32 2>/dev/null)
+    local JKS_KEYSTORE_FILE="${KEYSTORE_TYPE}-keystore.jks"
+    local PKCS12_KEYSTORE_FILE="${KEYSTORE_TYPE}-keystore.pk12"
+
+    if [ -f "${X509_KEYSTORE_DIR}/${X509_KEY}" ] && [ -f "${X509_KEYSTORE_DIR}/${X509_CRT}" ]; then
+
+      echo "Creating ${KEYSTORES[$KEYSTORE_TYPE]} keystore via OpenShift's service serving x509 certificate secrets.."
+
+      openssl pkcs12 -export \
+      -name "${NAME}" \
+      -inkey "${X509_KEYSTORE_DIR}/${X509_KEY}" \
+      -in "${X509_KEYSTORE_DIR}/${X509_CRT}" \
+      -out "${KEYSTORES_STORAGE}/${PKCS12_KEYSTORE_FILE}" \
+      -password pass:"${PASSWORD}" >& /dev/null
+
+      keytool -importkeystore -noprompt \
+      -srcalias "${NAME}" -destalias "${NAME}" \
+      -srckeystore "${KEYSTORES_STORAGE}/${PKCS12_KEYSTORE_FILE}" \
+      -srcstoretype pkcs12 \
+      -destkeystore "${KEYSTORES_STORAGE}/${JKS_KEYSTORE_FILE}" \
+      -storepass "${PASSWORD}" -srcstorepass "${PASSWORD}" >& /dev/null
+
+      if [ -f "${KEYSTORES_STORAGE}/${JKS_KEYSTORE_FILE}" ]; then
+        echo "${KEYSTORES[$KEYSTORE_TYPE]} keystore successfully created at: ${KEYSTORES_STORAGE}/${JKS_KEYSTORE_FILE}"
+      else
+        echo "${KEYSTORES[$KEYSTORE_TYPE]} keystore not created at: ${KEYSTORES_STORAGE}/${JKS_KEYSTORE_FILE} (check permissions?)"
+      fi
+
+      echo "set keycloak_tls_keystore_password=${PASSWORD}" >> "$JBOSS_HOME/bin/.jbossclirc"
+      echo "set keycloak_tls_keystore_file=${KEYSTORES_STORAGE}/${JKS_KEYSTORE_FILE}" >> "$JBOSS_HOME/bin/.jbossclirc"
+      echo "set configuration_file=standalone.xml" >> "$JBOSS_HOME/bin/.jbossclirc"
+      $JBOSS_HOME/bin/jboss-cli.sh --file=/opt/jboss/tools/cli/x509-keystore.cli >& /dev/null
+      sed -i '$ d' "$JBOSS_HOME/bin/.jbossclirc"
+      echo "set configuration_file=standalone-ha.xml" >> "$JBOSS_HOME/bin/.jbossclirc"
+      $JBOSS_HOME/bin/jboss-cli.sh --file=/opt/jboss/tools/cli/x509-keystore.cli >& /dev/null
+      sed -i '$ d' "$JBOSS_HOME/bin/.jbossclirc"
+    fi
+
+  done
+
+  # Auto-generate the Keycloak truststore if X509_CA_BUNDLE was provided
+  local -r X509_CRT_DELIMITER="/-----BEGIN CERTIFICATE-----/"
+  local JKS_TRUSTSTORE_FILE="truststore.jks"
+  local JKS_TRUSTSTORE_PATH="${KEYSTORES_STORAGE}/${JKS_TRUSTSTORE_FILE}"
+  local PASSWORD=$(openssl rand -base64 32 2>/dev/null)
+  local TEMPORARY_CERTIFICATE="temporary_ca.crt"
+  if [ -n "${X509_CA_BUNDLE}" ]; then
+    pushd /tmp >& /dev/null
+    echo "Creating Keycloak truststore.."
+    # We use cat here, so that users could specify multiple CA Bundles using space or even wildcard:
+    # X509_CA_BUNDLE=/var/run/secrets/kubernetes.io/serviceaccount/*.crt
+    # Note, that there is no quotes here, that's intentional. Once can use spaces in the $X509_CA_BUNDLE like this:
+    # X509_CA_BUNDLE=/ca.crt /ca2.crt
+    cat ${X509_CA_BUNDLE} > ${TEMPORARY_CERTIFICATE}
+    csplit -s -z -f crt- "${TEMPORARY_CERTIFICATE}" "${X509_CRT_DELIMITER}" '{*}'
+    for CERT_FILE in crt-*; do
+      keytool -import -noprompt -keystore "${JKS_TRUSTSTORE_PATH}" -file "${CERT_FILE}" \
+      -storepass "${PASSWORD}" -alias "service-${CERT_FILE}" >& /dev/null
+    done
+
+    if [ -f "${JKS_TRUSTSTORE_PATH}" ]; then
+      echo "Keycloak truststore successfully created at: ${JKS_TRUSTSTORE_PATH}"
+    else
+      echo "Keycloak truststore not created at: ${JKS_TRUSTSTORE_PATH}"
+    fi
+
+    # Import existing system CA certificates into the newly generated truststore
+    local SYSTEM_CACERTS=$(readlink -e $(dirname $(readlink -e $(which keytool)))"/../lib/security/cacerts")
+    if keytool -v -list -keystore "${SYSTEM_CACERTS}" -storepass "changeit" > /dev/null; then
+      echo "Importing certificates from system's Java CA certificate bundle into Keycloak truststore.."
+      keytool -importkeystore -noprompt \
+      -srckeystore "${SYSTEM_CACERTS}" \
+      -destkeystore "${JKS_TRUSTSTORE_PATH}" \
+      -srcstoretype jks -deststoretype jks \
+      -storepass "${PASSWORD}" -srcstorepass "changeit" >& /dev/null
+      if [ "$?" -eq "0" ]; then
+        echo "Successfully imported certificates from system's Java CA certificate bundle into Keycloak truststore at: ${JKS_TRUSTSTORE_PATH}"
+      else
+        echo "Failed to import certificates from system's Java CA certificate bundle into Keycloak truststore!"
+      fi
+    fi
+
+    echo "set keycloak_tls_truststore_password=${PASSWORD}" >> "$JBOSS_HOME/bin/.jbossclirc"
+    echo "set keycloak_tls_truststore_file=${KEYSTORES_STORAGE}/${JKS_TRUSTSTORE_FILE}" >> "$JBOSS_HOME/bin/.jbossclirc"
+    echo "set configuration_file=standalone.xml" >> "$JBOSS_HOME/bin/.jbossclirc"
+    $JBOSS_HOME/bin/jboss-cli.sh --file=/opt/jboss/tools/cli/x509-truststore.cli >& /dev/null
+    sed -i '$ d' "$JBOSS_HOME/bin/.jbossclirc"
+    echo "set configuration_file=standalone-ha.xml" >> "$JBOSS_HOME/bin/.jbossclirc"
+    $JBOSS_HOME/bin/jboss-cli.sh --file=/opt/jboss/tools/cli/x509-truststore.cli >& /dev/null
+    sed -i '$ d' "$JBOSS_HOME/bin/.jbossclirc"
+
+    popd >& /dev/null
+  fi
+}
+
+autogenerate_keystores
+ ```
  #### /opt/jboss/tools/jgroups.sh
+ ```
+ #!/bin/bash
+
+# If JGROUPS_DISCOVERY_PROPERTIES is set, it must be in the following format: PROP1=FOO,PROP2=BAR
+# If JGROUPS_DISCOVERY_PROPERTIES_DIRECT is set, it must be in the following format: {PROP1=>FOO,PROP2=>BAR}
+# It's a configuration error to set both of these variables
+
+if [ -n "$JGROUPS_DISCOVERY_PROTOCOL" ]; then
+    if [ -n "$JGROUPS_DISCOVERY_PROPERTIES" ] && [ -n "$JGROUPS_DISCOVERY_PROPERTIES_DIRECT" ]; then
+       echo >&2 "error: both JGROUPS_DISCOVERY_PROPERTIES and JGROUPS_DISCOVERY_PROPERTIES_DIRECT are set (but are exclusive)"
+       exit 1
+    fi
+
+    if [ -n "$JGROUPS_DISCOVERY_PROPERTIES_DIRECT" ]; then
+       JGROUPS_DISCOVERY_PROPERTIES_PARSED="$JGROUPS_DISCOVERY_PROPERTIES_DIRECT"
+    else
+       JGROUPS_DISCOVERY_PROPERTIES_PARSED=`echo $JGROUPS_DISCOVERY_PROPERTIES | sed "s/=/=>/g"`
+       JGROUPS_DISCOVERY_PROPERTIES_PARSED="{$JGROUPS_DISCOVERY_PROPERTIES_PARSED}"
+    fi
+
+    echo "Setting JGroups discovery to $JGROUPS_DISCOVERY_PROTOCOL with properties $JGROUPS_DISCOVERY_PROPERTIES_PARSED"
+    echo "set keycloak_jgroups_discovery_protocol=${JGROUPS_DISCOVERY_PROTOCOL}" >> "$JBOSS_HOME/bin/.jbossclirc"
+    echo "set keycloak_jgroups_discovery_protocol_properties=${JGROUPS_DISCOVERY_PROPERTIES_PARSED}" >> "$JBOSS_HOME/bin/.jbossclirc"
+    echo "set keycloak_jgroups_transport_stack=${JGROUPS_TRANSPORT_STACK:-tcp}" >> "$JBOSS_HOME/bin/.jbossclirc"
+    # If there's a specific CLI file for given protocol - execute it. If not, we should be good with the default one.
+    if [ -f "/opt/jboss/tools/cli/jgroups/discovery/$JGROUPS_DISCOVERY_PROTOCOL.cli" ]; then
+       $JBOSS_HOME/bin/jboss-cli.sh --file="/opt/jboss/tools/cli/jgroups/discovery/$JGROUPS_DISCOVERY_PROTOCOL.cli" >& /dev/null
+    else
+       $JBOSS_HOME/bin/jboss-cli.sh --file="/opt/jboss/tools/cli/jgroups/discovery/default.cli" >& /dev/null
+    fi
+fi
+ ```
  #### /opt/jboss/tools/infinispan.sh
+ ```
+ # How many owners / replicas should our distributed caches have. If <2 any node that is removed from the cluster will cause a data-loss!
+# As it is only sensible to replicate AuthenticationSessions for certain cases, their replication factor can be configured independently
+
+if [ -n "$CACHE_OWNERS_COUNT" ]; then
+    echo "Setting cache owners to $CACHE_OWNERS_COUNT replicas"
+
+    # Check and log the replication factor of AuthenticationSessions, otherwise this is set to 1 by default
+    if [ -n "$CACHE_OWNERS_AUTH_SESSIONS_COUNT" ]; then
+        echo "Enabling replication of AuthenticationSessions with ${CACHE_OWNERS_AUTH_SESSIONS_COUNT} replicas"
+    else
+        echo "AuthenticationSessions will NOT be replicated, set CACHE_OWNERS_AUTH_SESSIONS_COUNT to configure this"
+    fi
+$JBOSS_HOME/bin/jboss-cli.sh --file="/opt/jboss/tools/cli/infinispan/cache-owners.cli" >& /dev/null
+fi
+```
  #### /opt/jboss/tools/statistics.sh
- #### /opt/jboss/tools/vault.sh
- #### /opt/jboss/tools/autorun.sh
+ ```
+ #!/bin/bash
+
+if [ -n "$KEYCLOAK_STATISTICS" ]; then
+   IFS=',' read -ra metrics <<< "$KEYCLOAK_STATISTICS"
+   for file in /opt/jboss/tools/cli/metrics/*.cli; do
+      name=${file##*/}
+      base=${name%.cli}
+      if [[  $KEYCLOAK_STATISTICS == *"$base"* ]] || [[  $KEYCLOAK_STATISTICS == *"all"* ]];  then
+         $JBOSS_HOME/bin/jboss-cli.sh --file="$file" >& /dev/null
+      fi
+   done
+fi
+ ```
  
+ #### /opt/jboss/tools/vault.sh
+ ```
+ #!/bin/bash
+
+if [ -d "$JBOSS_HOME/secrets" ]; then
+    echo "set plaintext_vault_provider_dir=${JBOSS_HOME}/secrets" >> "$JBOSS_HOME/bin/.jbossclirc"
+
+    echo "set configuration_file=standalone.xml" >> "$JBOSS_HOME/bin/.jbossclirc"
+    $JBOSS_HOME/bin/jboss-cli.sh --file=/opt/jboss/tools/cli/files-plaintext-vault.cli
+    sed -i '$ d' "$JBOSS_HOME/bin/.jbossclirc"
+
+    echo "set configuration_file=standalone-ha.xml" >> "$JBOSS_HOME/bin/.jbossclirc"
+    $JBOSS_HOME/bin/jboss-cli.sh --file=/opt/jboss/tools/cli/files-plaintext-vault.cli
+    sed -i '$ d' "$JBOSS_HOME/bin/.jbossclirc"
+fi
+ ```
+ #### /opt/jboss/tools/autorun.sh
+ ```
+ #!/bin/bash -e
+cd /opt/jboss/keycloak
+
+ENTRYPOINT_DIR=/opt/jboss/startup-scripts
+
+if [[ -d "$ENTRYPOINT_DIR" ]]; then
+  # First run cli autoruns
+  for f in "$ENTRYPOINT_DIR"/*; do
+    if [[ "$f" == *.cli ]]; then
+      echo "Executing cli script: $f"
+      bin/jboss-cli.sh --file="$f"
+    elif [[ -x "$f" ]]; then
+      echo "Executing: $f"
+      "$f"
+    else
+      echo "Ignoring file in $ENTRYPOINT_DIR (not *.cli or executable): $f"
+    fi
+  done
+fi
+ ```
 
 ### Start Keycloak 
 ```
