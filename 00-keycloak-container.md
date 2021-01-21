@@ -54,3 +54,87 @@ chmod -R g+rwX /opt
 
 ### ENTRYPOINT [ "/opt/tools/docker-entrypoint.sh" ]
 ### CMD ["-b", "0.0.0.0"]
+
+#### Ajouer un  admin user keycloak s'il n'existe pas
+```
+if [[ -n ${KEYCLOAK_USER:-} && -n ${KEYCLOAK_PASSWORD:-} ]]; then
+    /opt/jboss/keycloak/bin/add-user-keycloak.sh --user "$KEYCLOAK_USER" --password "$KEYCLOAK_PASSWORD"
+fi
+```
+
+#### Hostname
+```
+if [[ -n ${KEYCLOAK_FRONTEND_URL:-} ]]; then
+    SYS_PROPS+="-Dkeycloak.frontendUrl=$KEYCLOAK_FRONTEND_URL"
+fi
+
+if [[ -n ${KEYCLOAK_HOSTNAME:-} ]]; then
+    SYS_PROPS+=" -Dkeycloak.hostname.provider=fixed -Dkeycloak.hostname.fixed.hostname=$KEYCLOAK_HOSTNAME"
+
+    if [[ -n ${KEYCLOAK_HTTP_PORT:-} ]]; then
+        SYS_PROPS+=" -Dkeycloak.hostname.fixed.httpPort=$KEYCLOAK_HTTP_PORT"
+    fi
+
+    if [[ -n ${KEYCLOAK_HTTPS_PORT:-} ]]; then
+        SYS_PROPS+=" -Dkeycloak.hostname.fixed.httpsPort=$KEYCLOAK_HTTPS_PORT"
+    fi
+
+    if [[ -n ${KEYCLOAK_ALWAYS_HTTPS:-} ]]; then
+            SYS_PROPS+=" -Dkeycloak.hostname.fixed.alwaysHttps=$KEYCLOAK_ALWAYS_HTTPS"
+    fi
+fi
+```
+#### Realm import
+```
+if [[ -n ${KEYCLOAK_IMPORT:-} ]]; then
+    SYS_PROPS+=" -Dkeycloak.import=$KEYCLOAK_IMPORT"
+fi
+```
+#### JGroups bind options
+```
+if [[ -z ${BIND:-} ]]; then
+    BIND=$(hostname --all-ip-addresses)
+fi
+if [[ -z ${BIND_OPTS:-} ]]; then
+    for BIND_IP in $BIND
+    do
+        BIND_OPTS+=" -Djboss.bind.address=$BIND_IP -Djboss.bind.address.private=$BIND_IP "
+    done
+fi
+SYS_PROPS+=" $BIND_OPTS"
+```
+
+#### Expose management console for metrics
+```
+if [[ -n ${KEYCLOAK_STATISTICS:-} ]] ; then
+    SYS_PROPS+=" -Djboss.bind.address.management=0.0.0.0"
+fi
+```
+#### Configuration
+```
+# If the server configuration parameter is not present, append the HA profile.
+if echo "$@" | grep -E -v -- '-c |-c=|--server-config |--server-config='; then
+    SYS_PROPS+=" -c=standalone-ha.xml"
+fi
+
+# Adding support for JAVA_OPTS_APPEND
+sed -i '$a\\n# Append to JAVA_OPTS. Necessary to prevent some values being omitted if JAVA_OPTS is defined directly\nJAVA_OPTS=\"\$JAVA_OPTS \$JAVA_OPTS_APPEND\"' /opt/jboss/keycloak/bin/standalone.conf
+```
+
+#### DB setup 
+ ```
+ /bin/sh /opt/jboss/tools/databases/change-database.sh $DB_VENDOR
+ /opt/jboss/tools/x509.sh
+ /opt/jboss/tools/jgroups.sh
+ /opt/jboss/tools/infinispan.sh
+ /opt/jboss/tools/statistics.sh
+ /opt/jboss/tools/vault.sh
+ /opt/jboss/tools/autorun.sh
+ ```
+
+#### Start Keycloak 
+```
+exec /opt/jboss/keycloak/bin/standalone.sh $SYS_PROPS $@
+```
+ 
+
