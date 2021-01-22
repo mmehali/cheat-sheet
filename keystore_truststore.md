@@ -17,3 +17,66 @@ openssl pkcs12 -export
       -in "${X509_KEYSTORE_DIR}/${X509_CRT}" \
       -out "${KEYSTORES_STORAGE}/${PKCS12_KEYSTORE_FILE}" \
       -password pass:"${PASSWORD}" >& /dev/null
+      
+## Steps to create a self-signed certificate using OpenSSL
+
+
+Below are the steps to create a self-signed certificate using OpenSSL :
+
+### STEP 1 :
+Create a private key and public certificate using the following command :
+'''
+openssl req -newkey rsa:2048 -x509 -keyout cakey.pem -out cacert.pem -days 3650 
+'''
+
+
+
+
+
+
+- **cakey.pem** is the private key
+
+- **cacert.pem** is the public certificate
+
+### STEP 2 :
+Use the following java utility to create a JKS keystore : 
+
+
+
+
+
+You can use the following commands to create a PKCS12 / JKS file : 
+#### STEP 2a :
+##### Create a PKCS12 keystore :
+
+       openssl pkcs12 -export -in cacert.pem -inkey cakey.pem -out identity.p12 -name "mykey" 
+
+
+
+In the above command :
+
+- "-name" is the alias of the private key entry in keystore. 
+
+##### STEP 2b :
+Now convert the PKCS12 keystore to JKS keytstore using keytool command : 
+
+      keytool -importkeystore -destkeystore identity.jks -deststorepass password -srckeystore identity.p12 -srcstoretype PKCS12 -srcstorepass password 
+
+
+
+### STEP 3 :
+Create a trust keystore using the following command :
+
+      keytool -import -file cacert.pem -keystore trust.jks -storepass password
+
+
+
+### Additional Info
+
+- To view the public certificate :
+
+       openssl x509 -in cacert.pem -noout -text
+
+- To concatenate the private key and public certificate into a pem file (which is required for many web-servers ) :
+
+       cat cakey.pem cacert.pem > server.pem  
