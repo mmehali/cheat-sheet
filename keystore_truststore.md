@@ -1,10 +1,16 @@
+- [Keycloak Cluster Setup](https://www.keycloak.org/2019/05/keycloak-cluster-setup.html)
+- [Configure the Vagrant login user during provisioning using the Shell provider](https://coderwall.com/p/uzkokw/configure-the-vagrant-login-user-during-provisioning-using-the-shell-provider)
+- [Changing user during vagrant provisioning - Stack Overflow](https://stackoverflow.com/questions/32369328/changing-user-during-vagrant-provisioning)
 - [Everything About HTTPS and SSL (Java)](https://dzone.com/articles/ssl-in-java)
 - [Core java security](https://github.com/eugenp/tutorials/tree/master/core-java-modules/core-java-security)
 - [Java KeyStore API](https://www.baeldung.com/java-keystore)
 - [HTTPS request with trust store for server certificates](https://connect2id.com/products/nimbus-oauth-openid-connect-sdk/examples/utils/custom-trust-store)
-[How to configure SSL/HTTPS on WildFly]http://www.mastertheboss.com/jboss-server/jboss-security/complete-tutorial-for-configuring-ssl-https-on-wildfly
- 
-
+- [How to configure SSL/HTTPS on WildFly](http://www.mastertheboss.com/jboss-server/jboss-security/complete-tutorial-for-configuring-ssl-https-on-wildfly)
+ [Instructions for enabling mutual SSL in Keycloak and WildFly](https://gist.github.com/gyfoster/4005353b1f063b92dd77798a6fbfc018)
+- [HELP Setting up SSL with Keycloak](https://developer.jboss.org/thread/278360)
+- [OpenSSL](https://www.dogtagpki.org/wiki/OpenSSL)
+- [Keytool](https://www.dogtagpki.org/wiki/Keytool)
+- [How do I convert my PEM format certificate to PKCS12 as required by the Java and .NET SDKs?](https://www.paypal.com/us/smarthelp/article/how-do-i-convert-my-pem-format-certificate-to-pkcs12-as-required-by-the-java-and-.net-sdks-ts1020)
 
 ## Étapes pour créer un certificat auto-signé à l'aide d'OpenSSL
 Vous trouverez ci-dessous les étapes pour créer un certificat auto-signé à l'aide d'OpenSSL:
