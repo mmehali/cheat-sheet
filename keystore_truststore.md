@@ -2,81 +2,59 @@
 - [Core java security](https://github.com/eugenp/tutorials/tree/master/core-java-modules/core-java-security)
 - [Java KeyStore API](https://www.baeldung.com/java-keystore)
 - [HTTPS request with trust store for server certificates](https://connect2id.com/products/nimbus-oauth-openid-connect-sdk/examples/utils/custom-trust-store)
-## Génération de la clé privee
-openssl genrsa 2048 > host.key
-chmod 400 host.key
-## Génération du certificat à partir de la clé publique
-openssl req -new -x509 -nodes -sha256 -days 365 -key host.key -out host.cert
-
-## Creatino keystore service serving x509 certificate secrets.."
+[How to configure SSL/HTTPS on WildFly]http://www.mastertheboss.com/jboss-server/jboss-security/complete-tutorial-for-configuring-ssl-https-on-wildfly
+ 
 
 
-openssl pkcs12 -export 
-      -name "${NAME}" \
--inkey "/${X509_KEY}" \
-      -in "${X509_KEYSTORE_DIR}/${X509_CRT}" \
-      -out "${KEYSTORES_STORAGE}/${PKCS12_KEYSTORE_FILE}" \
-      -password pass:"${PASSWORD}" >& /dev/null
-      
-## Steps to create a self-signed certificate using OpenSSL
+## Étapes pour créer un certificat auto-signé à l'aide d'OpenSSL
+Vous trouverez ci-dessous les étapes pour créer un certificat auto-signé à l'aide d'OpenSSL:
 
-
-Below are the steps to create a self-signed certificate using OpenSSL :
-
-### STEP 1 :
-Create a private key and public certificate using the following command :
+### STEP 1 : créez une clé privée et un certificat public
+Créez une clé privée et un certificat public à l'aide de la commande suivante:
 '''
 openssl req -newkey rsa:2048 -x509 -keyout cakey.pem -out cacert.pem -days 3650 
 '''
 
+- **cakey.pem** est la clé privée
+- **cacert.pem** est le certificat publique
+
+ou 
+```
+openssl genrsa 2048 > host.key
+chmod 400 host.key
+openssl req -new -x509 -nodes -sha256 -days 365 -key host.key -out host.cert
+```
+- pour afficher le certificat public 
+  ```
+  openssl x509 -in cacert.pem -noout -text
+```
+- Pour concaténer la clé privée et le certificat public dans un fichier pem (requis pour de nombreux serveurs Web)::
+```
+cat cakey.pem cacert.pem > server.pem  
+```
+### STEP 2 : créer un keystore JKS 
+ 
+#### STEP 2a : creation keystore PKCS12 
+```
+openssl pkcs12 -export -in cacert.pem -inkey cakey.pem -out identity.p12 -name "mykey" 
+```
+- "-name" est l'alias de l'entrée de clé privée dans le keystore. 
+
+ou 
+```
+openssl pkcs12 -export -in host.crt -inkey host.key  -name "${NAME}"  
+      -out "${KEYSTORES_STORAGE}/${PKCS12_KEYSTORE_FILE}" \
+      -password pass:"${PASSWORD}" >& /dev/null
+```   
+
+##### STEP 2b : convertir le keystore PKCS12 en keytstore JKS
+```
+keytool -importkeystore -destkeystore identity.jks -deststorepass password -srckeystore identity.p12 -srcstoretype PKCS12 -srcstorepass password 
+```
 
 
 
-
-
-- **cakey.pem** is the private key
-
-- **cacert.pem** is the public certificate
-
-### STEP 2 :
-Use the following java utility to create a JKS keystore : 
-
-
-
-
-
-You can use the following commands to create a PKCS12 / JKS file : 
-#### STEP 2a :
-##### Create a PKCS12 keystore :
-
-       openssl pkcs12 -export -in cacert.pem -inkey cakey.pem -out identity.p12 -name "mykey" 
-
-
-
-In the above command :
-
-- "-name" is the alias of the private key entry in keystore. 
-
-##### STEP 2b :
-Now convert the PKCS12 keystore to JKS keytstore using keytool command : 
-
-      keytool -importkeystore -destkeystore identity.jks -deststorepass password -srckeystore identity.p12 -srcstoretype PKCS12 -srcstorepass password 
-
-
-
-### STEP 3 :
-Create a trust keystore using the following command :
-
-      keytool -import -file cacert.pem -keystore trust.jks -storepass password
-
-
-
-### Additional Info
-
-- To view the public certificate :
-
-       openssl x509 -in cacert.pem -noout -text
-
-- To concatenate the private key and public certificate into a pem file (which is required for many web-servers ) :
-
-       cat cakey.pem cacert.pem > server.pem  
+### STEP 3 : Créez un truststore
+```
+keytool -import -file cacert.pem -keystore trust.jks -storepass password
+```
