@@ -11,6 +11,8 @@
 - [OpenSSL](https://www.dogtagpki.org/wiki/OpenSSL)
 - [Keytool](https://www.dogtagpki.org/wiki/Keytool)
 - [How do I convert my PEM format certificate to PKCS12 as required by the Java and .NET SDKs?](https://www.paypal.com/us/smarthelp/article/how-do-i-convert-my-pem-format-certificate-to-pkcs12-as-required-by-the-java-and-.net-sdks-ts1020)
+[Mise en oeuvre certificats SSL avec Wildfly](http://objis.com/mise-en-oeuvre-certificats-ssl-avec-wildfly/)
+
 
 ## Étapes pour créer un certificat auto-signé à l'aide d'OpenSSL
 Vous trouverez ci-dessous les étapes pour créer un certificat auto-signé à l'aide d'OpenSSL:
