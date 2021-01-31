@@ -1,3 +1,4 @@
+- [Install keycloak with postgres](https://devopstales.github.io/sso/keycloak2/)
 - [Keycloak Cluster Setup](https://www.keycloak.org/2019/05/keycloak-cluster-setup.html)
 - [Configure the Vagrant login user during provisioning using the Shell provider](https://coderwall.com/p/uzkokw/configure-the-vagrant-login-user-during-provisioning-using-the-shell-provider)
 - [Changing user during vagrant provisioning - Stack Overflow](https://stackoverflow.com/questions/32369328/changing-user-during-vagrant-provisioning)
