@@ -1,3 +1,4 @@
+- [How to configure load balancing using Nginx](https://upcloud.com/community/tutorials/configure-load-balancing-nginx/)
 - [Install postgres](https://devopstales.github.io/linux/install-postgresql/#install-postgresql-10-on-centos-7)
 - [Install keycloak with postgres](https://devopstales.github.io/sso/keycloak2/)
 - [Keycloak Cluster Setup](https://www.keycloak.org/2019/05/keycloak-cluster-setup.html)
