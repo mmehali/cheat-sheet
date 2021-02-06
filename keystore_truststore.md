@@ -59,6 +59,87 @@ openssl pkcs12 -export -in host.crt -inkey host.key  -name "${NAME}"
       -password pass:"${PASSWORD}" >& /dev/null
 ```   
 
+### How to create keystore and truststore using self-signed certificate?
+
+
+
+
+
+
+
+
+
+
+
+
+We have JAVA server and client communicate over a network using SSL. The server and client mutually authenticate each other using certificates. The keystore type used by the server and client is JKS. The server and client loads their keystore and truststore files. The keystore and truststore file names are: server.keystore, server.truststore, client.keystore, and client.truststore. I am using Self-Signed certificates for testing only.
+
+Questions:
+
+Q1. I would like to know why I need to add server’s and client’s own certificates into their respective truststores, in step 6.u
+
+Q2. Can I reduce the number steps to achieve the same thing? If yes, then how?
+
+### Steps to create RSA key, self-signed certificates, keystore, and truststore for a server
+
+#### Generate a private RSA key
+
+openssl genrsa -out diagserverCA.key 2048
+
+#### Create a x509 certificate
+
+openssl req -x509 -new -nodes -key diagserverCA.key \
+            -sha256 -days 1024 -out diagserverCA.pem
+#### Create a PKCS12 keystore from private key and public certificate.
+
+openssl pkcs12 -export -name server-cert \
+               -in diagserverCA.pem -inkey diagserverCA.key \
+               -out serverkeystore.p12
+#### Convert PKCS12 keystore into a JKS keystore
+
+keytool -importkeystore -destkeystore server.keystore \
+        -srckeystore serverkeystore.p12 -srcstoretype pkcs12 
+        -alias server-cert
+#### Import a client's certificate to the server's trust store.
+
+keytool -import -alias client-cert \
+        -file diagclientCA.pem -keystore server.truststore
+#### Import a server's certificate to the server's trust store.
+
+keytool -import -alias server-cert \
+        -file diagserverCA.pem -keystore server.truststore
+### Steps to create RSA private key, self-signed certificate, keystore, and truststore for a client
+
+#### Generate a private key
+
+openssl genrsa -out diagclientCA.key 2048
+
+#### Create a x509 certificate
+
+openssl req -x509 -new -nodes -key diagclientCA.key \
+            -sha256 -days 1024 -out diagclientCA.pem
+            
+#### Create PKCS12 keystore from private key and public certificate.
+
+openssl pkcs12 -export -name client-cert \
+               -in diagclientCA.pem -inkey diagclientCA.key \
+               -out clientkeystore.p12
+#### Convert a PKCS12 keystore into a JKS keystore
+
+keytool -importkeystore -destkeystore client.keystore \
+        -srckeystore clientkeystore.p12 -srcstoretype pkcs12 \
+        -alias client-cert
+        
+#### Import a server's certificate to the client's trust store.
+
+keytool -import -alias server-cert -file diagserverCA.pem \
+        -keystore client.truststore
+        
+#### Import a client's certificate to the client's trust store.
+
+keytool -import -alias client-cert -file diagclientCA.pem \
+        -keystore client.truststore
+
 ##### STEP 2b : convertir le keystore PKCS12 en keytstore JKS
 ```
 keytool -importkeystore -destkeystore identity.jks -deststorepass password -srckeystore identity.p12 -srcstoretype PKCS12 -srcstorepass password 
