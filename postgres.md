@@ -6,17 +6,21 @@
 Sur Linux, aucun mot de passe par défaut n'est défini.
 
 Pour définir le mot de passe par défaut:
-    - Exécutez la commande psql à partir du compte utilisateur postgres:
-```
-    sudo -u postgres psql postgres
-```
-    Définissez le mot de passe:
-```
-    \ password postgres
-```
-  - Entrer un mot de passe.
+- Exécutez la commande psql à partir du compte utilisateur postgres:
 
-  - Fermez psql.
 ```
-    \ q
+sudo -u postgres psql postgres
+```
+
+- Définissez le mot de passe:
+    
+```
+    \password postgres
+```
+ - Entrer un mot de passe.
+
+ - Fermez psql.
+
+```
+ \ q
 ```
