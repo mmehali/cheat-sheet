@@ -62,3 +62,127 @@ Pragma: no-cache{
                                        //   requested ones.
 }
 ```
+
+### 2. Implicit Flow
+#### 2.1. Request To Authorization Endpoint
+```
+GET {Authorization Endpoint}
+  ?response_type=token          // - Required
+  &client_id={Client ID}        // - Required
+  &redirect_uri={Redirect URI}  // - Conditionally required
+  &scope={Scopes}               // - Optional
+  &state={Arbitrary String}     // - Recommended
+  HTTP/1.1
+HOST: {Authorization Server}
+```
+
+#### 2.2. Response From Authorization Endpoint
+```
+HTTP/1.1 302 Found
+Location: {Redirect URI}
+  #access_token={Access Token}       // - Always included
+  &token_type={Token Type}           // - Always included
+  &expires_in={Lifetime In Seconds}  // - Optional
+  &state={Arbitrary String}          // - Included if the request
+                                     //   included 'state'.
+  &scope={Scopes}                    // - Mandatory if the granted
+                                     //   scopes differ from the
+                                     //   requested ones.
+```
+
+Implicit Flow does not issue refresh tokens.
+
+### 3. Resource Owner Password Credentials Flow
+
+#### 3.1. Request To Token Endpoint
+```
+POST {Token Endpoint} HTTP/1.1
+Host: {Authorization Server}
+Content-Type: application/x-www-form-urlecodedgrant_type=password    // - Required
+&username={User ID}    // - Required
+&password={Password}   // - Required
+&scope={Scopes}        // - Optional
+```
+If the client type of the client application is “public”, the client_id request parameter is additionally required. 
+On the other hand, if the client type is “confidential”, depending on the client authentication method, 
+an Authorization HTTP header, a pair of client_id & client_secret parameters, or some other input parameters 
+are required. See “OAuth 2.0 Client Authentication” for details.
+
+#### 3.2. Response From Token Endpoint
+```
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Cache-Control: no-store
+Pragma: no-cache{
+  "access_token": "{Access Token}",    // - Always included
+  "token_type": "{Token Type}",        // - Always included
+  "expires_in": {Lifetime In Seconds}, // - Optional
+  "refresh_token": "{Refresh Token}",  // - Optional
+  "scope": "{Scopes}"                  // - Mandatory if the granted
+                                       //   scopes differ from the
+                                       //   requested ones.
+}
+```
+
+### 4. Client Credentials Flow
+
+#### 4.1. Request To Token Endpoint
+```
+POST {Token Endpoint} HTTP/1.1
+Host: {Authorization Server}
+Authorization: Basic {Client Credentials}
+Content-Type: application/x-www-form-urlecodedgrant_type=client_credentials  // - Required
+&scope={Scopes}                // - Optional
+```
+
+Client Credentials Flow is allowed only for confidential clients (cf. RFC 6749, 2.1. Client Types). 
+As a result, Authorization header, a pair of client_id & client_secret parameters, or some other 
+input parameters for client authentication are required. See “OAuth 2.0 Client Authentication” for details.
+
+#### 4.2. Response From Token Endpoint
+```
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Cache-Control: no-store
+Pragma: no-cache{
+  "access_token": "{Access Token}",    // - Always included
+  "token_type": "{Token Type}",        // - Always included
+  "expires_in": {Lifetime In Seconds}, // - Optional
+  "scope": "{Scopes}"                  // - Mandatory if the granted
+                                       //   scopes differ from the
+                                       //   requested ones.
+}
+```
+
+The specification says Client Credentials Flow should not issue refresh tokens.
+
+### 5. Refresh Token Flow
+
+#### 5.1. Request To Token Endpoint
+```
+POST {Token Endpoint} HTTP/1.1
+Host: {Authorization Server}
+Content-Type: application/x-www-form-urlecodedgrant_type=refresh_token        // - Required
+&refresh_token={Refresh Token}  // - Required
+&scope={Scopes}                 // - Optional
+
+- if the **client type** of the client application is “public”, the client_id request parameter is additionally required. 
+- if the **client type** is “confidential”, depending on the client authentication method, an Authorization HTTP header, a pair of client_id & client_secret parameters, or some other input parameters are required. See “OAuth 2.0 Client Authentication” for details.
+```
+
+#### 5.2. Response From Token Endpoint
+
+```
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Cache-Control: no-store
+Pragma: no-cache{
+  "access_token": "{Access Token}",    // - Always included
+  "token_type": "{Token Type}",        // - Always included
+  "expires_in": {Lifetime In Seconds}, // - Optional
+  "refresh_token": "{Refresh Token}",  // - Optional
+  "scope": "{Scopes}"                  // - Mandatory if the granted
+                                       //   scopes differ from the
+                                       //   original ones.
+}
+```
