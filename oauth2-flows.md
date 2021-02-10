@@ -45,7 +45,7 @@ See PKCE Token Request for details.
 If the client type of the client application is “public”, the client_id request parameter is additionally required. 
 On the other hand, if the client type is “confidential”, depending on the client authentication method, an 
 Authorization HTTP header, a pair of client_id & client_secret parameters, or some other input parameters are 
-required. See “OAuth 2.0 Client Authentication” for details.
+required. See “[OAuth 2.0 Client Authentication](https://darutk.medium.com/oauth-2-0-client-authentication-4b5f929305d4)” for details.
 
 #### 1.4. Response From Token Endpoint
 ```
@@ -106,7 +106,7 @@ Content-Type: application/x-www-form-urlecodedgrant_type=password    // - Requir
 If the client type of the client application is “public”, the client_id request parameter is additionally required. 
 On the other hand, if the client type is “confidential”, depending on the client authentication method, 
 an Authorization HTTP header, a pair of client_id & client_secret parameters, or some other input parameters 
-are required. See “OAuth 2.0 Client Authentication” for details.
+are required. See “[OAuth 2.0 Client Authentication](https://darutk.medium.com/oauth-2-0-client-authentication-4b5f929305d4)” for details.
 
 #### 3.2. Response From Token Endpoint
 ```
@@ -137,7 +137,7 @@ Content-Type: application/x-www-form-urlecodedgrant_type=client_credentials  // 
 
 Client Credentials Flow is allowed only for confidential clients (cf. RFC 6749, 2.1. Client Types). 
 As a result, Authorization header, a pair of client_id & client_secret parameters, or some other 
-input parameters for client authentication are required. See “OAuth 2.0 Client Authentication” for details.
+input parameters for client authentication are required. See “[OAuth 2.0 Client Authentication](https://darutk.medium.com/oauth-2-0-client-authentication-4b5f929305d4)” for details.
 
 #### 4.2. Response From Token Endpoint
 ```
@@ -165,10 +165,10 @@ Host: {Authorization Server}
 Content-Type: application/x-www-form-urlecodedgrant_type=refresh_token        // - Required
 &refresh_token={Refresh Token}  // - Required
 &scope={Scopes}                 // - Optional
-
-- if the **client type** of the client application is “public”, the client_id request parameter is additionally required. 
-- if the **client type** is “confidential”, depending on the client authentication method, an Authorization HTTP header, a pair of client_id & client_secret parameters, or some other input parameters are required. See “OAuth 2.0 Client Authentication” for details.
 ```
+- if the **client type** of the client application is “public”, the client_id request parameter is additionally required. 
+- if the **client type** is “confidential”, depending on the client authentication method, an Authorization HTTP header, a pair of client_id & client_secret parameters, or some other input parameters are required. See “[OAuth 2.0 Client Authentication](https://darutk.medium.com/oauth-2-0-client-authentication-4b5f929305d4)” for details.
+
 
 #### 5.2. Response From Token Endpoint
 
