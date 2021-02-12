@@ -2,7 +2,7 @@
 
 
 Les transactions SAML utilisent le langage XML (Extensible Markup Language) pour les 
-communications normalisées entre le **fournisseur d'identité** et les **fournisseurs de services**. 
+communications normalisées entre le **fournisseur d'identité (IDP)** et les **fournisseurs de services (SP)**. 
 SAML est le lien entre l'authentification de l'identité d'un utilisateur et l'autorisation d'utiliser un service.
 
 Le Consortium OASIS a approuvé SAML 2.0 en 2005. La norme a considérablement changé par rapport 
@@ -22,45 +22,45 @@ SAML propose une solution permettant à votre fournisseur d'identité et à vos 
 d'exister séparément les uns des autres, ce qui centralise la gestion des utilisateurs et donne accès 
 aux solutions SaaS.
 
+## comment ça marche 
 SAML met en œuvre une méthode sécurisée de transmission des authentifications et autorisations 
-utilisateur entre le fournisseur d'identité et les fournisseurs de services. Lorsqu'un utilisateur 
-se connecte à une application SAML, le fournisseur de services demande l'autorisation du fournisseur 
-d'identité approprié. Le fournisseur d'identité authentifie les informations d'identification 
-de l'utilisateur, puis renvoie l'autorisation de l'utilisateur au fournisseur de services, 
-et l'utilisateur peut maintenant utiliser l'application.
+utilisateur entre le fournisseur d'identité et les fournisseurs de services. 
+- Lorsqu'un utilisateur se connecte à une application SAML (le SP).
+- Le **SP** (fournisseur de service) demande l'autorisation de l'**IDP** (fournisseur d'identité) approprié. 
+- L'**IDP** authentifie l'utilisateur, puis renvoie l'autorisation de celui-ci au fournisseur de service
+- L'utilisateur peut maintenant utiliser l'application.
 
-L'**authentification SAML** est le processus de vérification de l'identité et des identifiants 
-de l'utilisateur (mot de passe, authentification à deux facteurs, etc.). 
+L'**authentification SAML** est le processus de vérification de l'identité de l'utilisateur (mot de passe,2FA, etc.). 
 
-L'**autorisation SAML** indique au fournisseur de services quel accès accorder à 
-l'utilisateur authentifié.
+L'**autorisation SAML** indique au **SP**(fournisseur de service) quel accès accorder à l'utilisateur authentifié
+
 
 ## Qu'est-ce qu'un fournisseur SAML ?
-Un fournisseur SAML est un système qui aide un utilisateur à accéder à un service dont 
-il a besoin. Il existe deux principaux types de fournisseurs de SAML : 
-les fournisseurs de services et les fournisseurs d'identité.
+Un fournisseur SAML est un système qui aide un utilisateur à accéder au service dont il a besoin. 
+Il existe deux principaux types de fournisseurs de SAML : 
+- les fournisseurs de services (**SP**) 
+- les fournisseurs d'identité (**IDP**)
 
-un **fournisseur de services** à besoin de l'authentification du fournisseur d'identité 
-pour accorder l'autorisation à l'utilisateur.
+le **fournisseur de services** à besoin de l'authentification du fournisseur d'identité pour accorder 
+l'autorisation à l'utilisateur.
 
-un, **fournisseur d'identité** authentifie que l'utilisateur final est bien celui qu'il 
+le **fournisseur d'identité** authentifie que l'utilisateur final est bien celui qu'il 
 prétend être et envoie ces données au fournisseur de services avec les droits d'accès 
 de l'utilisateur au service.
 
 ## Qu'est-ce qu'une affirmation SAML ?
-Une **affirmation SAML** est le document XML que le fournisseur d'identité envoie au fournisseur
+Une **affirmation SAML** ou **Assertions SAML** est le document XML que le fournisseur d'identité envoie au fournisseur
 de services et qui contient l'autorisation utilisateur. Il existe trois types différents 
-d'Assertions SAML - **authentification, attribut et décision d'autorisation**.
+d'Assertions SAML : **authentification, attribut et décision d'autorisation**.
 
-Les **affirmations d'authentification** prouvent l'identification de l'utilisateur et indiquent 
+- Les **assertions d'authentification** prouvent l'identification de l'utilisateur et indiquent 
 l'heure à laquelle l'utilisateur s'est connecté et la méthode d'authentification 
 utilisée (p. ex., Kerberos, facteur 2, etc.).
 
-L'**assertion d'attribution** transmet les attributs SAML au fournisseur de 
-services - Les attributs SAML sont des données spécifiques qui fournissent 
-des informations sur l'utilisateur.
+- L'**assertion d'attribution** transmet les attributs SAML au fournisseur de services.
+Les attributs SAML sont des données spécifiques qui fournissent des informations sur l'utilisateur.
 
-Une **déclaration de décision d'autorisation** indique si l'utilisateur est autorisé à utiliser 
+- La **déclaration de décision d'autorisation** indique si l'utilisateur est autorisé à utiliser 
 le service ou si le fournisseur d'identification a refusé sa demande en raison d'une défaillance 
 du mot de passe ou d'un manque de droits sur le service.
 ```
@@ -120,10 +120,10 @@ du mot de passe ou d'un manque de droits sur le service.
 ## Comment fonctionne SAML ?
 SAML fonctionne en transmettant des informations sur les utilisateurs, les connexions et 
 les attributs entre le fournisseur d'identité et les fournisseurs de services. Chaque 
-utilisateur se connecte une seule fois au Single Sign On avec le fournisseur d'identification, 
-puis le fournisseur d'identification peut transmettre les attributs SAML au fournisseur 
+utilisateur se connecte une seule fois au Single Sign On avec le fournisseur d'identite, 
+puis le fournisseur d'identé peut transmettre les attributs SAML au fournisseur 
 de services lorsque l'utilisateur tente d'accéder à ces services. Le fournisseur de services 
-demande l'autorisation et l'authentification au fournisseur d'identification. 
+demande l'autorisation et l'authentification au fournisseur d'identité. 
 Comme ces deux systèmes parlent la même langue - SAML - l'utilisateur n'a besoin 
 de se connecter qu'une seule fois.
 
