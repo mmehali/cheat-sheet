@@ -63,6 +63,7 @@ Les attributs SAML sont des données spécifiques qui fournissent des informatio
 - La **déclaration de décision d'autorisation** indique si l'utilisateur est autorisé à utiliser 
 le service ou si le fournisseur d'identification a refusé sa demande en raison d'une défaillance 
 du mot de passe ou d'un manque de droits sur le service.
+<sub>
 ```xml
 <saml:Assertion
    xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
@@ -117,6 +118,7 @@ du mot de passe ou d'un manque de droits sur le service.
    </saml:AttributeStatement>
  </saml:Assertion>
  ```
+</sub>
 ## Comment fonctionne SAML ?
 SAML fonctionne en transmettant des informations sur les utilisateurs, les connexions et 
 les attributs entre le fournisseur d'identité et les fournisseurs de services. Chaque 
