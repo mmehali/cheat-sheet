@@ -639,7 +639,7 @@ There are 2 examples:
  - A Logout Request with the signature embedded (HTTP-POST binding).
 
 #### Logout Request
-```
+```xml
 <samlp:LogoutRequest xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol" xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" ID="ONELOGIN_21df91a89767879fc0f7df6a1490c6000c81644d" Version="2.0" IssueInstant="2014-07-18T01:13:06Z" Destination="http://idp.example.com/SingleLogoutService.php">
   <saml:Issuer>http://sp.example.com/demo1/metadata.php</saml:Issuer>
   <saml:NameID SPNameQualifier="http://sp.example.com/demo1/metadata.php" Format="urn:oasis:names:tc:SAML:2.0:nameid-format:transient">ONELOGIN_f92cc1834efc0f73e9c09f482fce80037a6251e7</saml:NameID>
@@ -654,7 +654,7 @@ x3Yq1dQ0S/6iirAPpkEYrDvY5mTqzQ3b1eE+sEmnmYbzDs5YHksRrc7uloHt7xqBcCGlk+ZI2USjKshf
 SigAlg=http://www.w3.org/2000/09/xmldsig#rsa-sha1 , RelayState=http://sp.example.com/relaystate
 Logout Request with embedded signature (HTTP-POST binding)
 
-```
+```xml
 <samlp:LogoutRequest xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol" xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" ID="pfxd4d369e8-9ea1-780c-aff8-a1d11a9862a1" Version="2.0" IssueInstant="2014-07-18T01:13:06Z" Destination="http://idp.example.com/SingleLogoutService.php">
   <saml:Issuer>http://sp.example.com/demo1/metadata.php</saml:Issuer>
   <ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
@@ -692,7 +692,7 @@ There are 2 examples:
 
 #### Logout Response
 
-```
+```xml
 <samlp:LogoutResponse xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol" xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" ID="_6c3737282f007720e736f0f4028feed8cb9b40291c" Version="2.0" IssueInstant="2014-07-18T01:13:06Z" Destination="http://sp.example.com/demo1/index.php?acs" InResponseTo="ONELOGIN_21df91a89767879fc0f7df6a1490c6000c81644d">
   <saml:Issuer>http://idp.example.com/metadata.php</saml:Issuer>
   <samlp:Status>
@@ -709,7 +709,7 @@ SigAlg=http://www.w3.org/2000/09/xmldsig#rsa-sha1 , RelayState=http://sp.example
 
 #### Logout Response with embedded signature (HTTP-POST binding)
 
-```
+```xml
 <samlp:LogoutResponse xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol" xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" ID="pfxe335499f-e73b-80bd-60c4-1628984aed4f" Version="2.0" IssueInstant="2014-07-18T01:13:06Z" Destination="http://sp.example.com/demo1/index.php?acs" InResponseTo="ONELOGIN_21df91a89767879fc0f7df6a1490c6000c81644d">
   <saml:Issuer>http://idp.example.com/metadata.php</saml:Issuer>
   <ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
