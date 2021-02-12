@@ -51,19 +51,73 @@ de l'utilisateur au service.
 ## Qu'est-ce qu'une affirmation SAML ?
 Une **affirmation SAML** ou **Assertions SAML** est le document XML que le fournisseur d'identité envoie au fournisseur
 de services et qui contient l'autorisation utilisateur. Il existe trois types différents 
-d'Assertions SAML : **authentification, attribut et décision d'autorisation**.
-
-- Les **assertions d'authentification** prouvent l'identification de l'utilisateur et indiquent 
+d'Assertions SAML : **AuthnStatement, AttributeStatement et Conditions**.
+```xml
+ <saml:Assertion>
+    <saml:Issuer>http://idp.example.com/metadata.php</saml:Issuer>
+    <saml:Subject>
+     ....
+    </saml:Subject>
+    <saml:Conditions NotBefore="2014-07-17T01:01:18Z" NotOnOrAfter="2024-01-18T06:21:48Z">
+     ....
+    </saml:Conditions>
+    <saml:AuthnStatement>
+    ...
+    </saml:AuthnStatement>
+    <saml:AttributeStatement>
+      ....
+    </saml:AttributeStatement>
+  </saml:Assertion>
+ ````
+ 
+- Les **assertions AuthnStatement** prouvent l'identification de l'utilisateur et indiquent 
 l'heure à laquelle l'utilisateur s'est connecté et la méthode d'authentification 
 utilisée (p. ex., Kerberos, facteur 2, etc.).
+```xml
+   <saml:AuthnStatement
+     AuthnInstant="2004-12-05T09:22:00Z"
+     SessionIndex="b07b804c-7c29-ea16-7300-4f3d6f7928ac">
+     <saml:AuthnContext>
+       <saml:AuthnContextClassRef>
+         urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport
+       </saml:AuthnContextClassRef>
+     </saml:AuthnContext>
+   </saml:AuthnStatement>
+```
 
-- L'**assertion d'attribution** transmet les attributs SAML au fournisseur de services.
+- L'**assertion AttributeStatement** transmet les attributs SAML au fournisseur de services.
 Les attributs SAML sont des données spécifiques qui fournissent des informations sur l'utilisateur.
+```xml
+ <saml:AttributeStatement>
+     <saml:Attribute
+       xmlns:x500="urn:oasis:names:tc:SAML:2.0:profiles:attribute:X500"
+       x500:Encoding="LDAP"
+       NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+       Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.1"
+       FriendlyName="eduPersonAffiliation">
+       <saml:AttributeValue
+         xsi:type="xs:string">member</saml:AttributeValue>
+       <saml:AttributeValue
+         xsi:type="xs:string">staff</saml:AttributeValue>
+     </saml:Attribute>
+   </saml:AttributeStatement>
+ ```
 
-- La **déclaration de décision d'autorisation** indique si l'utilisateur est autorisé à utiliser 
+- La **Conditions** indique si l'utilisateur est autorisé à utiliser 
 le service ou si le fournisseur d'identification a refusé sa demande en raison d'une défaillance 
 du mot de passe ou d'un manque de droits sur le service.
-<sub><sub><sub>
+
+```xml
+ <saml:Conditions
+     NotBefore="2004-12-05T09:17:05Z"
+     NotOnOrAfter="2004-12-05T09:27:05Z">
+     <saml:AudienceRestriction>
+       <saml:Audience>https://sp.example.com/SAML2</saml:Audience>
+     </saml:AudienceRestriction>
+   </saml:Conditions>
+ ```
+ 
+
 ```xml
 <saml:Assertion
    xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
@@ -118,7 +172,6 @@ du mot de passe ou d'un manque de droits sur le service.
    </saml:AttributeStatement>
  </saml:Assertion
  ```
- </sub></sub></sub>
 
 ## Comment fonctionne SAML ?
 SAML fonctionne en transmettant des informations sur les utilisateurs, les connexions et 
