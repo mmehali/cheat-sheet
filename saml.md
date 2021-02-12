@@ -1,3 +1,12 @@
+.markdown-preview {
+ &, h4, h5, h6 {
+   font-size: font-size;
+  }
+
+  h1 { font-size: font-size; }
+  h2 { font-size: font-size; }
+  h3 { font-size: font-size; }
+}
 ## Qu'est-ce que SAML et comment ça marche ?
 
 
