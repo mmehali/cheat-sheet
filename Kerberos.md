@@ -9,4 +9,17 @@ Lorsqu'un navigateur Web tente d'accéder au service,
 - Active Directory utilise le fichier keytab pour décrypter le ticket envoyé à partir du navigateur Web afin 
 d'établir que le serveur d'applications peut approuver le navigateur.
 
-Ces étapes sont effectuées par l'administrateur Active Directory, qui fournit les fichiers keytab pour Connections Deployment Manager, Node1 et Node2.
+An SPN consists of the following information:
+- Service type :
+Specifies the protocol to use, such as HTTP.
+- Instance:
+Specifies the name of the server hosting the application. 
+For example: finance1.us.example.com. Use the HTTP Server name or the virtual host name through which users access Connections applications. You do not need to specify a port number.
+- Realm:
+Specifies the domain name of the server hosting the application. 
+For example: US.EXAMPLE.COM.
+Specify an SPN using the following syntax: **service_type/instance@realm**
+
+For example: HTTP/finance1.us.example.com@US.EXAMPLE.COM
+
+
