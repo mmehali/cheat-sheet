@@ -15,7 +15,27 @@
      (Continuous Integration Server)
    #### logiciel :
      - Jenkins
-     
+   Le serveur d'intégration continue doit possèder les bons plugins :
+   ##### compilation
+    - Apache ANT
+    - Apache Maven
+    - Graddle
+    - si Docker en production : il faut intégrer Docker dans votre processus de build. graddle intègre un plugin pour Docker.
+   ##### Analyse de code
+    - SonarQube:  capable d'analyser plus de 20 langages differents:Java, Cobol, C, C++ etc.
+    - Checkmarx: outil permettant de scanner le code à la recherche de failles de sécurité. 
+   #### Tests unitaires
+    - JUnit : pour tester le code Java.
+    - Jmockit et PowerMock, pour tester le code sans dépendrede  composants tiers comme les connexion bases de données par exemple.
+    - SoapUI, qui permet de tester les API comme les Web Services. 
+   ##### référentiels de composants :
+     - Nexus: enregistrer et pour résoudre des dépendances externes. 
+
+ Chaque outil dispose généralement d'une barrière de qualité (quality gate). 
+ - Si votre score Qualité/Sécurité est trop faible, votre code est recalé et ne sera pas déployé. 
+ - Si votre score est suffisamment élevé, alors votre code sera compilé et poussé vers la prochaine étape. 
+ Généralement celle des "Tests fonctionnels".
+
 ### Test
 
 
