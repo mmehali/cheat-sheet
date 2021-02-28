@@ -1,4 +1,7 @@
 
+ - Q : Que se cache deriere l'expression  **cloud independant** ? multi-cloud ? cloud hybride ?
+ - Q : Utilisez-vous un ou plusieurs cloud public ? lesquels ?
+ 
  - vous évaluez les différentes options de cloud public, pas pour votre environnement tout entier, 
    mais pour une application orientée clients spécifique avec un taux d'utilisation très variable.
  
@@ -29,12 +32,11 @@ La plupart des entreprises qui migrent vers le cloud se retrouveront avec une so
 Q : avez vous des environnement conterisé. La contenairisation facilte le passage au cloud.
 Q : Quels outils de provisionning ? Ansible, Terraform : c'est outils ont des providers pour construire des Iaac et Paas
 
-
 **Q : Pourquoi plusieurs acteurs une orientation vers plusieurs acteurs?**
 - Eviter le vendor lock-in tout en se donnant la liberté d'opter au fil des projets pour des fournisseurs 
   différents en fonction de leurs points forts. 
 - Réduire la dépendance aux fournisseurs 
-- disponibilité géographique 
+- disponibilité géographique par rapport a vos clients? 
 - problématiques numériques multiples (data, IA, IoT...),
 - Accès à l’état de l’art de la technologie,
 - Optimisation et réduction des coûts,
@@ -54,13 +56,14 @@ L’absence de plan d’action clair à propos du multicloud est aujourd’hui e
 - Quelle plateforme pour les analytics ?
 - Comment éviter le « lock-in syndrome » ? 
 
-S**e lancer dans le multicloud**
+Se lancer dans le multicloud**
 
 Une fois la stratégie mise en place, la qualité de l’exécution est un enjeu fondamental.
-- Quelles technologies adopter ? 
-- Faut-il investir sur services natifs/propriétaire et ou des services agnostiques/opensource ?
+- **Q**:  Quelles technologies adopter ? 
+- **Q** Faut-il investir sur services natifs/propriétaire et ou des services agnostiques/opensource ?
 - Quels opérateurs de cloud privilégier, pour quels usages ?
 - Comment mettre en place les premières migrations ? 
+
 
 Q : Reste à savoir quelle gouvernance adopter pour maîtriser les choix, les coûts, et leur alignement sur la stratégie de l'entreprise
 
