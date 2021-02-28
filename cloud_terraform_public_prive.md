@@ -1,6 +1,8 @@
 
  - Q : Que se cache deriere l'expression  **cloud independant** ? multi-cloud ? cloud hybride ?
  - Q : Utilisez-vous un ou plusieurs cloud public ? lesquels ?
+ - Q : Utilisez-vous un cloud privé? lequel ? est-il hebergé sur site ou hébergé chez un fourniseur?
+ - 
  
  - vous évaluez les différentes options de cloud public, pas pour votre environnement tout entier, 
    mais pour une application orientée clients spécifique avec un taux d'utilisation très variable.
