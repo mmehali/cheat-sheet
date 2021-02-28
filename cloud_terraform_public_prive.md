@@ -1,15 +1,50 @@
+
+ - vous évaluez les différentes options de cloud public, pas pour votre environnement tout entier, 
+   mais pour une application orientée clients spécifique avec un taux d'utilisation très variable.
+ 
+ - Un **cloud public** est un cloud partagé par plusieurs clients.
+ - Le **multicloud** désigne le déploiement de plusieurs clouds public issus de différents fournisseurs. 
+ - Le **cloud hybride** implique le déploiement de clouds public et privé reliés par des fonctions 
+   d'intégration ou d'orchestration.
+   les clouds étant interconnectés (cloud hybride) ou non (multicloud).
+   interconnectés ou pas ?
+   
+Le terme **multi-cloud** désigne plusieurs clouds publics. 
+Une entreprise qui utilise un déploiement multi-cloud intègre plusieurs clouds publics de plusieurs fournisseurs de cloud. 
+Dans une configuration multi-cloud, une entreprise a recours à plusieurs fournisseurs au lieu d'un seul pour l'hébergement, le stockage et la pile complète d'applications dans le cloud.
+
+**Q**: Les déploiements multi-cloud peuvent être utilisés à des fins diverses. Un déploiement multi-cloud peut recourir à plusieurs fournisseurs 
+IaaS (Infrastructure-as-a-Service) ou utiliser un fournisseur différent pour les services IaaS, PaaS (Platform-as-a-Service) et SaaS (Software-as-a-Service). 
+
+Le multi-cloud peut être utilisé simplement à des **fins de redondance et de secours du système** ou **englober différents fournisseurs pour différents services cloud**.
+
+La plupart des entreprises qui migrent vers le cloud se retrouveront avec une sorte de déploiement multicloud. Un déploiement multicloud peut même se produire involontairement, en raison du shadow IT (voir ci-dessous).
+
+
+- **Le cloud hybride** décrit l'association de deux ou plusieurs types d'infrastructures distincts : il combine un cloud privé, un datacenter sur site, ou les deux avec au moins un cloud public. 
+- **Cloud privé hébergé**
+- **Cloud privé sur site**
+
+   
+Q : avez vous des environnement conterisé. La contenairisation facilte le passage au cloud.
+Q : Quels outils de provisionning ? Ansible, Terraform : c'est outils ont des providers pour construire des Iaac et Paas
+
+
 **Q : Pourquoi plusieurs acteurs une orientation vers plusieurs acteurs?**
 - Eviter le vendor lock-in tout en se donnant la liberté d'opter au fil des projets pour des fournisseurs 
   différents en fonction de leurs points forts. 
-- choix géographiques
+- Réduire la dépendance aux fournisseurs 
+- disponibilité géographique 
 - problématiques numériques multiples (data, IA, IoT...),
 - Accès à l’état de l’art de la technologie,
 - Optimisation et réduction des coûts,
 - Amélioration de la continuité et du PRA,
 - Flexibilité accrue.
+- Économies potentielles
 - Un vecteur d’innovation,
 - Une agilité accrue,
 - Une accélération du time-to-market.
+- Fiabilité et/ou redondance : Si un cloud tombe en panne, certaines fonctionnalités seront toujours disponibles pour les utilisateurs grâce aux autres clouds déployés. En outre, un cloud public pourrait être utilisé comme cloud de secours pour un autre cloud
 
 **Établir la stratégie multicloud**
 L’absence de plan d’action clair à propos du multicloud est aujourd’hui encore un frein pour un grand nombre d’organisations. 
