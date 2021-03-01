@@ -1,8 +1,43 @@
 
- - Q : Que se cache deriere l'expression  **cloud independant** ? multi-cloud ? cloud hybride ?
+
+
+ 
+
+
+- Q1 : « L'architecture proposée doit être hébergée en Cloud et agnostique des clouds providers publics ». Que se cache derrière l'expression  « agnostique des clouds providers publics»?  multi-cloud ? Cloud hybride ? Cloud privé et pas de cloud public?
+- Q2 : Les deux applications existantes « HelpMeTrack » et « Qualité de Service Fournisseur » sont-elles des API ? exposent-elles des API ?
+- Q3 : Comment sont déployées les deux applications existantes  « HelpMeTrack » et « Qualité de Service Fournisseur » ? Déploiement classique, container, cloud,...?
+- Q4) En fonction de la réponse à la question Q1 : Pourquoi le multi-cloud (plusieurs fournisseurs) ou le cloud hybride ?
+    - Réduire la dépendance aux fournisseurs et éviter le lock-in tout en se donnant la liberté
+      d'opter en fonction des  projets  pour des fournisseurs differents
+    - en fonction de leurs points forts.
+    - disponibilité géographique par rapport à vos clients?
+    - économies potentielles : Optimisation et réduction des coûts
+    - agilité accrue,
+    - accélération du time-to-market.
+    - fiabilité et/ou redondance :
+            * Si un cloud tombe en panne, certaines fonctionnalités seront toujours disponibles pour les utilisateurs
+               grâce aux autres clouds déployés.
+            * un cloud public pourrait être utilisé comme cloud de secours pour un autre cloud
+
+- Q5 : Si cloud privé. Celui-ci sera hébergé ou sur site ?
+- Q6 : avez-vous des environnements conteneurisés. La conteneurisation facilite le passage au cloud.
+- Q7: Quels outils de provisionning utilisez-vous ? Ansible, Terraform : ces outils ont des providers pour construire des Iaac et Paas
+- Q8: Les environnements de dev et de recette seront eux aussi déployés sur le cloud ?
+- Q9 : Avez-vous des pipelines d'intégration, de livraison ou de déploiement continus (CI/CD/CD) ?
+ 
+
+
+
+
+
+architecture :
+ - L'architecture proposée doit être hébergée en Cloud et agnostique des clouds providers publics. 
+ - Q1 : Que se cache deriere l'expression  **agnostique des clouds providers publics** ? multi-cloud ? cloud hybride ? cloud privé et pas de cloud plublic?
+ - 
  - Q : Utilisez-vous un ou plusieurs cloud public ? lesquels ?
  - Q : Utilisez-vous un cloud privé? lequel ? est-il hebergé sur site ou hébergé chez un fourniseur?
- - 
+ - Q : Comment sont deployées Les deux applications existantes - HelpMeTrack et Qualité de Service Fournisseur ? deploiment classique, container, cloaud,...?
  
  - vous évaluez les différentes options de cloud public, pas pour votre environnement tout entier, 
    mais pour une application orientée clients spécifique avec un taux d'utilisation très variable.
@@ -35,20 +70,16 @@ Q : avez vous des environnement conterisé. La contenairisation facilte le passa
 Q : Quels outils de provisionning ? Ansible, Terraform : c'est outils ont des providers pour construire des Iaac et Paas
 
 **Q : Pourquoi plusieurs acteurs une orientation vers plusieurs acteurs?**
-- Eviter le vendor lock-in tout en se donnant la liberté d'opter au fil des projets pour des fournisseurs 
+- Réduire la dépendance aux fournisseurs et eviter le lock-in tout en se donnant la liberté d'opter au fil des projets pour des fournisseurs 
   différents en fonction de leurs points forts. 
-- Réduire la dépendance aux fournisseurs 
 - disponibilité géographique par rapport a vos clients? 
-- problématiques numériques multiples (data, IA, IoT...),
 - Accès à l’état de l’art de la technologie,
-- Optimisation et réduction des coûts,
-- Amélioration de la continuité et du PRA,
-- Flexibilité accrue.
-- Économies potentielles
-- Un vecteur d’innovation,
+- Économies potentielles : Optimisation et réduction des coûts
 - Une agilité accrue,
 - Une accélération du time-to-market.
-- Fiabilité et/ou redondance : Si un cloud tombe en panne, certaines fonctionnalités seront toujours disponibles pour les utilisateurs grâce aux autres clouds déployés. En outre, un cloud public pourrait être utilisé comme cloud de secours pour un autre cloud
+- Fiabilité et/ou redondance : 
+- Si un cloud tombe en panne, certaines fonctionnalités seront toujours disponibles pour les utilisateurs grâce aux autres clouds déployés. 
+- un cloud public pourrait être utilisé comme cloud de secours pour un autre cloud
 
 **Établir la stratégie multicloud**
 L’absence de plan d’action clair à propos du multicloud est aujourd’hui encore un frein pour un grand nombre d’organisations. 
