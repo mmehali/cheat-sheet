@@ -1,28 +1,30 @@
-entvm01$ > yum install krb5-server
-centvm01$ > vi /etc/krb5.conf  
-    ==>Remplacer example.com  par jungle.kvm
-    ==>Remplacer EXAMPLE.COM  par JUNGLE.KVM
-    ==>Remplacer kerberos par centvm01
-centvm01$ > vi /var/kerberos/krb4kdc/kdc.conf
-   ==>Remplacer EXAMPLE.COM  par JUNGLE.KVM
-centvm01$ > vi /var/kerberos/krb4kdc/kadm5.acl
-   ==>Remplacer EXAMPLE.COM  par JUNGLE.KVM
-centvm01$ >krb5_util -s -r JUNGLE.KVM
-centvm01$ >systemctl enable kadmin
-centvm01$ >systemctl enable krb5kdc
-centvm01$ >systemctl start kadmin
-centvm01$ >systemctl start krb5kdc
-centvm01$> firewall-cmd --get-services|grep kerberos --color
-centvm01$> firewall-cmd --permanent --add_service-kerberos
-centvm01$> firewall-cmd --reload
-centvm01$> kadmin.local
-kadmin.local>addprinc root/admin
-kadmin.local>addprinc -randkey host/centvm02.jungle.kvm
-kadmin.local>addprinc -randkey host/centvm03.jungle.kvm
-kadmin.local>ktadd -k /tmp/centvm02.keytab host/centvm02.jungle.kvm
-kadmin.local>ktadd -k /tmp/centvm03.keytab host/centvm03.jungle.kvm
-kadmin.local>listprincs
-kadmin.local>quit
+ sur VM cenvm01: 
+- yum install krb5-server
+- centvm01$ > vi /etc/krb5.conf  
+     - ==>Remplacer example.com  par jungle.kvm
+     - ==>Remplacer EXAMPLE.COM  par JUNGLE.KVM
+     - ==>Remplacer kerberos par centvm01
+- vi /var/kerberos/krb4kdc/kdc.conf
+     -  ==>Remplacer EXAMPLE.COM  par JUNGLE.KVM
+-  vi /var/kerberos/krb4kdc/kadm5.acl
+     - ==>Remplacer EXAMPLE.COM  par JUNGLE.KVM
+- krb5_util -s -r JUNGLE.KVM
+- systemctl enable kadmin
+- systemctl enable krb5kdc
+- systemctl start kadmin
+- systemctl start krb5kdc
+- firewall-cmd --get-services|grep kerberos --color
+- firewall-cmd --permanent --add_service-kerberos
+- firewall-cmd --reload
+- kadmin.local
+   - addprinc root/admin
+   - addprinc -randkey host/centvm02.jungle.kvm
+   - addprinc -randkey host/centvm03.jungle.kvm
+   - ktadd -k /tmp/centvm02.keytab host/centvm02.jungle.kvm
+   - ktadd -k /tmp/centvm03.keytab host/centvm03.jungle.kvm
+   - listprincs
+   - quit
+   
 cenvm01$ >scp /etc/krb5.conf /tmp/cenvm02.keytab cenvm02:/tmp/
 cenvm01$ >scp /etc/krb5.conf /tmp/cenvm03.keytab cenvm03:/tmp/
 
