@@ -1,4 +1,12 @@
- sur VM cenvm01:
+ 
+ ### Installation KDC et KADM sur la VM cenvm01:
+ **KDC** : Centre de distribution de clé. Il contient :
+   - une base de données de tous les donneurs d'ordre (utilisateurs, ordinateurs et services)
+   - un serveur d'authentification (AS)
+   - un serveur accordant les tickets (TGS)
+ 
+ **REALM** : un domaine (un group de hosts et les utilisateurs). Toujours en Majuscule.
+ **Fichiers Keytab** :  des fichiers extraits de la base de données KDC des « principals » et qui contiennent la clé de chiffrement pour un service ou un hôte.
 ```
  yum install krb5-server
 ```
@@ -62,7 +70,7 @@ myrealm.com =CTCCDH1.COM
 #### Create the database.
 - krb5_util -s -r JUNGLE.KVM
 #### Start the Kerberos Service.
-
+```
 - systemctl enable kadmin
 - systemctl start kadmin
 
@@ -72,21 +80,25 @@ myrealm.com =CTCCDH1.COM
 - firewall-cmd --get-services|grep kerberos --color
 - firewall-cmd --permanent --add_service-kerberos
 - firewall-cmd --reload
+```
 
 #### Create a principal
 ```
-- kadmin.local
-   - addprinc root/admin  
-   - addprinc -randkey host/centvm02.jungle.kvm
-   - addprinc -randkey host/centvm03.jungle.kvm
-   - ktadd -k /tmp/centvm02.keytab host/centvm02.jungle.kvm
-   - ktadd -k /tmp/centvm03.keytab host/centvm03.jungle.kvm
-   - listprincs
-   - quit
+ kadmin.local
+     addprinc root/admin  
+     addprinc -randkey host/centvm02.jungle.kvm
+     addprinc -randkey host/centvm03.jungle.kvm
+     ktadd -k /tmp/centvm02.keytab host/centvm02.jungle.kvm
+     ktadd -k /tmp/centvm03.keytab host/centvm03.jungle.kvm
+     listprincs
+     quit
 ```
+
 cenvm01$ >scp /etc/krb5.conf /tmp/cenvm02.keytab cenvm02:/tmp/
 cenvm01$ >scp /etc/krb5.conf /tmp/cenvm03.keytab cenvm03:/tmp/
 
+## insatallation du client sur cenvm02
+```
 cenvm02$ > ls /tmp/
 cenvm02$ > yum install pam_krb5 krb5-workstation
 cenvm02$ > less /etc/krb5.conf
@@ -96,15 +108,18 @@ kutil> rkt /tmp/cencm02.keytab
 kutil> wkt /etc/krb5.keytab
 kutil> list
 kutil>quit
+```
 
+## insatallation du client sur cenvm03
+```
 centvm03>yum install pam_krb5 krb5_workstation
 cenvm03>\cp /tmp/krb5.com /etc/
 cenvm03>kutil
-kutil> rkt /tmp/cencm03keytab
+kutil> rkt /tmp/cenvm03keytab
 kutil> wkt /etc/krb5.keytab
 kutil> list
 kutil>quit
-
+```
 
 
 
