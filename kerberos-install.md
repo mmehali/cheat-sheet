@@ -1,9 +1,40 @@
- sur VM cenvm01: 
-- yum install krb5-server
-- centvm01$ > vi /etc/krb5.conf  
+ sur VM cenvm01:
+```
+ yum install krb5-server
+```
+
+```
+ vi /etc/krb5.conf  
+```
+
+```
+ [logging]
+ default = FILE:/var/log/krb5libs.log
+ kdc = FILE:/var/log/krb5kdc.log
+ admin_server = FILE:/var/log/kadmind.log
+
+[libdefaults]
+ default_realm = MYREALM.COM
+ dns_lookup_realm = false
+ dns_lookup_kdc = false
+ ticket_lifetime = 24h
+ renew_lifetime = 7d
+ forwardable = true
+
+[realms]
+ MYREALM.COM = {
+  kdc = elserver1.example.com
+  admin_server = elserver1.example.com
+ }
+
+[domain_realm]
+ .myrealm.com =CTCCDH1.COM
+myrealm.com =CTCCDH1.COM
+```
      - ==>Remplacer example.com  par jungle.kvm
      - ==>Remplacer EXAMPLE.COM  par JUNGLE.KVM
      - ==>Remplacer kerberos par centvm01
+
 - vi /var/kerberos/krb4kdc/kdc.conf
      -  ==>Remplacer EXAMPLE.COM  par JUNGLE.KVM
 -  vi /var/kerberos/krb4kdc/kadm5.acl
