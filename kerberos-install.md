@@ -2,6 +2,7 @@
 ```
  yum install krb5-server
 ```
+#### Modify the /etc/krb5.conf file.
 
 ```
  vi /etc/krb5.conf  
@@ -35,27 +36,54 @@ myrealm.com =CTCCDH1.COM
      - ==>Remplacer EXAMPLE.COM  par JUNGLE.KVM
      - ==>Remplacer kerberos par centvm01
 
+#### Modify the KDC.conf file.
 - vi /var/kerberos/krb4kdc/kdc.conf
+```
+[kdcdefaults]
+ kdc_ports = 88
+ kdc_tcp_ports = 88
+
+[realms]
+ MYREALM.COM = {
+  #master_key_type = aes256-cts
+  acl_file = /var/kerberos/krb5kdc/kadm5.acl
+  dict_file = /usr/share/dict/words
+  admin_keytab = /var/kerberos/krb5kdc/kadm5.keytab
+  supported_enctypes = aes256-cts:normal aes128-cts:normal des3-hmac-sha1:normal arcfour-hmac:normal des-hmac-sha1:normal des-cbc-md5:normal des-cbc-crc:normal
+ }
+```
      -  ==>Remplacer EXAMPLE.COM  par JUNGLE.KVM
+#### Assign administrator privileges.
 -  vi /var/kerberos/krb4kdc/kadm5.acl
+```
+*/admin@MYREALM.COM *
+```
      - ==>Remplacer EXAMPLE.COM  par JUNGLE.KVM
+#### Create the database.
 - krb5_util -s -r JUNGLE.KVM
+#### Start the Kerberos Service.
+
 - systemctl enable kadmin
-- systemctl enable krb5kdc
 - systemctl start kadmin
+
+- systemctl enable krb5kdc
 - systemctl start krb5kdc
+
 - firewall-cmd --get-services|grep kerberos --color
 - firewall-cmd --permanent --add_service-kerberos
 - firewall-cmd --reload
+
+#### Create a principal
+```
 - kadmin.local
-   - addprinc root/admin
+   - addprinc root/admin  
    - addprinc -randkey host/centvm02.jungle.kvm
    - addprinc -randkey host/centvm03.jungle.kvm
    - ktadd -k /tmp/centvm02.keytab host/centvm02.jungle.kvm
    - ktadd -k /tmp/centvm03.keytab host/centvm03.jungle.kvm
    - listprincs
    - quit
-   
+```
 cenvm01$ >scp /etc/krb5.conf /tmp/cenvm02.keytab cenvm02:/tmp/
 cenvm01$ >scp /etc/krb5.conf /tmp/cenvm03.keytab cenvm03:/tmp/
 
