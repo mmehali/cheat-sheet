@@ -1,6 +1,5 @@
  
- ### Installation KDC et KADM sur la VM cenvm01:
- **KDC** : Centre de distribution de clé. Il contient :
+  **KDC** : Centre de distribution de clé. Il contient :
    - une base de données de tous les donneurs d'ordre (utilisateurs, ordinateurs et services)
    - un serveur d'authentification (AS)
    - un serveur accordant les tickets (TGS)
@@ -8,6 +7,10 @@
  **REALM** : un domaine (un group de hosts et les utilisateurs). Toujours en Majuscule.
  
  **Fichiers Keytab** :  des fichiers extraits de la base de données KDC des « principals » et qui contiennent la clé de chiffrement pour un service ou un hôte.
+ 
+ 
+ ### Installation KDC et KADM sur la VM cenvm01:
+
 ```
  yum install krb5-server
 ```
