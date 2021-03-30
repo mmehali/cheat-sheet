@@ -6,6 +6,7 @@
    - un serveur accordant les tickets (TGS)
  
  **REALM** : un domaine (un group de hosts et les utilisateurs). Toujours en Majuscule.
+ 
  **Fichiers Keytab** :  des fichiers extraits de la base de données KDC des « principals » et qui contiennent la clé de chiffrement pour un service ou un hôte.
 ```
  yum install krb5-server
