@@ -114,6 +114,8 @@ kutil> list
 kutil>quit
 ```
 
+
+
 ## insatallation du client sur cenvm03
 ```
 centvm03>yum install pam_krb5 krb5_workstation
@@ -127,8 +129,41 @@ kutil>quit
 
 
 
+## Installation OpenLDAP sur cennvm01 
+voir document (https://www.thegeekstuff.com/2015/01/openldap-linux/)
+```
+yum install -y openldap openldap-clients openldap-servers
+````
+- openldap-servers – LDAP server
+- openldap-clients – all required LDAP client utilities
+- openldap – LDAP support libraries
+
+**/etc/openldap/slapd.d/cn=config.ldif** : The LDAP default configuration
+
+**/etc/openldap/slapd.d/cn=config/olcDatabase{2}bdb.ldif** :  modify the settings like number of connections the server can support, timeouts , LDAP root user and the base DN.
+
+**Create olcRootDN Account as Admin**:It is always recommended to create a dedicated user account first with the full permissions to change information on the LDAP database.
+
+ - change the olcRootDN entry in olcDatabase={2}bdb.ldif :
+ ```
+ grep olcRootDN /etc/openldap/slapd.d/cn=config/olcDatabase={2}bdb.ldif
+olcRootDN: cn=Manager,dc=my-domain,dc=com
+```
+par 
+```
+olcRootDN: cn=ramesh,dc=thegeekstuff,dc=com
+```
+user “ramesh” will be the olcRootDN.
+
+**Create olcRootPW Root Password**
 
 
+cenvm01> yum install openldap-servers openldap-client migrationtools
+cenvm01> cp /usr/share/openldap-servers/DB_CONFIG.example  /var/lib/ldap/DB_CONFIG
+cenvm01>chown -R ldap. /var/lib/ldap
+cenvm01>id ldap
+cenvm01>slappasswd
+cd /etc/openldap/slapd.d/cn\ config
 
 
 
