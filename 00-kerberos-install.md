@@ -119,6 +119,7 @@ cenvm02$ >\cp /tmp/krb5.conf /etc/
 ```
 
 #### 3) importer  la keytab générée dans /etc
+```
 cenvm02$ >kutil
 kutil> rkt /tmp/cencm02.keytab #read keytab
 kutil> wkt /etc/krb5.keytab    #write keytab
@@ -126,10 +127,24 @@ kutil> list  #lister les entrees dans keytab
 kutil>quit
 ```
 
-## insatallation du client sur cenvm03
+### insatallation du client kerberos sur cenvm03
+
+#### 1) installation des packages
 ```
 centvm03>yum install pam_krb5 krb5_workstation
-cenvm03>\cp /tmp/krb5.com /etc/
+```
+
+#### 1) installation des packages
+```
+cenvm03$ > yum install pam_krb5 krb5-workstation
+```
+#### 2) copier le fichier de conf dans /etc
+```
+cenvm03$ > more/etc/krb5.conf
+cenvm03$ >\cp /tmp/krb5.conf /etc/
+```
+#### 3) importer  la keytab générée dans /etc
+```
 cenvm03>kutil
 kutil> rkt /tmp/cenvm03keytab
 kutil> wkt /etc/krb5.keytab
@@ -148,9 +163,11 @@ yum install -y openldap openldap-clients openldap-servers
 - openldap-clients – all required LDAP client utilities
 - openldap – LDAP support libraries
 
+
 **/etc/openldap/slapd.d/cn=config.ldif** : The LDAP default configuration
 
-**/etc/openldap/slapd.d/cn=config/olcDatabase{2}bdb.ldif** :  modify the settings like number of connections the server can support, timeouts , LDAP root user and the base DN.
+**/etc/openldap/slapd.d/cn=config/olcDatabase{2}bdb.ldif** :  modify the settings like number of connections the server can support, 
+timeouts , LDAP root user and the base DN.
 
 **Create olcRootDN Account as Admin**:It is always recommended to create a dedicated user account first with the full permissions to change information on the LDAP database.
 
@@ -160,13 +177,14 @@ yum install -y openldap openldap-clients openldap-servers
 olcRootDN: cn=Manager,dc=my-domain,dc=com
 ```
 par 
+
 ```
 olcRootDN: cn=ramesh,dc=thegeekstuff,dc=com
 ```
+
 user “ramesh” will be the olcRootDN.
 
 **Create olcRootPW Root Password**
-
 
 cenvm01> yum install openldap-servers openldap-client migrationtools
 cenvm01> cp /usr/share/openldap-servers/DB_CONFIG.example  /var/lib/ldap/DB_CONFIG
