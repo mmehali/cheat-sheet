@@ -27,17 +27,18 @@
  admin_server = FILE:/var/log/kadmind.log
 
 [libdefaults]
- default_realm = MYREALM.COM
  dns_lookup_realm = false
- dns_lookup_kdc = false
+ #dns_lookup_kdc = false
  ticket_lifetime = 24h
  renew_lifetime = 7d
  forwardable = true
+ default_realm = MYREALM.COM
+ default_ccache_name = KEYRING:persistent:%{uid} 
 
 [realms]
  MYREALM.COM = {
-  kdc = elserver1.example.com
-  admin_server = elserver1.example.com
+  kdc = kerberos.example.com
+  admin_server = kerberos.example.com
  }
 
 [domain_realm]
