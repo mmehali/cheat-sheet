@@ -66,12 +66,13 @@ myrealm.com =CTCCDH1.COM
 ```
      -  ==>Remplacer EXAMPLE.COM  par JUNGLE.KVM
 #### config : assigner les privileges admin : /var/kerberos/krb4kdc/kadm5.acl
+Le principal admin a desormé acces a la base kerberos.
 ```
 */admin@MYREALM.COM *
 ```
      - Remplacer EXAMPLE.COM  par JUNGLE.KVM
 
-#### 3) Create the database.
+#### 3) Create the database en utilisant krb5_utils
 ```
 krb5_util -s -r JUNGLE.KVM
 ```
@@ -89,21 +90,28 @@ firewall-cmd --permanent --add_service-kerberos
 firewall-cmd --reload
 ```
 
-#### 5) Creation d'un principal
+#### 5) ajouter des principals kerberos
 ```
  kadmin.local
      addprinc root/admin                            #ajouter root principal admin
      addprinc -randkey host/centvm02.jungle.kvm     #ajouter un host principal pour le client centvm02.jungle.kvm
      addprinc -randkey host/centvm03.jungle.kvm     #ajouter un host principal pour le client centvm03.jungle.kvm 
-     ktadd -k /tmp/centvm02.keytab host/centvm02.jungle.kvm  # creation du fichier keytab /tmp/centvm02.keytab pour
+     ktadd -k /tmp/centvm02.keytab host/centvm02.jungle.kvm  # add host to keytab ou creation du fichier keytab /tmp/centvm02.keytab pour
                                                              # le client centvm02.jungle.kvm
      ktadd -k /tmp/centvm03.keytab host/centvm03.jungle.kvm  # meme chose pour client centvm03.jungle.kvm
      listprincs  # lister les principals
      quit
 ```
+
+
 #### 6) Copier le fichier de conf /etc/krb5.conf pour le client 
 cenvm01$ >scp /etc/krb5.conf /tmp/cenvm02.keytab cenvm02:/tmp/
 cenvm01$ >scp /etc/krb5.conf /tmp/cenvm03.keytab cenvm03:/tmp/
+
+#### 7) Test : recupérer une ticket
+kinit 
+#### 8) Test : verifier la récupération du ticket
+klist
 
 
 ### Insatallation du client Kerberos sur cenvm02
@@ -151,6 +159,9 @@ kutil> wkt /etc/krb5.keytab
 kutil> list
 kutil>quit
 ```
+
+ 
+
 
 
 
