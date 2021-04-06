@@ -8,17 +8,36 @@
  
  **Fichiers Keytab** :  des fichiers extraits de la base de données KDC des « principals » et qui contiennent la clé de chiffrement pour un service ou un hôte.
  
- 
- ### Installation KDC et KADM sur la VM cenvm01:
-#### 1) install krb5-server
+
+
+Pour commencer, nous devons imiter des FQDNS valides en insérant les entrées suivantes dans le fichier **/etc/hosts**:
+
 ```
- yum install krb5-server
+192.168.10.100 kdc.sherc.sg-host.com
+192.168.10.101 krb-client1.sherc.sg-host.com
+192.168.10.102 krb-client2.sherc.sg-host.com
+```
+
+
+ 
+ ### Installation du serveur kerberos (KDC et KADM sur la VM cenvm01):
+#### 1) install krb5-server
+Pour commencer, nous devons installer les packages suivants:
+  - **krb5-server** - c'est le serveur kerberos (KDC et KDM).
+  - **krb5-workstation** - c'est le client keberos. Il est facultatif de l'installer sur le serveur Kerberos, mais est utile à des fins de dépannage Kerberos.
+  - **pam_krb5** - c'est le module pam krb5. ssh fait son authentification via pam, nous devons donc rendre pam krb5 conscient.
+
+```
+ $ yum install krb5-server ou
+ $ yum install krb5-server krb5-workstation pam_krb5
+
 ```
 #### 2.1) config realm : /etc/krb5.conf file.
 
-```
- vi /etc/krb5.conf  
-```
+- Ouvrez le fichier /etc/krb5.conf et effectuez les actions suivantes :
+     - Remplacer example.com  par jungle.kvm
+     - Remplacer EXAMPLE.COM  par JUNGLE.KVM
+     - Remplacer kerberos par centvm01
 
 ```
  [logging]
@@ -32,6 +51,7 @@
  ticket_lifetime = 24h
  renew_lifetime = 7d
  forwardable = true
+ rdns = false
  default_realm = MYREALM.COM
  default_ccache_name = KEYRING:persistent:%{uid} 
 
@@ -43,13 +63,12 @@
 
 [domain_realm]
  .myrealm.com =CTCCDH1.COM
-myrealm.com =CTCCDH1.COM
+  myrealm.com =CTCCDH1.COM
 ```
-     - Remplacer example.com  par jungle.kvm
-     - Remplacer EXAMPLE.COM  par JUNGLE.KVM
-     - Remplacer kerberos par centvm01
 
+     
 #### 2.2 Config KDC server : /var/kerberos/krb4kdc/kdc.conf
+-  ouvrez le fihier /var/kerberos/krb4kdc/kdc.conf et remplacez EXAMPLE.COM  par JUNGLE.KVM
 ```
 [kdcdefaults]
  kdc_ports = 88
@@ -58,21 +77,37 @@ myrealm.com =CTCCDH1.COM
 [realms]
  MYREALM.COM = {
   #master_key_type = aes256-cts
+  default_principle_flags = +preauth
   acl_file = /var/kerberos/krb5kdc/kadm5.acl
   dict_file = /usr/share/dict/words
   admin_keytab = /var/kerberos/krb5kdc/kadm5.keytab
   supported_enctypes = aes256-cts:normal aes128-cts:normal des3-hmac-sha1:normal arcfour-hmac:normal des-hmac-sha1:normal des-cbc-md5:normal des-cbc-crc:normal
  }
+ 
+ 
 ```
-     -  ==>Remplacer EXAMPLE.COM  par JUNGLE.KVM
+ 
 #### config : assigner les privileges admin : /var/kerberos/krb4kdc/kadm5.acl
-Le principal admin a desormé acces a la base kerberos.
+- ouvrez le fichier et remplacer EXAMPLE.COM  par JUNGLE.KVM
+
 ```
-*/admin@MYREALM.COM *
+*/admin@EXAMPLE.COM *
 ```
-     - Remplacer EXAMPLE.COM  par JUNGLE.KVM
+Le principal admin a désormais acces a la base kerberos.
+
+
+
+#### créer un compte utilisateur de test. 
+Cet utilisateur doit en fait être uniquement à partir du client. Cependant, nous le créons sur le serveur Kerberos afin que nous puissions faire des tests de cohérence localement.
+
+```
+useradd krbtest
+```
+
+
 
 #### 3) Create the database en utilisant krb5_utils
+creation d'une base de données kerberos interne. Vous devez choisir un mot de passe pour cette base.
 ```
 krb5_util -s -r JUNGLE.KVM
 ```
@@ -84,13 +119,18 @@ systemctl start kadmin
 
 systemctl enable krb5kdc
 systemctl start krb5kdc
-
-firewall-cmd --get-services|grep kerberos --color
-firewall-cmd --permanent --add_service-kerberos
-firewall-cmd --reload
 ```
 
-#### 5) ajouter des principals kerberos
+#### 5) ouvrir les flux kerberos 
+```
+$ systemctl start firewalld.service
+$ firewall-cmd --add-service=kerberos --permanent
+$ firewall-cmd --add-service=kadmin --permanent
+$ systemctl restart firewalld.service
+$ systemctl enable firewalld.service
+```
+
+#### 6) ajouter des principals kerberos
 ```
  kadmin.local
      addprinc root/admin                            #ajouter root principal admin
@@ -102,17 +142,26 @@ firewall-cmd --reload
      listprincs  # lister les principals
      quit
 ```
-
-
+#### 6) configure ssh /etc/ssh/sshd_config
+```
+KerberosAuthentication yes
+GSSAPIAuthentication yes
+GSSAPICleanupCredentials yes
+UsePAM no
+```
 #### 6) Copier le fichier de conf /etc/krb5.conf pour le client 
+```
 cenvm01$ >scp /etc/krb5.conf /tmp/cenvm02.keytab cenvm02:/tmp/
 cenvm01$ >scp /etc/krb5.conf /tmp/cenvm03.keytab cenvm03:/tmp/
-
+```
 #### 7) Test : recupérer une ticket
-kinit 
+```
+kinit
+```
 #### 8) Test : verifier la récupération du ticket
+```
 klist
-
+```
 
 ### Insatallation du client Kerberos sur cenvm02
 #### 1) installation des packages
@@ -134,7 +183,14 @@ kutil> wkt /etc/krb5.keytab    #write keytab
 kutil> list  #lister les entrees dans keytab
 kutil>quit
 ```
+#### 4) configure ssh /etc/ssh_config 
 
+```
+Host *.domain.com
+  GSSAPIAuthentication yes
+  GSSAPIDelegateCredentials yes
+
+```
 ### insatallation du client kerberos sur cenvm03
 
 #### 1) installation des packages
