@@ -1,0 +1,7 @@
+## workflows
+- **authentication flow**: The sequence of actions a user or a service needs to perform to be authenticated.
+- flows for :
+        - login, 
+        - registration, 
+        - credentials reset 
+        - other Keycloak workflows.
