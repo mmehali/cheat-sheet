@@ -27,3 +27,7 @@ openssl x509 -in keycloak.csr \
   -req -days 3650 -out keycloak.crt \
   -extfile <(printf "subjectAltName=DNS:localhost,DNS:keycloak,DNS:keycloak.127.0.0.1.nip.io")
 ```
+# Verifier le certificat keycloak
+```
+openssl verify -verbose -CAfile rootCA.crt keycloak.crt
+```
